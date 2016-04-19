@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var moment = required('moment');
 
 var schema = new mongoose.Schema({
     movie: {
@@ -24,7 +25,7 @@ var schema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        default: Date.now,
+        default: moment,
         required: true
     },
     bestFor: {
