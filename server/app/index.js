@@ -37,5 +37,6 @@ app.get('/*', function (req, res) {
 app.use(function (err, req, res, next) {
     console.error(err)
     console.error(err.stack);
+    //create 404 handler to redirect to 404 page
     res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
