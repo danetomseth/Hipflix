@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
 		},
 		movie: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "movies"
+			ref: "Movies"
 		},
 		reviewed: {
 			type: Boolean
@@ -21,7 +21,7 @@ var schema = new mongoose.Schema({
 		},
 		orderId:{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "orders"
+			ref: "Orders"
 		}
 	}]
 })
