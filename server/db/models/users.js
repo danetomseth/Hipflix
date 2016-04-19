@@ -1,10 +1,11 @@
 'use strict';
-var crypto = require('crypto');
-var mongoose = require('mongoose');
-var moment = require('moment');
-var _ = require('lodash');
+const crypto = require('crypto');
+const mongoose = require('mongoose');
+const moment = require('moment');
+const _ = require('lodash');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -66,6 +67,8 @@ var schema = new mongoose.Schema({
 schema.methods.sanitize =  function () {
     return _.omit(this.toJSON(), ['password', 'salt']);
 };
+
+schema.plugin(deepPopulate)
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
