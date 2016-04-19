@@ -14,17 +14,22 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/:categoryName', (req, res, next) => { //may later move to movies route
-	Categories.find({name: req.params.categoryName})
-	.then((category) => Movies.find({category: category._id}))
-	.populate('category')
-	.then((movies) => res.json(movies))
-	.catch(next)
+    console.log(req.params.categoryName)
+    Categories.find({name: req.params.categoryName})
+    .then((category) => {
+        console.log(category)
+        return Movies.find({category: category._id})
+        .populate('category')
+    })
+    .then((movies) => res.json(movies))
+    .catch(next)
 })
 
 
 router.post('/', (req, res, next) => {
-	Categories.create(req.body)
-	.then((newCategory) => res.json(newCategory))
+    console.log(req.body)
+    Categories.create(req.body)
+    .then((newCategory) => res.json(newCategory))
 })
 
 module.exports = router

@@ -7,6 +7,10 @@ app.factory("CategoriesFactory", ($http) => {
         fetchOne: category => {
             return $http.get('/api/categories/'+category)
             .then(category => category.data)
+        },
+        create: newCategory => {
+            return $hhtp.post('/api/categories', {newCategory})
+            .then(newCategory => newCategory.data)
         }
     }
 })
