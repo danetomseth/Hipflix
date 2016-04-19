@@ -19,8 +19,8 @@ router.post('/', (req, res, next) => {
 		.catch(next);
 });
 
-router.params('/:userId', (req, res, next, id) => {
-	Users.findById(id)
+router.param('/:userId', (req, res, next, userId) => {
+	Users.findById(userId)
 		.populate('movieQueue')
 		.populate('address')
 		.populate('billingHistory')

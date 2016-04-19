@@ -5,7 +5,7 @@ var _ = require('lodash');
 var passport = require('passport');
 var path = require('path');
 var mongoose = require('mongoose');
-var UserModel = mongoose.model('User');
+var UserModel = mongoose.model('Users');
 
 var ENABLED_AUTH_STRATEGIES = [
     'local',
