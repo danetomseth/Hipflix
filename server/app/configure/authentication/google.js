@@ -3,7 +3,7 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var mongoose = require('mongoose');
-var UserModel = mongoose.model('User');
+var UserModel = mongoose.model('Users');
 
 module.exports = function (app) {
 

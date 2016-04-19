@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var moment = required('moment');
+var moment = require('moment');
 
 var schema = new mongoose.Schema({
     movie: {

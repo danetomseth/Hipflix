@@ -2,7 +2,7 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
-var UserModel = mongoose.model('User');
+var UserModel = mongoose.model('Users');
 
 module.exports = function (app) {
 
