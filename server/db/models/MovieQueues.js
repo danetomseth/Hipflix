@@ -13,7 +13,7 @@ var schema = new mongoose.Schema({
 			ref: "Movies"
 		},
 		reviewed: {
-			type: Boolean
+			type: Boolean,
 			default: false
 		},
 		priority:{
