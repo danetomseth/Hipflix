@@ -28,7 +28,7 @@ router.params('/:userId', (req, res, next, id) => {
 			if(!user) {
 				res.sendStatus(404);
 			} else {
-				req.user = user;
+				req.newUser = user;
 				next();
 			}
 		})
@@ -37,25 +37,25 @@ router.params('/:userId', (req, res, next, id) => {
 });
 
 router.get('/:userId', (req, res, next) => {
-	res.json(req.user)
+	res.json(req.newUser)
 });
 
 router.get('/:userId/moviequeue', (req, res, next) => {
-	res.json(req.user.movieQueue);
+	res.json(req.newUser.movieQueue);
 });
 
 router.get('/:userId/reviews', (req, res, next) => {
-	Reviews.find({user: req.user._id})
+	Reviews.find({user: req.newUser._id})
 		.then(reviewsOfOneUser => res.json(reviewsOfOneUser))
 		.catch(next);
 });
 
 router.get('/:userId/billing', (req, res, next) => {
-	res.json(req.user.billingHistory)
+	res.json(req.newUser.billingHistory)
 });
 
 router.get('/:userId/orders', (req, res, next) => {
-	Orders.find({user: req.user._id})
+	Orders.find({user: req.newUser._id})
 		.then(ordersOfOneUser => res.json(ordersOfOneUser))
 		.catch(next);
 });
