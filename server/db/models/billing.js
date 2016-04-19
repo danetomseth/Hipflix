@@ -11,7 +11,7 @@ var schema = new mongoose.Schema({
 	},
 	date: {
 		type: Date,
-		defualt: moment,
+		default: moment,
 		required: true
 	},
 	total: {
