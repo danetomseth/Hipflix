@@ -1,7 +1,8 @@
 'use strict'
 
 const router = require('express').Router();
-const Subscriptions = require('../db/models/subscriptions.js');
+const mongoose = require('mongoose');
+const Subscriptions = mongoose.model('Subscriptions');
 module.exports = router;
 
 router.get('/', (req, res, next) => {
