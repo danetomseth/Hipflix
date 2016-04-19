@@ -32,8 +32,4 @@ var schema = new mongoose.Schema({
     }
 })
 
-
-
-
-
 mongoose.model('Reviews', schema);
