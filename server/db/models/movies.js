@@ -17,7 +17,8 @@ var schema = new mongoose.Schema({
 		type: Number
 	},
 	category: {
-		type: [String]
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'Categories'
 	},
 	tags: {
 		type: [String]
