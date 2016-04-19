@@ -1,24 +1,59 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var moment = require('moment');
 var _ = require('lodash');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     password: {
         type: String
     },
+    first: {
+        type: String
+    },
+    last: {
+        type: String
+    },
+    address: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Addresses'
+    },
+    movieQueue: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'MovieQueues'
+    },
+    likes: {
+        type: [String]
+    },
+    renewalDate: {
+        type: Date
+    },
+    signupDate: {
+        type: Date,
+        default: moment
+    },
+    subscription: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Subscriptions'
+    },
+    billingHistory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Billing'
+    },
     salt: {
         type: String
     },
-    twitter: {
-        id: String,
-        username: String,
-        token: String,
-        tokenSecret: String
-    },
+    // twitter: {
+    //     id: String,
+    //     username: String,
+    //     token: String,
+    //     tokenSecret: String
+    // },
     facebook: {
         id: String
     },
