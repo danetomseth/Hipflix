@@ -8,7 +8,7 @@ var Categories = mongoose.model('Categories')
 
 router.get('/', (req, res, next) => {
 	Categories.find({})
-	.then((categories) => categories)
+	.then((categories) => res.json(categories))
 	.catch(next)
 })
 
