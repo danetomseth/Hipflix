@@ -9,8 +9,7 @@ var schema = new mongoose.Schema({
 		ref: "Users"
 	},
 	deliverables: {
-		type: [mongoose.Schema.Types.ObjectId],
-		ref: 'Movies'
+		type: [{ type: Schema.Types.ObjectId, ref: 'Movies' }]
 	},
 	date: {
 		type: Date,
