@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	Users.find(req.body)
+	Users.findOne({email: req.body.email})
 	.then((user) => {
 		if(user) {
 			let err = new Error('User already exists!');

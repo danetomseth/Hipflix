@@ -29,9 +29,10 @@ router.param('movieId', (req, res, next, movieId) => {
 
 router.get('/', (req, res, next) => {
   console.log(req.body);
-	Movies.find({})
-	.then((movies) => res.json(movies))
-	.catch(next)
+  Movies.find({})
+  .populate("category")
+  .then((movies) => res.json(movies))
+  .catch(next)
 })
 
 router.get('/:movieId', (req, res, next) => res.json(req.movie));
@@ -39,7 +40,7 @@ router.get('/:movieId', (req, res, next) => res.json(req.movie));
 router.get('/:movieId/reviews', (req, res, next) => res.json(req.movie.reviews));
 
 router.post('/', (req, res, next) => {
-	Movies.create(req.body)
+  Movies.create(req.body)
 		.then((movie) => res.send(movie))
 		.catch(next)
 
