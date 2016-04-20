@@ -28,6 +28,7 @@ router.get('/:categoryName', (req, res, next) => { //may later move to movies ro
 })
 
 
+
 router.post('/', (req, res, next) => {
     console.log(req.body)
     Categories.create(req.body)

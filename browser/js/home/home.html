@@ -1,4 +1,16 @@
 <section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
+	<div class="container">
+		<div class="row" ng-repeat="category in categories">
+			<h3>{{ category.name }} ...</h3>
+			<div class="col-xs-2" ng-repeat="movie in movies | filter:moviesByCategory(movies, category)">
+				<div class="panel panel-default">
+					<div class="well text-center" style="height: 150px" src="movie.image">Image</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </section>
+
+
+

@@ -6,7 +6,7 @@ app.factory("CategoriesFactory", ($http) => {
         },
         fetchOne: category => {
             return $http.get('/api/categories/'+category)
-            .then(category => category.data)
+            .then(category => category.data)  // return movies in one category
         },
         create: newCategory => {
             return $http.post('/api/categories', newCategory)
