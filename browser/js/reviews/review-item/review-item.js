@@ -1,7 +1,7 @@
-app.directive('HfReviewItem', function(reviewFactory) {
+app.directive('hfReviewItem', function(reviewsFactory) {
 	return {
 		restrict: 'E',
-		templateUrl: '/js/movies/review-item.html',
+		templateUrl: '/js/reviews/review-item/review-item.html',
 		link: function(scope, element, attr) {
 
 		}

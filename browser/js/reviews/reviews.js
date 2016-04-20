@@ -10,4 +10,4 @@ app.config(function($stateProvider) {
 		controller: 'ReviewsCtrl',
 		templateUrl: '/js/reviews/review-form.html'
 	})
-})
+});
