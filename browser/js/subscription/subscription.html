@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row row-centered">
+        <div class="col-xs-10 col-centered">
+            <ul class="list-inline">
+                <li ng-repeat="sub in subscriptions" class="block-item col-xs-3" >
+                    <div class="block-content col-xs-12">
+                    <span class="glyphicon glyphicon-coin"></span>
+                    <p><h3>{{sub.plan}}</h3> Plan</p>
+                    <p><h3>${{sub.price}}</h3> per month</p>
+                    <p>You can have <h3>{{sub.allowance}}</h3> movies at a time</p>
+                    <button ng-click="submit(sub)">Select</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
