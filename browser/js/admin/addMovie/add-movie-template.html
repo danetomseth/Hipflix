@@ -25,9 +25,13 @@
 				<div class="form-group">
 					<label for="title" class="col-xs-1 control-label">Category:</label>
 					<div class="col-xs-4">
-						<select name="" id="select-menu" ng-model="singleCategory" placeholder="Select" class="form-control">
-							<option value="">Select Category</option>
-							<option ng-repeat="category in categories" value="{{category}}">{{category}}</option>
+						<!-- <select  id="select-menu" ng-model="singleCategory" class="form-control">
+							<option>Select Category</option>
+							<option ng-repeat="category in categories" value={{category}}>{{category}}</option>
+
+						</select> -->
+						<select class="form-control" ng-model="singleCategory" ng-options="category.name for category in categories">
+								<option value="">-- choose category --</option>
 						</select>
 						
 					</div>
@@ -71,7 +75,7 @@
 				
 				<div class="form-group">
 					<div class="col-md-2 col-md-offset-10">
-						<button type="submit" ng-submit="addMovie(newMovie)" class="btn btn-primary control-label">Add Movie</button>
+						<button type="submit" ng-click="addMovie(newMovie)" class="btn btn-primary control-label">Add Movie</button>
 					</div>
 				</div>
 				
@@ -79,3 +83,5 @@
 		</div>
 	</div>
 </div>
+
+
