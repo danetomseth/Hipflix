@@ -6,13 +6,12 @@ app.config(function ($stateProvider) {
     });
 });
 
-var Promise = require('bluebird')
 
 app.controller('HomeCtrl', function($scope, CategoriesFactory,MovieFactory){
 
 	CategoriesFactory.fetchAll()
 		.then(categories => {
-			$scope.categories = categories			
+			$scope.categories = categories
 		})
 
 	MovieFactory.fetchAll()
