@@ -28,8 +28,9 @@ router.param('movieId', (req, res, next, movieId) => {
 
 
 router.get('/', (req, res, next) => {
-	Movies.find()
-	.then((movies) => movies)
+  console.log(req.body);
+	Movies.find({})
+	.then((movies) => res.json(movies))
 	.catch(next)
 })
 
