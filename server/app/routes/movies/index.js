@@ -40,6 +40,7 @@ router.get('/:movieId/reviews', (req, res, next) => res.json(req.movie.reviews))
 
 router.post('/', (req, res, next) => {
 	Movies.create(req.body)
+  .populate("category")
 		.then((movie) => res.send(movie))
 		.catch(next)
 
