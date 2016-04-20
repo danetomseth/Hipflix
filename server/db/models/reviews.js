@@ -28,12 +28,16 @@ let schema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        default: moment,
+        default: moment(),
         required: true
     },
     bestFor: {
         type: [String]
     }
 });
+
+schema.virtual('momentDate').set(function(dateCreated){
+    return dateCreated.fromNow();
+})
 
 mongoose.model('Reviews', schema);

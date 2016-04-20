@@ -3,12 +3,11 @@
 		<div class="panel-body">
 			<div class="list-group">
 				<div class="list-group-item"><strong>{{review.title}}, {{review.movie}} by {{review.user}}</strong></div>
-				<div class="list-group-item">Created: {{review.dateCreated}}</div>
+				<div class="list-group-item">Created: {{review.momentDate}}</div>
 				<div class="list-group-item">Rating: {{review.rating}}<span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
 				<div>{{review.content}}</div>
 				<div ng-repeat="bestFor in reviews.bestFor">{{bestFor}}</div>
 			</div>
 		</div>
 
-		
 <!-- </div> -->

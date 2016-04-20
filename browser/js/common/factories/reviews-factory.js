@@ -15,6 +15,6 @@ app.factory('ReviewsFactory', function($http) {
 		// },
 		submitReview: (postedReview) => {
 			return $http.post('/api/reviews', postedReview);
-		},
+		}
 	}
 })
