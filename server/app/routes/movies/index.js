@@ -9,7 +9,7 @@ var Movies = mongoose.model('Movies');
 router.param('movieId', (req, res, next, movieId) => {
     //might be able to use movieId instead of router.params.id
     Movies.findById(req.params.movieId)
-    .populate('reviews')
+    .populate('category reviews')
     .then((movie) => {
     	if (!movie) {
             var err = new Error('empty movie')
@@ -28,8 +28,8 @@ router.param('movieId', (req, res, next, movieId) => {
 
 
 router.get('/', (req, res, next) => {
-  console.log(req.body);
 	Movies.find({})
+  .populate('category reviews')
 	.then((movies) => res.json(movies))
 	.catch(next)
 })
