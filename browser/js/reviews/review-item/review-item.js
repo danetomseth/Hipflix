@@ -1,1 +1,0 @@
-app.directive('hfReviewItem', function())
