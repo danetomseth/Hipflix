@@ -1,8 +1,8 @@
 app.config(function($stateProvider) {
-	$stateProvider.state('addMovie', {
+	$stateProvider.state('addmovie', {
 		url: '/admin/addmovie',
 		controller: 'AddMovieCtrl',
-		templateUrl: '/js/admin/add-movie-template.html'
+		templateUrl: '/js/admin/addmovie/add-movie-template.html'
 	});
 });
 
