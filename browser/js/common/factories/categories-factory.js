@@ -9,7 +9,7 @@ app.factory("CategoriesFactory", ($http) => {
             .then(category => category.data)
         },
         create: newCategory => {
-            return $hhtp.post('/api/categories', {newCategory})
+            return $http.post('/api/categories', newCategory)
             .then(newCategory => newCategory.data)
         }
     }

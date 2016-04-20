@@ -1,0 +1,18 @@
+<div class="container">
+	<div class='col-md-10 col-centered'>
+		<div class="page-header">
+			<h3>Add Category</h3>
+		</div>
+		<div class="col-xs-12 well">
+			<form class="form-inline" name="newCategory" ng-submit="addCategory(newCategory.name)">
+				<div class="form-group col-xs-12">
+					<label class="control-label col-xs-2">Category Name:</label>
+					<div class="col-xs-4">
+						<input class="form-control col-xs-6" type="text" ng-model="newCategory.name" placeholder="Category Name">
+					</div>
+					<button class="btn btn-primary btn-submit" type="submit">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

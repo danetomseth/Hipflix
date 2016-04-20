@@ -1,5 +1,4 @@
 app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory) {
-	$scope.singleCategory = "";
 	$scope.singleTag = "";
 	$scope.singlePhoto = "";
 	$scope.movieForm;
@@ -13,16 +12,17 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
 		tags: [],
 		photos: []
 	};
-	$scope.categoryArray = [];
-	$scope.categories = ['drama', 'action', 'comedy'];
-	// CategoriesFactory.fetchAll()
-	// .then((categories) => {
-	// 	console.log('categories returned', categories);
-	// 	$scope.categories = categories;
-	// })
+	//$scope.categoryArray = [];
+	//$scope.categories = ['drama', 'action', 'comedy'];
+	CategoriesFactory.fetchAll()
+	.then((categories) => {
+		console.log('categories returned', categories);
+		$scope.categories = categories;
+		console.log($scope.categories);
+	})
 	$scope.addCategory = function(category) {
-		$scope.newMovie.category.push($scope.singleCategory)
-		//$scope.newMovie.category.push(category._id)
+		console.log('category', category);
+		$scope.newMovie.category.push(category._id)
 	}
 	$scope.addPhoto = function(photo) {
 		console.log(photo);
@@ -35,10 +35,11 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
 	}
 
 	$scope.addMovie = function(movie) {
-		//console.log(movie);
-		//console.log('form', $scope.movieForm.title);
 		console.log('new movie', $scope.newMovie);
-		MovieFactory.create($scope.newMovie);
+		MovieFactory.create($scope.newMovie)
+		.then((newMovie) => {
+			$state.go('admin');
+		})
 	}
 
 
