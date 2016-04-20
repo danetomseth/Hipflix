@@ -28,7 +28,7 @@ let schema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        default: moment(),
+        default: moment,
         required: true
     },
     bestFor: {
@@ -36,8 +36,8 @@ let schema = new mongoose.Schema({
     }
 });
 
-schema.virtual('momentDate').set(function(dateCreated){
-    return dateCreated.fromNow();
+schema.virtual('momentDate').set(function(){
+    return moment(this.dateCreated).fromNow();
 })
 
 mongoose.model('Reviews', schema);
