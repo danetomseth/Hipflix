@@ -15,13 +15,15 @@ router.get('/', (req, res, next) => {
 
 router.get('/:categoryName', (req, res, next) => { //may later move to movies route
     console.log(req.params.categoryName)
-    Categories.find({name: req.params.categoryName})
+    Categories.findOne({name: req.params.categoryName})
     .then((category) => {
         console.log(category)
-        return Movies.find({category: category._id})
-        .populate('category')
+        return Movies.find({category: category._id}).populate('category')
     })
-    .then((movies) => res.json(movies))
+    .then((movies) => {
+        console.log(movies)
+        return res.json(movies)
+    })
     .catch(next)
 })
 
