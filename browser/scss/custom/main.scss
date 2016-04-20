@@ -1,0 +1,31 @@
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.block-item {
+  //display: block;
+  
+}
+.block-content {
+  min-height: 100px;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  background-color: lightgrey;
+  border: 2px solid grey;
+  span {
+    line-height: 50px;
+    font-size: 1.6em;
+    width: 100%;
+  }
+
+}

@@ -16,10 +16,10 @@ var schema = new mongoose.Schema({
 	duration: {
 		type: Number
 	},
-	category: {
-		type: [mongoose.Schema.Types.ObjectId],
+	category: [{
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Categories'
-	},
+	}],
 	tags: {
 		type: [String]
 	},
