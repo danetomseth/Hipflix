@@ -8,24 +8,16 @@ app.config(function ($stateProvider) {
 
 var Promise = require('bluebird')
 
-app.controller('HomeCtrl', function($scope, CategoriesFactory){
+app.controller('HomeCtrl', function($scope, CategoriesFactory,MovieFactory){
 
 	CategoriesFactory.fetchAll()
 		.then(categories => {
-			// find movies of each category
-			var categoryPromises = categories.map(category => CategoriesFactory.fetchOne(category));
-
-			Promise.all(categoryPromises)
-				.then(categoryMovies => {
-					 for(var i=0; i<categoryMovies.length;i++){
-					 	categories[i].movies = categoryMovies[i]
-					 }
-					 return categories
-				})
-			
+			$scope.categories = categories			
 		})
-		.then(categories => {
-			$scope.categories = categories
+
+	MovieFactory.fetchAll()
+		.then(movies => {
+			$scope.movies = movies
 		})
 
 
