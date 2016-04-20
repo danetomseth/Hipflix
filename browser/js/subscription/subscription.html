@@ -8,7 +8,7 @@
                     <p><h3>{{sub.plan}}</h3> Plan</p>
                     <p><h3>${{sub.price}}</h3> per month</p>
                     <p>You can have <h3>{{sub.allowance}}</h3> movies at a time</p>
-                    <button ng-click="submit(sub)">Select</button>
+                    <button ng-show="user" ng-click="submit(sub)">Select</button>
                     </div>
                 </li>
             </ul>
