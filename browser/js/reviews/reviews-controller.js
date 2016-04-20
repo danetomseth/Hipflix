@@ -1,7 +1,7 @@
-app.controller('MoviesCtrl', function($scope, MovieFactory) {
-	MovieFactory.fetchAll()
-	.then(function(res) {
-		console.log('movies returned', res);
-		$scope.movies = res
+app.controller('ReviewsCtrl', function($scope, ReviewsFactory) {
+	ReviewsFactory.fetchAll()
+	.then((res) => {
+		console.log('reviews submitted', res);
+		$scope.reviews = res;
 	})
 })

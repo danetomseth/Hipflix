@@ -1,4 +1,4 @@
-app.directive('movieItem', function(MovieFactory) {
+app.directive('HfMovieItem', function(MovieFactory) {
 	return {
 		restrict: 'E',
 		templateUrl: '/js/movies/movie-item.html',

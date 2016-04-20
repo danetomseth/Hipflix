@@ -1,9 +1,12 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var moment = require('moment');
+const mongoose = require('mongoose');
+const moment = require('moment');
 
-var schema = new mongoose.Schema({
+let schema = new mongoose.Schema({
+    title: {
+        type: String
+    },
     movie: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Movies',
@@ -31,6 +34,6 @@ var schema = new mongoose.Schema({
     bestFor: {
         type: [String]
     }
-})
+});
 
 mongoose.model('Reviews', schema);

@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 const Reviews = mongoose.model('Reviews');
 module.exports = router;
 
+// we are probably not using /Reviews page right now (stretch feature), unless
+// we have time to build a Recommendations page/ engine that highlights reviews/
+// movies that might interest a particular User.
+
 router.get('/', (req, res, next) => {
 	Reviews.find({})
 	.then(reviews => res.json(reviews))
