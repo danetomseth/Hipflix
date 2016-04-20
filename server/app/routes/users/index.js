@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const Users = mongoose.model('Users');
 const Reviews = mongoose.model('Reviews');
 const Orders = mongoose.model('Orders');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
+
 module.exports = router;
 
 router.get('/', (req, res, next) => {
@@ -14,16 +16,23 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	Users.findOrCreate(req.body)
-		.then(newUser => res.json(newUser))
-		.catch(next);
+	Users.find(req.body)
+	.then((user) => {
+		if(user) {
+			let err = new Error('User already exists!');
+			err.status = 403;
+			return next(err);
+		} else {
+			return Users.create(req.body)
+			.then(newUser => res.json(newUser));
+		}
+	})
+	.catch(next);	
 });
 
 router.param('/:userId', (req, res, next, userId) => {
 	Users.findById(userId)
-		.populate('movieQueue')
-		.populate('address')
-		.populate('billingHistory')
+		.deepPopulate('addresses addresses.user movieQueue movieQueue.movie subscription billingHistory billingHistory.user')
 		.then(user => {
 			if(!user) {
 				res.sendStatus(404);
