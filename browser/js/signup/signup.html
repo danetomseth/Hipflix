@@ -6,7 +6,6 @@
         <div class="col-xs-3">
           <input ng-model="newUser.email" type="email" class="form-control">
         </div>
-
         <label class="col-xs-1 control-label" >First:</label>
         <div class="col-xs-3">
           <input type="first" ng-model="newUser.first" class="form-control">
@@ -21,19 +20,6 @@
         <div class="col-xs-3">
           <input ng-model="newUser.password" type="password" class="form-control">
         </div>
-
-        <label class="col-xs-1 control-label" >Admin:</label>
-        <div class="col-xs-3">
-          <label>
-            <input type="radio" ng-model="newUser.isAdmin" value='true' class="form-control">
-            Yes
-          </label>
-          <label>
-            <input type="radio" ng-model="newUser.isAdmin" value='false' class="form-control">
-            No
-          </label>
-        </div>
-
       </fieldset>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

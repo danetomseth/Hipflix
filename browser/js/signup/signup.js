@@ -6,13 +6,16 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('SignupCtrl', function($scope, $state, SignupFactory) {
+app.controller('SignupCtrl', function($scope, $state, SignupFactory, AuthService) {
     $scope.addUser = function() {
         console.log('user', $scope.newUser);
-        SingupFactory.createUser($scope.newUser)
+        SignupFactory.createUser($scope.newUser)
         .then(user => {
+            return AuthService.login({email: $scope.newUser.email, password: $scope.newUser.password})
+        })
+        .then(() => {
             console.log('user created!!!');
-            $state.go('signup');
+            $state.go('subscription');
         })
     }
 })
