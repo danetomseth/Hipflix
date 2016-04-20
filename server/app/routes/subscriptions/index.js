@@ -20,14 +20,15 @@ router.post('/', (req, res, next) => {
 
 router.put('/', (req, res, next) => {
     console.log(req.user)
-    if(req.user.isAdmin || req.user === req.body.user){ // I think this will check if the current user is updating themselves, or is an admin
+    // if(req.user.isAdmin || req.user === req.body.user){ // I think this will check if the current user is updating themselves, or is an admin
         var user = req.body.user
-        Users.findOne({email: user.email})
+        User.findOne({email: user.email})
         .then(user => {
             user.subscription = req.body.sub._id
+            console.log("****NEW USER****", user)
             return user.save()
         })
         .then(user => res.json(user))
         .catch(next)
-    }
+    // }
 })
