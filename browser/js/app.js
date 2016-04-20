@@ -8,6 +8,19 @@ app.config(function ($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
 });
 
+// create a filter for finding movies of a specific category
+app.filter("moviesByCategory", function(){
+    return funtion(movies, category) {
+        var filtered = [];
+        angular.forEach(movies, function(movie){
+            if(movie.category.indexOf(category)> -1){
+                filtered.push(movie)
+            }
+        })
+        return filtered
+    }
+})
+
 // This app.run is for controlling access to specific states.
 app.run(function ($rootScope, AuthService, $state) {
 
