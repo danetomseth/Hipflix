@@ -20,6 +20,10 @@ let schema = new mongoose.Schema({
     last: {
         type: String
     },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
     address: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Addresses'
