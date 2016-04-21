@@ -30,11 +30,32 @@
 
 }
 
+.movie-box {
+  height: 450px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.movie-content {
+  height: 100%;
+  box-shadow: 5px 5px 5px #888888 !important;
+
+}
+
+#movie-link {
+
+}
+
+.movie-link:hover {
+  cursor: pointer;
+  border: 3px solid;
+}
+
 
 /*Movie item--------*/
 
 .movie-hover {
-  border: 3px solid blue;
+  border: 3px solid;
   cursor: pointer;
 
 }

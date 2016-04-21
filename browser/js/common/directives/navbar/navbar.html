@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top">
+<!-- <nav class="navbar navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <fullstack-logo></fullstack-logo>
@@ -15,4 +15,29 @@
             <a ng-click="logout()">Logout</a>
         </div>
     </div>
+</nav> -->
+
+<nav id="custom-nav" class="navbar navbar-custom navbar-transparent navbar-fixed-top">
+
+    <div class="container">
+
+        <div class="navbar-header">
+            <!-- YOU LOGO HERE -->
+            <a class="navbar-brand logo" href="/admin">
+                <img class="logo" src="assets/logo.png" width="120" alt="">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="custom-collapse">
+
+            <ul class="nav navbar-nav navbar-right"> 
+
+                <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
 </nav>

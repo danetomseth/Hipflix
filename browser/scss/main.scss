@@ -3,7 +3,9 @@
 }
 
 body {
-  background: #fdfdfd;
+  background-image: url('28.png') !important;
+  background-size: 5% !important; 
+  background-repeat: repeat;
 }
 
 @mixin clearfix {
@@ -15,9 +17,36 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding: 180px 30px 20px 30px;
   margin: 0 auto;
 }
+.logo {
+  position: relative;
+  top: -10px;
+}
+
+#custom-nav {
+	//height: 200px;
+	background-color: #fff;
+  background-image: url('04G.jpg') !important;
+  background-size: 25% !important; 
+  background-repeat: repeat;
+  color: white;
+	border-bottom: 1px solid grey;
+  a {
+    color: white;
+  }
+  a.active {
+    color: grey;
+  }
+}
+
+#custom-collapse {
+  position: relative;
+  top: 30px;
+}
+
+
 
 @import 'directives/main';
 @import 'home/main';
@@ -25,3 +54,5 @@ body {
 @import 'tutorial/main';
 @import 'login/main';
 @import 'custom/main';
+@import 'template/main';
+@import 'fonts/main'

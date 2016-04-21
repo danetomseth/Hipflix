@@ -1,5 +1,5 @@
 <div class="container">
-	<div class='col-md-12'>
+	<div class='col-xs-12'>
 		<div class="page-header">
 			<h3>Create New Movie</h3>
 		</div>
@@ -24,7 +24,7 @@
 				<hr>
 				<div class="form-group">
 					<label for="title" class="col-xs-1 control-label">Category:</label>
-					<div class="col-xs-4">
+					<div class="col-xs-3">
 						<!-- <select  id="select-menu" ng-model="singleCategory" class="form-control">
 							<option>Select Category</option>
 							<option ng-repeat="category in categories" value={{category}}>{{category}}</option>
@@ -35,9 +35,9 @@
 						</select>
 						
 					</div>
-					<div class="col-md-1">
-						<button class="btn btn-primary" ng-click="addCategory(singleCategory)">Add</button>
-					</div>
+				
+						<button class="btn btn-primary col-xs-1" ng-click="addCategory(singleCategory)">Add</button>
+					
 					<label class="col-xs-1 control-label" >Trailer:</label>
 					<div class="col-xs-4">
 						<input type="trailer" ng-model="newMovie.trailer" placeholder="Url" class="form-control">
@@ -49,18 +49,18 @@
 					<div class="col-xs-3">
 						<input type="photos" ng-model="singlePhoto" placeholder="Url" class="form-control">
 					</div>
-					<div class="col-md-1">
-						<button class="btn btn-primary" ng-click="addPhoto(singlePhoto)">Add</button>
-					</div>
+					
+						<button class="btn btn-primary col-xs-1" ng-click="addPhoto(singlePhoto)">Add</button>
+				
 					<label class="col-xs-1 control-label">Tags:</label>
 					<div class="col-xs-2">
 						<input type="tags" ng-model="singleTag" class="form-control">
 					</div>
-					<div class="col-md-1">
-						<button class="btn btn-primary" ng-click="addTag(singleTag)">Add</button>
-					</div>
+					
+						<button class="btn btn-primary col-xs-1" ng-click="addTag(singleTag)">Add</button>
+					
 					<label class="col-xs-1 control-label" >Inventory:</label>
-					<div class="col-xs-2">
+					<div class="col-xs-1">
 						<input type="Inventory" class="form-control" ng-model="newMovie.inventory">
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 				</div>
 				
 				<div class="form-group">
-					<div class="col-md-2 col-md-offset-10">
+					<div class="col-xs-2 col-xs-offset-9">
 						<button type="submit" ng-click="addMovie(newMovie)" class="btn btn-primary control-label">Add Movie</button>
 					</div>
 				</div>
