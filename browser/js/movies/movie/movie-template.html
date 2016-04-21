@@ -13,9 +13,10 @@
 								<h5>Genre:</h5>
 								<p style="display:inline-block; padding-right:5px" ng-repeat="category in movie.category">{{category.name}}</p>
 								<h5>Duration:</h5>
-								<p>{{movie.duration}}</p>
+								<p>{{movie.duration}} minutes</p>
 								<h5>Trailer:</h5>
 								<a ng-src="{{movie.trailer}}">{{movie.title}}</a>
+								<h5 ui-sref="reviews({movieId: movie._id})">Read reviews</h5>
 							</div>
 						</div>
 					</div>
@@ -29,7 +30,7 @@
 					<div class="col-xs-8">
 					</div>
 					<div class="col-xs-2">
-						<button class="btn btn-primary" ng-click="addToQueue()">Add To Q</button>
+						<button class="btn btn-primary" ng-click="addToQueue()">Add To Q</button><button class="btn btn-primary" ui-sref="addReview({movieId: movie._id})">Write Review</button>
 					</div>
 				</div>
 			</div>

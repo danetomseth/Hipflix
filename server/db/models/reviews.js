@@ -1,9 +1,13 @@
-'use strict';
+ 'use strict';
 
-var mongoose = require('mongoose');
-var moment = require('moment');
+const mongoose = require('mongoose');
+const moment = require('moment');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var schema = new mongoose.Schema({
+    title: {
+        type: String
+    },
     movie: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Movies',
@@ -13,7 +17,7 @@ var schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
         required: true
-    },
+    }, 
     content: {
         type: String,
         minlength: 10,
@@ -25,12 +29,19 @@ var schema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        default: moment,
-        required: true
+        default: Date.now
     },
     bestFor: {
         type: [String]
     }
+});
+
+schema.virtual('momentDate').get(function(){
+    // console.log('MOMENTDATE', this);
+    // return "hello";
+    return moment(this.dateCreated).fromNow();
 })
+
+schema.plugin(deepPopulate);
 
 mongoose.model('Reviews', schema);
