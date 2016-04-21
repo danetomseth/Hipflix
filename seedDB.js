@@ -10,7 +10,7 @@ var dumpDB = spawn('/usr/local/bin/mongo', dumpArgs);
 // var mongoose = require('mongoose');
 /* Connect to the DB */
 mongoose.connect(DATABASE_URI,function(){
-    mongoose.connection.once('open', ()=> {
+    mongoose.connection.once('open', function() {
 
         mongoose.connection.db.dropDatabase(function (err) {
           console.log('db dropped');
