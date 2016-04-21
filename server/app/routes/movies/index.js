@@ -22,7 +22,6 @@ router.param('movieId', (req, res, next, movieId) => {
           req.movie = movie;
           next()
         }, (err) => {
-
          err.message = 'Cannot Find Movie';
                 throw err //next(err)
               })
