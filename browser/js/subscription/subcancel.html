@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row row-centered">
+        <div class="col-xs-10 col-centered">
+            <ul class="list-inline">
+                <li class="block-item col-xs-3" >
+                    <div class="block-content col-xs-12">
+                    <span class="glyphicon glyphicon-coin"></span>
+                    <p><h3>Are you sure you want to cancel the following plan you are currently subscribing to?</h3></p>
+                    <p><h3>{{user.subscription.plan}}</h3> Plan</p>
+                    <p><h3>${{user.subscription.price}}</h3> per month</p>
+                    <p>You can have <h3>{{user.subscription.allowance}}</h3> movies at a time</p>
+                    <button ng-show="user" ng-click="cancel()">Cancel</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
