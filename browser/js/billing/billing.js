@@ -9,7 +9,7 @@ app.config(function($stateProvider) {
                 .then(user => {
                     return BillingFactory.getBills(user._id)
                 })
-                .then(bills => bills.data)
+                .then(bills => bills)
             }
         }
     })
