@@ -2,15 +2,20 @@ app.config(function($stateProvider) {
 	$stateProvider.state('billing', {
 		url: '/billing',
 		templateUrl: '/js/billing/billing.html',
-		controller:"BillingCtrl"
-	})
+		controller:"BillingCtrl",
+        resolve: {
+            bills: function($http, AuthService, BillingFactory){
+                return AuthService.getLoggedInUser()
+                .then(user => {
+                    return BillingFactory.getBills(user._id)
+                })
+                .then(bills => bills.data)
+            }
+        }
+    })
 });
 
 
-app.controller('BillingCtrl', function($scope,AuthService){
-	AuthService.getLoggedInUser()
-		.then(user => {
-			$scope.user = user
-		})
-
+app.controller('BillingCtrl', function($scope, bills){
+    $scope.bills = bills
 });
