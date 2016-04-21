@@ -5,8 +5,7 @@ app.factory("SubscriptionFactory", function($http){
             .then(subscriptions => subscriptions.data)
         },
         update: function(user, sub){
-            console.log(user, sub)
-            return $http.put("/api/subscriptions", {sub: sub, user: user})
+            return $http.put("/api/users/subscription", {sub: sub, user: user})
             .then(user => user.data)
         },
         create: function(sub){
