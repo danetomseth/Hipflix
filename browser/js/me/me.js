@@ -4,7 +4,7 @@ app.config(function($stateProvider) {
 		templateUrl: '/js/me/me.html',
 		controller: 'MyAccountCtrl'
 	})
-})
+});
 
 
 app.controller('MyAccountCtrl', function($scope,AuthService){
@@ -13,4 +13,4 @@ app.controller('MyAccountCtrl', function($scope,AuthService){
 			$scope.user = user
 		})
 
-})
+});

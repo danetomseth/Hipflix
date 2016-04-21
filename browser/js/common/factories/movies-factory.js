@@ -11,6 +11,11 @@ app.factory('MovieFactory', function($http) {
 		create: (newMovie) => {
 			console.log('movie', newMovie);
 			return $http.post('/api/movies', newMovie)
+		},
+		addToQueue: (user, id) => {
+			console.log('movieid', id);
+			console.log('user', user);
+			return $http.post('/api/users/'+user._id+'/addmovie', {movieId: id})
 		}
 	}
 })

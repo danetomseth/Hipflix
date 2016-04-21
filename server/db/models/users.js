@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const _ = require('lodash');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
+var MovieQ = mongoose.model('MovieQueues')
 
 var schema = new mongoose.Schema({
     email: {
@@ -88,13 +89,20 @@ var encryptPassword = function (plainText, salt) {
 };
 
 schema.pre('save', function (next) {
-
-    if (this.isModified('password')) {
-        this.salt = this.constructor.generateSalt();
-        this.password = this.constructor.encryptPassword(this.password, this.salt);
+    var user = this;
+    if (user.isModified('password')) {
+        user.salt = user.constructor.generateSalt();
+        user.password = user.constructor.encryptPassword(user.password, user.salt);
     }
 
-    next();
+    MovieQ.create({})
+    .then(function(queue) {
+        user.movieQueue = queue._id;
+        next();
+    })
+    .catch(next);
+
+    
 
 });
 
