@@ -37,6 +37,7 @@
 }
 
 .movie-content {
+  padding-top: 5px;
   height: 100%;
   box-shadow: 5px 5px 5px #888888 !important;
 
@@ -53,9 +54,19 @@
 
 
 /*Movie item--------*/
+.red {
+  color: red;
+  background-color: blue;
+}
 
 .movie-hover {
-  border: 3px solid;
+  .movie-content {
+    background-color: #F9F9F9;
+  }
+  //padding-left: 18px;
+  //padding-right: 18px;
+  padding: 3px 18px;
   cursor: pointer;
+  
 
 }
