@@ -1,0 +1,29 @@
+app.config(function($stateProvider){
+    $stateProvider.state('subscription', {
+        url: "/subscription",
+        templateUrl: "/js/subscription/subscription.html",
+        controller: "SubscriptionCtrl"
+    })
+});
+
+app.controller('SubscriptionCtrl', function($scope, $state, AuthService, SubscriptionFactory){
+    AuthService.getLoggedInUser().then(function (user) {
+        $scope.user = user;
+    });
+
+    SubscriptionFactory.fetchAll()
+    .then(subscriptions => {
+        console.log(subscriptions);
+        return $scope.subscriptions = subscriptions
+    });
+
+    $scope.submit = function(sub){
+        if(!$scope.user) return alert("login or signup please")
+            console.log($scope.user)
+        return SubscriptionFactory.update($scope.user, sub)
+        .then(user => {
+            console.log("updated", user)
+            $state.go('home') // ultimately send this back to the users' billing page
+        })
+    }
+})
