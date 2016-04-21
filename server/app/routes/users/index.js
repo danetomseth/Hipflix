@@ -12,11 +12,9 @@ module.exports = router;
 
 var popMovies = function(queue) {
 	var userMovies = [];
-	console.log(queue);
 	queue.queue.forEach(function(elem) {
 		Movies.findById(elem.movie)
 		.then(function(movie) {
-			console.log('found movie!!');
 			userMovies.push(movie)
 		})
 	})
@@ -24,7 +22,6 @@ var popMovies = function(queue) {
 }
 
 router.param('userId', (req, res, next, userId) => {
-	console.log('param', userId);
 	Users.findById(userId)
 		.deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
 		.then(user => {
@@ -32,7 +29,6 @@ router.param('userId', (req, res, next, userId) => {
 				res.sendStatus(404);
 			} else {
 				req.newUser = user;
-				console.log('user', user);
 				next();
 			}
 		})
@@ -60,34 +56,21 @@ router.post('/', (req, res, next) => {
 	.catch(next);	
 });
 
-router.post('/:userId/addmovie', (req, res, next) => {
-	var user = req.newUser;
-	var check = true;
-	var movieId = {
-		movie: req.body.movieId,
-		status: 'pending'
-	}
-	var userQueue = user.movieQueue;
-	
-	console.log('Movie id', movieId);
-	userQueue.queue.forEach(function(movie) {
-		if(movie._id == movieId) {
-			check = false;
-		}
+router.post('/:userId/movie', (req, res, next) => {
+	req.newUser.movieQueue.addToQueue(req.body.movieId)
+	.then(data => {
+		console.log('data returned', data);
+		res.status(204).send('created')
 	})
-	if(check) {
-		userQueue.queue.push(movieId);
-		userQueue.save()
-		.then(data => {
-			res.send('created')
+	.catch(next)
+})
+
+router.delete('/:userId/movie/:itemId', (req, res, next) => {
+	req.newUser.movieQueue.dequeue(req.params.itemId)
+	.then(data => {
+			res.status(204).send('deleted')
 		})
 		.catch(next)
-	}
-	else {
-		res.status(204).send('failed')
-	}
-	//res.send('done');
-
 })
 
 router.get('/:userId', (req, res, next) => {
