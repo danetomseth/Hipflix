@@ -1,6 +1,6 @@
-<div class="col-xs-3">
+<div id="movie-item" class="col-xs-3" ui-sref="movie({movieId: movie._id})">
 	<div class="panel panel-default">
-		<div class="well text-center" style="height: 150px">Image</div>
+		<div class="well text-center"><img style="height: 150px" ng-repeat="photo in movie.photos" class="img-thumbnail" ng-src="{{photo}}"></div>
 		<div class="panel-body">
 			<div class="list-group">
 				<div class="list-group-item"><strong>{{movie.title}}</strong></div>
@@ -8,6 +8,7 @@
 				<div class="list-group-item">Rating: <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
 				<div ui-sref="reviews">Read reviews</div>
 				<div>Watch trailer</div>
+
 			</div>
 		</div>
 	</div>

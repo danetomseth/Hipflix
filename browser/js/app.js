@@ -11,6 +11,8 @@ app.config(function ($urlRouterProvider, $locationProvider) {
 // create a filter for finding movies of a specific category
 app.filter("moviesByCategory", function(){
     return function(movies, category) {
+        // console.log('movies',movies)
+        // console.log('category',category)
         var filtered = [];
         angular.forEach(movies, function(movie){
             if(movie.category.indexOf(category)> -1){
