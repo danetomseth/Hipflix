@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var schema = new mongoose.Schema({
 	title: {
@@ -29,17 +30,17 @@ var schema = new mongoose.Schema({
 	trailer: {
 		type: String
 	},
-	reviews: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Reviews'
-	},
+	reviews: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Reviews'
+	}],
 	inventory: {
 		type: Number
 	}
 })
 
 
-
+schema.plugin(deepPopulate);
 
 
 mongoose.model('Movies', schema);

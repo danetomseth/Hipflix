@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 module.exports = app;
+var cron = require('../utils/generateBills.js') // this reads and starts the cron job that checks for billing
 
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
