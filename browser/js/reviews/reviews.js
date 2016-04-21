@@ -35,9 +35,6 @@ app.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService
 	};
 });
 
-
 app.controller('ReviewsCtrl', function($scope, $state, ReviewsFactory, movie) {
-
 	$scope.movie = movie;
-	
 });
