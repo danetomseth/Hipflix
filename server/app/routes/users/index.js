@@ -58,33 +58,36 @@ router.post('/', (req, res, next) => {
 	.catch(next);
 });
 
-router.post('/:userId/addmovie', (req, res, next) => {
-	var user = req.newUser;
-	var check = true;
-	var movieId = {
-		movie: req.body.movieId,
-		status: 'pending'
-	}
-	var userQueue = user.movieQueue;
 
-	userQueue.queue.forEach(function(movie) {
-		if(movie._id == movieId) {
-			check = false;
-		}
+router.post('/:userId/movie', (req, res, next) => {
+	req.newUser.movieQueue.addToQueue(req.body.movieId)
+	.then(data => {
+		console.log('data returned', data);
+		res.status(204).send('created')
+// router.post('/:userId/addmovie', (req, res, next) => {
+// 	var user = req.newUser;
+// 	var check = true;
+// 	var movieId = {
+// 		movie: req.body.movieId,
+// 		status: 'pending'
+// 	}
+// 	var userQueue = user.movieQueue;
+
+// 	userQueue.queue.forEach(function(movie) {
+// 		if(movie._id == movieId) {
+// 			check = false;
+// 		}
+
 	})
-	if(check) {
-		userQueue.queue.push(movieId);
-		userQueue.save()
-		.then(data => {
-			res.send('created')
+	.catch(next)
+})
+
+router.delete('/:userId/movie/:itemId', (req, res, next) => {
+	req.newUser.movieQueue.dequeue(req.params.itemId)
+	.then(data => {
+			res.status(204).send('deleted')
 		})
 		.catch(next)
-	}
-	else {
-		res.status(204).send('failed')
-	}
-	//res.send('done');
-
 })
 
 router.get('/:userId', (req, res, next) => {

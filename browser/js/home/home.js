@@ -26,4 +26,4 @@ app.controller('HomeCtrl', function($q, $scope, CategoriesFactory){
  					$scope.categories = categories;
  				})
 		});
-})
+});

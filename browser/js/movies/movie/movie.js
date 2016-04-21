@@ -14,7 +14,7 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('MovieCtrl', function($scope, $state, MovieFactory, AuthService, movie) {
+app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFactory, AuthService, movie) {
 	console.log('single movie', movie);
 	$scope.movie = movie;
 	AuthService.getLoggedInUser()
@@ -24,6 +24,9 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, AuthService, 
 
 	$scope.addToQueue = function() {
 		console.log('add to queue', $scope.movie);
-		MovieFactory.addToQueue($scope.user, $scope.movie._id);
+		MovieQueueFactory.addToQueue($scope.user, $scope.movie._id)
+		.then(res => {
+			$state.go('movieQueue');
+		})
 	}
 });
