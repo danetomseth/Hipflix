@@ -4,7 +4,7 @@ app.config(function($stateProvider) {
 		templateUrl: '/js/billing/billing.html',
 		controller:"BillingCtrl"
 	})
-})
+});
 
 
 app.controller('BillingCtrl', function($scope,AuthService){
@@ -13,4 +13,4 @@ app.controller('BillingCtrl', function($scope,AuthService){
 			$scope.user = user
 		})
 
-})
+});

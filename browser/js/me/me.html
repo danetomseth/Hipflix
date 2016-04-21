@@ -1,15 +1,19 @@
 <div class="container">
 	<div class="list-group">
 		<div class="list-group-item"><strong>My Account</strong></div>
+		<div class="list-group-item">
+			<strong>Movie Queue</strong>
+			<button class="btn btn-primary" ui-sref="movieQueue({userId: user._id})">Go</button>
+		</div>
 		<div class="list-group-item">Membership & Billing
 			<ol>
-				<ul>{{ User.Email }}</ul>
-				<ul>{{ User.RenewalDate }}</ul>
+				<ul>{{ user.email }}</ul>
+				<ul>{{ user.RenewalDate }}</ul>
 				<ul ui-sref="billing">Billing Details</ul>
 			</ol>
 		</div>
 		<div class="list-group-item">Plan Details
-			<ol> {{ User.subscription }}
+			<ol> {{ user.subscription }}
 				<ul ui-sref="subscription">Change Plan</ul>
 				<ul ui-sref="subcancel">Cancel Plan</ul>
 			</ol>

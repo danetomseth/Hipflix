@@ -5,10 +5,40 @@ const mongoose = require('mongoose');
 const Users = mongoose.model('Users');
 const Reviews = mongoose.model('Reviews');
 const Orders = mongoose.model('Orders');
+const Movies = mongoose.model('Movies');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 module.exports = router;
 
+var popMovies = function(queue) {
+	var userMovies = [];
+	console.log(queue);
+	queue.queue.forEach(function(elem) {
+		Movies.findById(elem.movie)
+		.then(function(movie) {
+			console.log('found movie!!');
+			userMovies.push(movie)
+		})
+	})
+	return userMovies 
+}
+
+router.param('userId', (req, res, next, userId) => {
+	console.log('param', userId);
+	Users.findById(userId)
+		.deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
+		.then(user => {
+			if(!user) {
+				res.sendStatus(404);
+			} else {
+				req.newUser = user;
+				console.log('user', user);
+				next();
+			}
+		})
+		.catch(next);
+
+});
 router.get('/', (req, res, next) => {
 	Users.find({})
 		.then(users => res.json(users))
@@ -30,27 +60,46 @@ router.post('/', (req, res, next) => {
 	.catch(next);	
 });
 
-router.param('/:userId', (req, res, next, userId) => {
-	Users.findById(userId)
-		.deepPopulate('addresses addresses.user movieQueue movieQueue.movie subscription billingHistory billingHistory.user')
-		.then(user => {
-			if(!user) {
-				res.sendStatus(404);
-			} else {
-				req.newUser = user;
-				next();
-			}
+router.post('/:userId/addmovie', (req, res, next) => {
+	var user = req.newUser;
+	var check = true;
+	var movieId = {
+		movie: req.body.movieId,
+		status: 'pending'
+	}
+	var userQueue = user.movieQueue;
+	
+	console.log('Movie id', movieId);
+	userQueue.queue.forEach(function(movie) {
+		if(movie._id == movieId) {
+			check = false;
+		}
+	})
+	if(check) {
+		userQueue.queue.push(movieId);
+		userQueue.save()
+		.then(data => {
+			res.send('created')
 		})
-		.catch(next);
+		.catch(next)
+	}
+	else {
+		res.status(204).send('failed')
+	}
+	//res.send('done');
 
-});
+})
 
 router.get('/:userId', (req, res, next) => {
+	console.log('user!');
 	res.json(req.newUser)
 });
 
 router.get('/:userId/moviequeue', (req, res, next) => {
-	res.json(req.newUser.movieQueue);
+	console.log('user route');
+	var movies = popMovies(req.newUser.movieQueue);
+	console.log('movies', movies);
+	res.json(req.newUser);
 });
 
 router.get('/:userId/reviews', (req, res, next) => {

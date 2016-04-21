@@ -23,6 +23,12 @@ app.filter("moviesByCategory", function(){
     }
 })
 
+app.config(function($sceProvider) {
+  // Completely disable SCE.  For demonstration purposes only!
+  // Do not use in new projects.
+  $sceProvider.enabled(false);
+});
+
 // This app.run is for controlling access to specific states.
 app.run(function ($rootScope, AuthService, $state) {
 
