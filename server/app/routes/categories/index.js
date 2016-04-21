@@ -32,7 +32,7 @@ router.get('/:categoryName', (req, res, next) => { //may later move to movies ro
 router.post('/', (req, res, next) => {
     console.log(req.body)
     Categories.create(req.body)
-    .then((newCategory) => res.status(201).json(newCategory))
+    .then((newCategory) => res.json(newCategory))
 })
 
 module.exports = router
