@@ -6,10 +6,7 @@ app.config(function($stateProvider) {
 		templateUrl: '/js/reviews/reviews.html',
 		resolve: {
 			movie: function($stateParams, MovieFactory) {
-				return MovieFactory.fetchOne($stateParams.movieId)
-				.then(movie => {
-					return movie;
-				})
+				return MovieFactory.fetchOne($stateParams.movieId);
 			}
 		}
 	})

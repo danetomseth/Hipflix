@@ -18,6 +18,7 @@ router.param('movieId', (req, res, next, movieId) => {
             err.status = 404; //eventually want to redirect her to 404 page, pass to err handler
             return next(err);
           }
+          console.log(movie)
           req.movie = movie;
           next()
         }, (err) => {
@@ -38,7 +39,9 @@ router.get('/', (req, res, next) => {
 
 router.get('/:movieId', (req, res, next) => res.json(req.movie));
 
-router.get('/:movieId/reviews', (req, res, next) => {res.json(req.movie.reviews)});
+router.get('/:movieId/reviews', (req, res, next) => {
+  console.log('REQ,MOVIE',req.movie)
+  res.json(req.movie.reviews)});
 
 router.post('/', (req, res, next) => {
   Movies.create(req.body)

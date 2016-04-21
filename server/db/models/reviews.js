@@ -29,7 +29,7 @@ var schema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        default: moment,
+        default: Date.now,
         required: true
     },
     bestFor: {
@@ -38,7 +38,7 @@ var schema = new mongoose.Schema({
 });
 
 schema.virtual('momentDate').get(function(){
-    console.log(this);
+    console.log('MOMENTDATE', this);
     return "hello";
     // return moment(this.dateCreated).fromNow();
 })
