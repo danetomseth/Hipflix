@@ -42,7 +42,7 @@ router.get('/:movieId/reviews', (req, res, next) => {res.json(req.movie.reviews)
 
 router.post('/', (req, res, next) => {
   Movies.create(req.body)
-  .then((movie) => res.send(movie))
+  .then((movie) => res.status(201).send(movie))
   .catch(next)
 
 	// if(req.user.isAuthenticated && req.user.isAdmin){ // consider changing to use ensureAuthenticated
