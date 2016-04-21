@@ -25,6 +25,7 @@ navbar {
   .nav > li > a {
     cursor: pointer;
     transition: color 0.2s;
+    transition: background-color 0.2s;
     &.active {
       color: darken(#f31214, 10%);
     }
@@ -39,10 +40,16 @@ navbar {
 
   .login-button {
     float: right;
-    border: 1px solid black;
+    border: 1px solid rgba(256, 256, 256, 0.4);
+    margin-right: 5px;
+
     margin-top: 10px;
     background: none;
     outline: none !important;
+    background-color:rgba(128, 128, 128, 0.2);
+  }
+  .login-button:hover {
+    background-color:rgba(256, 256, 256, 0.8);
   }
 
   .welcome {
