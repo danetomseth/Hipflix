@@ -9,7 +9,6 @@ app.factory('MovieFactory', function($http) {
 			return $http.get('/api/movies/'+ movieId).then(movie => movie.data)
 		},
 		create: (newMovie) => {
-			console.log('movie', newMovie);
 			return $http.post('/api/movies', newMovie)
 		},
 		addToQueue: (user, id) => {
