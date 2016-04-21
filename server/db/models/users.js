@@ -1,11 +1,11 @@
-'use strict';
+//'use strict';
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const moment = require('moment');
 const _ = require('lodash');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
-let schema = new mongoose.Schema({
+var schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
