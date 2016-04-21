@@ -1,3 +1,20 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@import 'directives/main';
+@import 'home/main';
+@import 'about/main';
+@import 'tutorial/main';
+@import 'login/main';
+@import 'custom/main';
+@import 'template/main';
+@import 'fonts/main';
+
 * {
   box-sizing: border-box;
 }
@@ -8,13 +25,7 @@ body {
   background-repeat: repeat;
 }
 
-@mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
+
 
 #main {
   padding: 180px 30px 20px 30px;
@@ -32,12 +43,17 @@ body {
   background-size: 25% !important; 
   background-repeat: repeat;
   color: white;
-	border-bottom: 1px solid grey;
+  border-bottom: 1px solid grey;
   a {
     color: white;
   }
   a.active {
     color: grey;
+  }
+}
+navbar {
+  .container {
+    padding-top: 0px;
   }
 }
 
@@ -48,11 +64,4 @@ body {
 
 
 
-@import 'directives/main';
-@import 'home/main';
-@import 'about/main';
-@import 'tutorial/main';
-@import 'login/main';
-@import 'custom/main';
-@import 'template/main';
-@import 'fonts/main'
+

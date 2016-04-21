@@ -20,15 +20,22 @@
 <nav id="custom-nav" class="navbar navbar-custom navbar-transparent navbar-fixed-top">
 
     <div class="container">
-
+        <div class="row">
+            
+            <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+            <button ng-show="!user" ui-sref="signup" class="btn login-button">Signup</button>
+        </div>
+        <div class="row">
         <div class="navbar-header">
             <!-- YOU LOGO HERE -->
             <a class="navbar-brand logo" href="/admin">
                 <img class="logo" src="assets/logo.png" width="120" alt="">
             </a>
         </div>
-
-        <div class="collapse navbar-collapse" id="custom-collapse">
+        
+            
+       
+        <div class="collapse navbar-collapse clearfix" id="custom-collapse">
 
             <ul class="nav navbar-nav navbar-right"> 
 
@@ -36,6 +43,7 @@
                     <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
                 </li>
             </ul>
+        </div>
         </div>
 
     </div>
