@@ -17,7 +17,7 @@ var schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
         required: true
-    },
+    }, 
     content: {
         type: String,
         minlength: 10,
@@ -38,11 +38,10 @@ var schema = new mongoose.Schema({
 });
 
 schema.virtual('momentDate').get(function(){
-    console.log('MOMENTDATE', this);
-    return "hello";
-    // return moment(this.dateCreated).fromNow();
+    // console.log('MOMENTDATE', this);
+    // return "hello";
+    return moment(this.dateCreated).fromNow();
 })
-
 
 schema.plugin(deepPopulate);
 

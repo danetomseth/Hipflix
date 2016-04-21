@@ -1,11 +1,10 @@
 app.controller('ReviewsCtrl', function($scope, ReviewsFactory, $stateParams, movie) {
-	console.log(movie);
+	
 	var movieId = $stateParams.movieId;
-	console.log('movieID', movieId);
-	console.log('movie moment date', movie.reviews[0].momentDate);
-	console.log('movie date created', movie.reviews[0].dateCreated);
+	
 	$scope.reviews = movie.reviews;
-	console.dir(movie.reviews[0])
+	
+	$scope.submitReview = ReviewsFactory.submitReview;
 
 	// ReviewsFactory.fetchAllByMovie(movieId)
 	// .then((res) => {
