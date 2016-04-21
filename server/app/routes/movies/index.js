@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 //var path = require('path');
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var Movies = mongoose.model('Movies');
 
@@ -10,6 +11,7 @@ router.param('movieId', (req, res, next, movieId) => {
     //might be able to use movieId instead of router.params.id
     Movies.findById(req.params.movieId)
     .populate('category reviews')
+    .deepPopulate('reviews.user reviews.movie')
     .then((movie) => {
     	if (!movie) {
         var err = new Error('empty movie')
@@ -36,7 +38,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:movieId', (req, res, next) => res.json(req.movie));
 
-router.get('/:movieId/reviews', (req, res, next) => res.json(req.movie.reviews));
+router.get('/:movieId/reviews', (req, res, next) => {res.json(req.movie.reviews)});
 
 router.post('/', (req, res, next) => {
   Movies.create(req.body)

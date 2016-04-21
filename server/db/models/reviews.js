@@ -1,9 +1,10 @@
-'use strict';
+ 'use strict';
 
 const mongoose = require('mongoose');
 const moment = require('moment');
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
-let schema = new mongoose.Schema({
+var schema = new mongoose.Schema({
     title: {
         type: String
     },
@@ -36,8 +37,13 @@ let schema = new mongoose.Schema({
     }
 });
 
-schema.virtual('momentDate').set(function(){
-    return moment(this.dateCreated).fromNow();
+schema.virtual('momentDate').get(function(){
+    console.log(this);
+    return "hello";
+    // return moment(this.dateCreated).fromNow();
 })
+
+
+schema.plugin(deepPopulate);
 
 mongoose.model('Reviews', schema);

@@ -30,11 +30,43 @@
 
 }
 
+.movie-box {
+  height: 450px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.movie-content {
+  padding-top: 5px;
+  height: 100%;
+  box-shadow: 5px 5px 5px #888888 !important;
+
+}
+
+#movie-link {
+
+}
+
+.movie-link:hover {
+  cursor: pointer;
+  border: 3px solid;
+}
+
 
 /*Movie item--------*/
+.red {
+  color: red;
+  background-color: blue;
+}
 
 .movie-hover {
-  border: 3px solid blue;
+  .movie-content {
+    background-color: #F9F9F9;
+  }
+  //padding-left: 18px;
+  //padding-right: 18px;
+  padding: 3px 18px;
   cursor: pointer;
+  
 
 }

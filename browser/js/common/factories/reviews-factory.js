@@ -3,11 +3,11 @@ app.factory('ReviewsFactory', function($http) {
 		fetchAll: () => {
 			return $http.get('/api/reviews').then(reviews => reviews.data)
 		},
-		fetchAllByUser: () => {
+		fetchAllByUser: (userId) => {
 			return $http.get('/api/users/' + userId + '/reviews').then(reviews => reviews.data)
 		},
-		fetchAllByMovie: () => {
-			return $http.get('/api/movies/' + movieId + '/reviews').then(reviews => reviews.data)
+		fetchAllByMovie: (movieId) => {
+			return $http.get('/api/movies/' + movieId + '/reviews').then(reviews => reviews)
 		},
 		// stretch goal: fetch 1 single review >> edit.
 		// fetchOne: (movieId) => {

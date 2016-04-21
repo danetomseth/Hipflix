@@ -1,4 +1,4 @@
-app.directive('hfReviewItem', function(reviewsFactory) {
+app.directive('hfReviewItem', function(ReviewsFactory) {
 	return {
 		restrict: 'E',
 		templateUrl: '/js/reviews/review-item/review-item.html',
