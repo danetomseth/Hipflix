@@ -1,15 +1,25 @@
-app.controller('ReviewsCtrl', function($scope, ReviewsFactory, $stateParams, movie) {
+app.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService, ReviewsFactory) {
 	
-	var movieId = $stateParams.movieId;
+	$scope.movieId = $stateParams.movieId;
 	
-	$scope.reviews = movie.reviews;
+	AuthService.getLoggedInUser().then(user => {
+		$scope.user = user
+	})
 	
-	$scope.submitReview = ReviewsFactory.submitReview;
+	$scope.submitReview = function(newReview){
+		var reviewToPost = {user: $scope.user._id, title: newReview.title, movie: $scope.movieId, content: newReview.content, rating: newReview.rating}
+		console.log('reviewToPost', reviewToPost)
+		ReviewsFactory.submitReview(reviewToPost)
+			.then(newReview => {
+				$state.go('reviews', {movieId: $scope.movieId})
+			})
+	}
+	
+});
 
-	// ReviewsFactory.fetchAllByMovie(movieId)
-	// .then((res) => {
-	// 	console.log('reviews submitted', res);
-	// 	$scope.reviews = res;
 
-	// })
-})
+app.controller('ReviewsCtrl', function($scope, $state, ReviewsFactory, movie) {
+
+	$scope.movie = movie;
+	
+});

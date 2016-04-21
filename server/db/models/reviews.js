@@ -29,8 +29,7 @@ var schema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        default: Date.now,
-        required: true
+        default: Date.now
     },
     bestFor: {
         type: [String]
