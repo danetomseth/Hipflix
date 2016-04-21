@@ -12,6 +12,14 @@ app.factory("SubscriptionFactory", function($http){
         create: function(sub){
             return $http.post("/api/subscriptions", sub)
             .then(sub => sub.data)
+        },
+        fetchBasic: function(){
+            return $http.get("/api/subscriptions/basic")
+                .then(sub => sub.data)
+        },
+        cancel: function(user, sub){
+            return $http.put("/api/subscriptions",{sub: sub, user: user})
+            .then(user => user.data)
         }
     }
 })

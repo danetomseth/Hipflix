@@ -6,6 +6,14 @@ app.config(function($stateProvider){
     })
 });
 
+app.config(function($stateProvider){
+    $stateProvider.state('subcancel', {
+        url: "/subscription/cancel",
+        templateUrl: "/js/subscription/subcancel.html",
+        controller:"SubcancelCtrl"
+    })
+});
+
 app.controller('SubscriptionCtrl', function($scope, $state, AuthService, SubscriptionFactory){
     AuthService.getLoggedInUser().then(function (user) {
         $scope.user = user;
@@ -25,5 +33,25 @@ app.controller('SubscriptionCtrl', function($scope, $state, AuthService, Subscri
             console.log("updated", user)
             $state.go('home') // ultimately send this back to the users' billing page
         })
+    }
+})
+
+app.controller('SubcancelCtrl',function($scope, $state, AuthService, SubscriptionFactory){
+    AuthService.getLoggedInUser().then(function (user) {
+        $scope.user = user;
+    });
+
+    SubscriptionFactory.fetchBasic().then(sub => {
+         $scope.defaultSub = sub;
+    })
+   
+
+
+    $scope.cancel = function(){
+        SubscriptionFactory.cancel($scope.user, $scope.defaultSub)
+            .then(user => {
+                console.log("cancelled", user)
+                $state.go('me')
+            })
     }
 })

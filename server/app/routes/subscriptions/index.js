@@ -18,6 +18,13 @@ router.post('/', (req, res, next) => {
 	.catch(next);
 });
 
+router.get('/basic', (req, res, next) => {
+    console.log('basic route')
+    Subscriptions.find({plan:'Basic'})
+    .then(subscription => res.json(subscription))
+    .catch(next);
+});
+
 router.put('/', (req, res, next) => {
     console.log(req.user)
     // if(req.user.isAdmin || req.user === req.body.user){ // I think this will check if the current user is updating themselves, or is an admin

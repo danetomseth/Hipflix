@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="list-group">
+		<div class="list-group-item"><strong>My Account</strong></div>
+		<div class="list-group-item">Membership & Billing
+			<ol>
+				<ul>{{ User.Email }}</ul>
+				<ul>{{ User.RenewalDate }}</ul>
+				<ul ui-sref="billing">Billing Details</ul>
+			</ol>
+		</div>
+		<div class="list-group-item">Plan Details
+			<ol> {{ User.subscription }}
+				<ul ui-sref="subscription">Change Plan</ul>
+				<ul ui-sref="subcancel">Cancel Plan</ul>
+			</ol>
+		</div>
+		<div class="list-group-item">Settings</div>
+		<div class="list-group-item">Gifts & Offers</div>
+	</div>
+</div>
