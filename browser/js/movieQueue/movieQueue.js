@@ -16,6 +16,7 @@ app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueu
 		$scope.user = user
 		MovieQueueFactory.fetch(user._id).then(function(user) {
 			var queue = user.movieQueue.queue;
+			console.log('fetching movies', user);
 			queue.forEach(function(item) {
 				if(item.status === 'active') {
 					$scope.activeMovies.push(item);
