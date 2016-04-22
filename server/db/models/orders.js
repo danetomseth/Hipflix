@@ -9,7 +9,8 @@ var schema = new mongoose.Schema({
 		ref: "Users"
 	},
 	deliverables: {
-		type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }]
+		type: mongoose.Schema.Types.ObjectId, 
+		ref: 'Movies' 
 	},
 	date: {
 		type: Date,
@@ -20,5 +21,8 @@ var schema = new mongoose.Schema({
 		default: (Math.random() * 10000000)
 	}
 })
+
+
+//Presave hook to send email
 
 mongoose.model('Orders', schema);

@@ -35,10 +35,22 @@
   display: inline-block;
   margin-bottom: 10px;
 }
+.small-movie-box {
+  height: 200px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
 
 .movie-content {
   padding-top: 5px;
   height: 100%;
+  box-shadow: 5px 5px 5px #888888 !important;
+
+}
+
+.movie-content-small {
+  padding-top: 5px;
+  height: auto;
   box-shadow: 5px 5px 5px #888888 !important;
 
 }

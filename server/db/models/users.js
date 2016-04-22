@@ -99,8 +99,11 @@ schema.pre('save', function (next) {
         user.password = user.constructor.encryptPassword(user.password, user.salt);
     }
 
-    MovieQ.create({})
+    MovieQ.create({
+        owner: user._id
+    })
     .then(function(queue) {
+        console.log('**********',user);
         user.movieQueue = queue._id;
         next();
     })

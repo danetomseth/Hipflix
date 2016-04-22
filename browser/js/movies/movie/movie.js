@@ -14,7 +14,8 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('MovieCtrl', function($http, $scope, $state, MovieFactory, MovieQueueFactory, AuthService, movie) {
+app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFactory, AuthService, movie) {
+
 	$scope.movie = movie;
 	AuthService.getLoggedInUser()
 		.then(user => {
