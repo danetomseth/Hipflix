@@ -20,6 +20,10 @@
 <nav id="custom-nav" class="navbar navbar-custom navbar-transparent navbar-fixed-top">
 
     <div class="container">
+        <div ng-show="user" class="welcome">
+            <span><a ui-sref-active="active" ui-sref="me" class="ng-binding" href="/me">Welcome, {{ user.first }}!</a></span>
+            <a ng-click="logout()">Logout</a>
+        </div>
         <div class="row">
             
             <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
@@ -32,7 +36,8 @@
                 <img class="logo" src="assets/logo.png" width="120" alt="">
             </a>
         </div>
-        
+
+ 
             
        
         <div class="collapse navbar-collapse clearfix" id="custom-collapse">
@@ -42,6 +47,7 @@
                 <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                     <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
                 </li>
+
             </ul>
         </div>
         </div>
