@@ -1,6 +1,12 @@
-<div class="container">
+<div class="container-fluid movie-queue">
+	<h2><strong>Active Queue</strong></h2>
 	<div class="row">
-		<hf-moviequeue-item ng-repeat="item in Userqueue"></hf-moviequeue-item>
+		<hf-moviequeue-item ng-repeat="item in activeMovies"></hf-moviequeue-item>
 		<!-- <div ng-repeat="item in Userqueue">{{item}}</div> -->
+	</div>
+	<hr>
+	<h2><strong>Pending Queue</strong></h2>
+	<div class="row">
+		<hf-moviequeue-item ng-repeat="item in pendingMovies" ></hf-moviequeue-item>
 	</div>
 </div>
