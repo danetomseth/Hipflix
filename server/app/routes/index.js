@@ -10,6 +10,8 @@ router.use('/movies', require('./movies'));
 router.use('/users', require('./users'));
 router.use('/subscriptions', require('./subscriptions'));
 router.use('/reviews', require('./reviews'));
+router.use('/wishlist', require('./wishlist'));
+
 
 // Make sure this is after all of
 // the registered routes!

@@ -1,4 +1,4 @@
-app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('navbar', function ($rootScope, MovieQueueFactory, AuthService, AUTH_EVENTS, $state) {
 
     return {
         restrict: 'E',
@@ -16,6 +16,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             ];
 
             scope.user = null;
+
+            MovieQueueFactory.getWishlist()
+                .then( wishlist => {
+                    scope.wishlist = wishlist;
+                    console.log(wishlist)
+                })
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
