@@ -14,6 +14,7 @@
 @import 'custom/main';
 @import 'template/main';
 @import 'fonts/main';
+@import 'custom/animate';
 
 * {
   box-sizing: border-box;
@@ -35,55 +36,7 @@ body {
   }
 }
 
-.animation {
-  -webkit-transition: 1s;
-}
 
-.animation.ng-enter {
-  opacity: 0.7;
-}
-
-.animation.ng-leave {
-  opacity: 1;
-}
-
-.animation.ng-enter.ng-enter-active {
-  opacity: 1;
-}
-
-.animation.ng-leave.ng-leave-active {
-  opacity: 0;
-}
-
-.item-enter {
- -webkit-transition: 5s linear all; /* Chrome */
-    transition: 5s linear all;
-    opacity: 0;
-  color: red;
-  
-  margin-left: 100%;
-}
-
-.animate-enter {
-  -webkit-transition: 1s linear all; /* Chrome */
-  transition: 1s linear all;
-  opacity: 0;
-}
- 
-.animate-enter.animate-enter-active {
-  opacity: 1;
-}
-
-.item-leave {
-  -webkit-transition: 1s;
-  transition: 5s;
-  
-  margin-left: 0;
-}
-
-.item-enter-active {
-    opacity: 1;
-}
 
 .body-loading {
   background-color: grey;
