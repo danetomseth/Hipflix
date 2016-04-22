@@ -20,12 +20,86 @@
 }
 
 body {
-  background-image: url('28.png') !important;
-  background-size: 5% !important; 
-  background-repeat: repeat;
+  // background-image: url('loading.gif') !important;
+  h2 {
+    color: white;
+  }
+  h3 {
+    color: white;
+  }
+  h4 {
+    color: white;
+  }
+  h5 {
+    color: white;
+  }
 }
 
+.animation {
+  -webkit-transition: 1s;
+}
 
+.animation.ng-enter {
+  opacity: 0.7;
+}
+
+.animation.ng-leave {
+  opacity: 1;
+}
+
+.animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.animation.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+.item-enter {
+ -webkit-transition: 5s linear all; /* Chrome */
+    transition: 5s linear all;
+    opacity: 0;
+  color: red;
+  
+  margin-left: 100%;
+}
+
+.animate-enter {
+  -webkit-transition: 1s linear all; /* Chrome */
+  transition: 1s linear all;
+  opacity: 0;
+}
+ 
+.animate-enter.animate-enter-active {
+  opacity: 1;
+}
+
+.item-leave {
+  -webkit-transition: 1s;
+  transition: 5s;
+  
+  margin-left: 0;
+}
+
+.item-enter-active {
+    opacity: 1;
+}
+
+.body-loading {
+  background-color: grey;
+}
+.body-background {
+  background-image: url('03AG.jpg') !important;
+  background-size: 25% !important; 
+  background-repeat: cover;
+
+}
+
+.movie-queue {
+  background-color: rgba(100, 100, 100, 0.8);
+  border: 2px solid rgba(200, 200, 200, 0.8);
+  padding: 20px;
+}
 
 #main {
   padding: 180px 30px 20px 30px;
