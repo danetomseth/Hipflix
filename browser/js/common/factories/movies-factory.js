@@ -2,6 +2,7 @@ app.factory('MovieFactory', function($http) {
 	return {
 		fetchAll: function() {
 			return $http.get('/api/movies').then(movies => {
+                console.log('movies', movies.data);
 				return movies.data
 			})
 		},
@@ -25,6 +26,9 @@ app.factory('MovieFactory', function($http) {
 
                 };
             })
+        },
+        updateMovie: (movie) => {
+            console.log('updating movie', movie);
         }
     }
 })

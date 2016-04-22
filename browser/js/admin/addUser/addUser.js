@@ -6,6 +6,13 @@ app.config(function($stateProvider) {
 	})
 });
 
+app.config(function($stateProvider) {
+	$stateProvider.state('listusers', {
+		url: '/admin/addUser',
+		templateUrl: 'js/admin/addUser/list-users.html'
+	})
+});
+
 app.controller('AddUserController', function($scope, $state, AdminFactory) {
 	$scope.addUser = function() {
 		if($scope.newUser.isAdmin === 'true') {
@@ -19,5 +26,5 @@ app.controller('AddUserController', function($scope, $state, AdminFactory) {
 			$state.go('admin');
 		})
 	}
-})
+});
 

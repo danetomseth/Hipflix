@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 var mongoose = require('mongoose');
 
@@ -49,7 +49,7 @@ var newOrder = function(userId, movieId) {
 		user: userId,
 		deliverables: movieId
 	})
-	.then(order => {
+	.then(function(order) {
 		console.log('Order created!!', order);
 	})
 }
