@@ -1,4 +1,4 @@
-app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory) {
+app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, $http, CategoriesFactory) {
 	$scope.singleTag = "";
 	$scope.singlePhoto = "";
 	$scope.movieForm;
@@ -34,13 +34,32 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
 		$scope.singleTag = "";
 	}
 
-	$scope.addMovie = function(movie) {
-		console.log('new movie', $scope.newMovie);
-		MovieFactory.create($scope.newMovie)
-		.then((newMovie) => {
-			$state.go('admin');
-		})
-	}
+    $scope.findMovie = function(imdbID){
+        var rand = Math.floor(Math.random()*$scope.categories.length)
+        var cat = $scope.categories[rand]
+        $http.get("http://www.omdbapi.com/?i="+imdbID+"&plot=full&r=json")
+        .then(movie => movie.data)
+        .then(movie => {
+            console.log(movie)
+            $scope.newMovie = {
+                title: movie.Title,
+                year: movie.Year,
+                category: [cat],
+                duration: movie.Runtime.split(" ")[0],
+                description: movie.Plot,
+                photos: [movie.Poster],
+                inventory: rand
+            };
+        })
+    }
+
+    $scope.addMovie = function(movie) {
+      console.log('new movie', $scope.newMovie);
+      MovieFactory.create($scope.newMovie)
+      .then((newMovie) => {
+         $state.go('admin');
+     })
+  }
 
 
 })
