@@ -32,6 +32,13 @@ app.factory('MovieQueueFactory', function($http) {
 				})
 				
 		},
+		removeFromWishlist: (movie) => {
+			return $http.delete("/api/wishlist" + movie._id)
+				.then(wishlist => {
+					angular.copy(wishlist.data, cachedWishlist);
+					return cachedWishlist
+				})
+		}
 
 		
 	}
