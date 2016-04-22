@@ -7,24 +7,23 @@ const Reviews = mongoose.model('Reviews');
 const Orders = mongoose.model('Orders');
 const Movies = mongoose.model('Movies');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
+const moment = require('moment');
+const renewalPeriod = require("../../../env").RENEWAL_PERIOD
 
 module.exports = router;
 
 var popMovies = function(queue) {
 	var userMovies = [];
-	console.log(queue);
 	queue.queue.forEach(function(elem) {
 		Movies.findById(elem.movie)
 		.then(function(movie) {
-			console.log('found movie!!');
 			userMovies.push(movie)
 		})
 	})
-	return userMovies 
+	return userMovies
 }
 
 router.param('userId', (req, res, next, userId) => {
-	console.log('param', userId);
 	Users.findById(userId)
 		.deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
 		.then(user => {
@@ -32,7 +31,6 @@ router.param('userId', (req, res, next, userId) => {
 				res.sendStatus(404);
 			} else {
 				req.newUser = user;
-				console.log('user', user);
 				next();
 			}
 		})
@@ -57,48 +55,47 @@ router.post('/', (req, res, next) => {
 			.then(newUser => res.json(newUser));
 		}
 	})
-	.catch(next);	
+	.catch(next);
 });
 
-router.post('/:userId/addmovie', (req, res, next) => {
-	var user = req.newUser;
-	var check = true;
-	var movieId = {
-		movie: req.body.movieId,
-		status: 'pending'
-	}
-	var userQueue = user.movieQueue;
-	
-	console.log('Movie id', movieId);
-	userQueue.queue.forEach(function(movie) {
-		if(movie._id == movieId) {
-			check = false;
-		}
+
+router.post('/:userId/movie', (req, res, next) => {
+	req.newUser.movieQueue.addToQueue(req.body.movieId)
+	.then(data => {
+		console.log('data returned', data);
+		res.status(204).send('created')
+// router.post('/:userId/addmovie', (req, res, next) => {
+// 	var user = req.newUser;
+// 	var check = true;
+// 	var movieId = {
+// 		movie: req.body.movieId,
+// 		status: 'pending'
+// 	}
+// 	var userQueue = user.movieQueue;
+
+// 	userQueue.queue.forEach(function(movie) {
+// 		if(movie._id == movieId) {
+// 			check = false;
+// 		}
+
 	})
-	if(check) {
-		userQueue.queue.push(movieId);
-		userQueue.save()
-		.then(data => {
-			res.send('created')
+	.catch(next)
+})
+
+router.delete('/:userId/movie/:itemId', (req, res, next) => {
+	req.newUser.movieQueue.dequeue(req.params.itemId)
+	.then(data => {
+			res.status(204).send('deleted')
 		})
 		.catch(next)
-	}
-	else {
-		res.status(204).send('failed')
-	}
-	//res.send('done');
-
 })
 
 router.get('/:userId', (req, res, next) => {
-	console.log('user!');
 	res.json(req.newUser)
 });
 
 router.get('/:userId/moviequeue', (req, res, next) => {
-	console.log('user route');
 	var movies = popMovies(req.newUser.movieQueue);
-	console.log('movies', movies);
 	res.json(req.newUser);
 });
 
@@ -117,3 +114,17 @@ router.get('/:userId/orders', (req, res, next) => {
 		.then(ordersOfOneUser => res.json(ordersOfOneUser))
 		.catch(next);
 });
+
+router.put('/subscription', (req, res, next) => {
+    // if(req.user.isAdmin || req.user === req.body.user){ // I think this will check if the current user is updating themselves, or is an admin
+        Users.findById(req.body.user._id)
+        .then(user => {
+            user.subscription = req.body.sub._id;
+            user.renewalPrice = req.body.sub.price;
+            user.renewalDate = moment().add(renewalPeriod, 'seconds') // this is a crappy business model - if someone updates their subscription mid-month, then they don't pay for the current pay period. We should add pro-rating logic.
+            return user.save()
+        })
+        .then(user => res.json(user))
+        .catch(next)
+    // }
+})

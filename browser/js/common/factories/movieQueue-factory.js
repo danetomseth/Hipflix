@@ -3,9 +3,15 @@ app.factory('MovieQueueFactory', function($http) {
 		fetch: function(userId) {
 			return $http.get('/api/users/' + userId + '/moviequeue')
 			.then(function(res) {
-				console.log('user data', res.data);
 				return res.data
 			})
+		},
+		dequeue: function(user, item) {
+			return $http.delete('/api/users/'+user._id+'/movie/'+item._id)
+			.then(res => res);
+		},
+		addToQueue: (user, id) => {
+			return $http.post('/api/users/'+user._id+'/movie', {movieId: id})
 		}
 	}
 });

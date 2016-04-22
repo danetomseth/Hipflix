@@ -36,9 +36,6 @@ var schema = new mongoose.Schema({
     likes: {
         type: [String]
     },
-    renewalDate: {
-        type: Date
-    },
     signupDate: {
         type: Date,
         default: moment
@@ -47,10 +44,17 @@ var schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Subscriptions'
     },
-    billingHistory: {
+    renewalDate: {
+        type: Date
+    },
+    renewalPrice: { // this saves their monthly billing price even if the subscription price changes
+        type: Number,
+        default: 0
+    },
+    billingHistory: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Billing'
-    },
+    }],
     salt: {
         type: String
     },
@@ -102,7 +106,7 @@ schema.pre('save', function (next) {
     })
     .catch(next);
 
-    
+
 
 });
 

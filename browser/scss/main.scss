@@ -14,18 +14,45 @@
 @import 'custom/main';
 @import 'template/main';
 @import 'fonts/main';
+@import 'custom/animate';
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-image: url('28.png') !important;
-  background-size: 5% !important; 
-  background-repeat: repeat;
+  // background-image: url('loading.gif') !important;
+  h2 {
+    color: white;
+  }
+  h3 {
+    color: white;
+  }
+  h4 {
+    color: white;
+  }
+  h5 {
+    color: white;
+  }
 }
 
 
+
+.body-loading {
+  background-color: grey;
+}
+.body-background {
+  background-image: url('03AG.jpg') !important;
+  background-size: 25% !important; 
+  background-repeat: cover;
+
+}
+
+.movie-queue {
+  background-color: rgba(100, 100, 100, 0.8);
+  border: 2px solid rgba(200, 200, 200, 0.8);
+  padding: 20px;
+}
 
 #main {
   padding: 180px 30px 20px 30px;
