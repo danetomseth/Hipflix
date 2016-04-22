@@ -34,13 +34,26 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
 		$scope.singleTag = "";
 	}
 
-	$scope.addMovie = function(movie) {
-		console.log('new movie', $scope.newMovie);
-		MovieFactory.create($scope.newMovie)
-		.then((newMovie) => {
-			$state.go('admin');
-		})
-	}
+    $scope.findMovie = function(imdbID){
+        MovieFactory.findMovie(imdbID)
+        .then(movie => {
+            console.log("movie", movie)
+            var rand = Math.floor(Math.random()*$scope.categories.length)
+            var cat = $scope.categories[rand]
+            movie.inventory = rand;
+            movie.category = [cat];
+            $scope.newMovie = movie
+        })
+
+    }
+
+    $scope.addMovie = function(movie) {
+      console.log('new movie', $scope.newMovie);
+      MovieFactory.create($scope.newMovie)
+      .then((newMovie) => {
+       $state.go('admin');
+   })
+  }
 
 
 })
