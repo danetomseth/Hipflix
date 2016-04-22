@@ -60,24 +60,10 @@ router.post('/', (req, res, next) => {
 
 
 router.post('/:userId/movie', (req, res, next) => {
-	req.newUser.movieQueue.addToQueue(req.body.movieId)
+	var allowance = 3;
+	req.newUser.movieQueue.addToQueue(req.body.movieId, allowance)
 	.then(data => {
-		console.log('data returned', data);
 		res.status(204).send('created')
-// router.post('/:userId/addmovie', (req, res, next) => {
-// 	var user = req.newUser;
-// 	var check = true;
-// 	var movieId = {
-// 		movie: req.body.movieId,
-// 		status: 'pending'
-// 	}
-// 	var userQueue = user.movieQueue;
-
-// 	userQueue.queue.forEach(function(movie) {
-// 		if(movie._id == movieId) {
-// 			check = false;
-// 		}
-
 	})
 	.catch(next)
 })

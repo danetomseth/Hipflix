@@ -12,7 +12,8 @@ app.factory('MovieFactory', function($http) {
 			return $http.post('/api/movies', newMovie)
 		},
         findMovie: (imdbID) => {
-            return $http.get("http://www.omdbapi.com/?i="+imdbID+"&plot=full&r=json")
+            var id = imdb.slice(26, -1)
+            return $http.get("http://www.omdbapi.com/?i="+id+"&plot=full&r=json")
             .then(movie => movie.data)
             .then(movie => {
                 return {
