@@ -15,11 +15,11 @@
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
 </head>
-<body ng-app="Hipflix" page-loader>
-    <navbar></navbar ng-hide="loader">
-    <div class="container">
+<body ng-app="Hipflix" class="body-background">
+    <navbar></navbar>
+    <!-- <div class="container">
         <img class="img-responsive" ng-show="loader" src="loading.gif">
-    </div>
-    <div id="main" ui-view ng-hide="loader"></div>
+    </div> -->
+    <div id="main" ui-view></div>
 </body>
 </html>
