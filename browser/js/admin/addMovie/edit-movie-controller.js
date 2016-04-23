@@ -1,12 +1,7 @@
 app.controller('EditMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory, $uibModal) {
-	
-	//$scope.categoryArray = [];
-	//$scope.categories = ['drama', 'action', 'comedy'];
-	//$scope.movies = ['hello'];
-	var globalModal;
+
 	MovieFactory.fetchAll()
 	.then(function(res) {
-		console.log('movies returned', res);
 		$scope.movies = res
 	});
 
@@ -17,7 +12,6 @@ app.controller('EditMovieCtrl', function($scope, $state, MovieFactory, Categorie
 
 	$scope.editMovie = function(movie) {
 		$scope.movie = movie
-		console.log('opening', $scope.movie);
 		var modalInstance = $uibModal.open({
 			animation: true,
 			templateUrl: '/js/admin/addmovie/edit-window.html',
@@ -25,30 +19,50 @@ app.controller('EditMovieCtrl', function($scope, $state, MovieFactory, Categorie
 			scope: $scope,
 			resolve: {
 				movie: function() {
+					$scope.localCategories = $scope.categories
+					//used to pre-set selected value for categories in edit window
+					//this pre-fills the checkbox for the current movies category
+					$scope.movie.category.forEach(function(cat) {
+						$scope.localCategories.forEach(function(elem) {
+							if(elem.name === cat.name) {
+								elem.selected = true;
+							}
+						})
+
+					})
 					return $scope.movie;
 				}
 			}
 		});
-		globalModal = modalInstance;
+		$scope.globalModal = modalInstance;
 	}
+
 	$scope.addInv = function() {
-		console.log('add');
 		$scope.movie.inventory++;
 	}
 	$scope.minusInv = function() {
-		console.log('minus');
 		$scope.movie.inventory--;
 	}
-	$scope.closeWindow = function() {
-		globalModal.close();
-	};
 
-	// $scope.updateMovie = function(movie) {
-	// 	MovieFactory.updateMovie($scope.newMovie)
-	// 	.then((newMovie) => {
-	// 		$state.go('admin');
-	// 	})
-	// }
+	$scope.updateMovie = function(movie, categories) {
+		var newCat = [];
+		//categories is passed from the modal category ng-model
+		//need to filter for categories.selected === true and push id onto movie
+		categories.forEach(function(cat) {
+			if(cat.selected){
+				newCat.push(cat._id)
+			}
+		})
+		movie.category = newCat;
+		MovieFactory.updateMovie(movie)
+		.then(res => {
+			//close edit window and reload state after save
+			$scope.globalModal.close();
+			$state.reload();
+			
+		})
+		
+	}
 
 
 })

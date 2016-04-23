@@ -1,12 +1,17 @@
 
-<div class="container col-xs-10">
-	<div class="row">
-		<div class="list-group">
-			<div class="list-group-item" ng-repeat="movie in movies">
-				<strong>{{movie.title}}</strong>
-				<button class="btn btn-default pull-right" ng-click="editMovie(movie)">Edit</button>
+<div class="container" id="admin-movies">
+	<div class="row row-centered">
+		<div class="col-xs-8 col-centered">
+			<div class="panel">
+				<div class="list-group panel-body">
+					<div class="list-group-item" ng-repeat="movie in movies">
+						<h5><strong>{{movie.title}}</strong></h5>
+						<p><strong>Categories:</strong> <p ng-repeat="category in movie.category">{{category.name}}</p></p>
+						<p><strong>Inventory:</strong> {{movie.inventory}}</p>
+						<button class="btn btn-default pull-right" ng-click="editMovie(movie)">Edit</button>
+					</div>
+				</div>
 			</div>
 		</div>
-		
 	</div>
 </div>

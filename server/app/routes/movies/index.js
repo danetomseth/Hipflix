@@ -51,4 +51,14 @@ router.post('/', (req, res, next) => {
 	// }
 });
 
+router.put('/', (req, res, next) => {
+  console.log('body****', req.body);
+  Movies.findOneAndUpdate({_id:req.body._id}, req.body, {new: true})
+  .exec()
+  .then(updatedMovie => {
+    console.log('movie saved', updatedMovie);
+    res.send('yes');
+  })
+})
+
 module.exports = router;

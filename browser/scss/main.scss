@@ -15,11 +15,9 @@
 @import 'template/main';
 @import 'fonts/main';
 @import 'custom/animate';
-<<<<<<< HEAD
 @import 'custom/modal';
-=======
 @import 'custom/henry';
->>>>>>> master
+@import 'custom/admin';
 
 * {
   box-sizing: border-box;
@@ -29,6 +27,10 @@ body {
   // background-image: url('loading.gif') !important;
 
 }
+
+
+//fixes ui-bootstrap h-ref css
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 
 
@@ -83,6 +85,13 @@ navbar {
   top: 30px;
 }
 
+// .img-thumbnail {
+//  // width: 100%;
+//   background-image: url('poster.jpg');
+//   background-size: cover;
+//   width: 50%;
+//   height: auto;
+// }
 
 
 

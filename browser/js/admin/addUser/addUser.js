@@ -8,8 +8,9 @@ app.config(function($stateProvider) {
 
 app.config(function($stateProvider) {
 	$stateProvider.state('listusers', {
-		url: '/admin/addUser',
-		templateUrl: 'js/admin/addUser/list-users.html'
+		url: '/admin/users',
+		templateUrl: 'js/admin/addUser/list-users.html',
+		controller: "ListUsersCtrl"
 	})
 });
 
@@ -19,7 +20,6 @@ app.controller('AddUserController', function($scope, $state, AdminFactory) {
 			$scope.newUser.isAdmin = true
 		}
 		else $scope.newUser.isAdmin = false
-		console.log('user', $scope.newUser);
 		AdminFactory.createUser($scope.newUser)
 		.then(user => {
 			console.log('user created!!!');
