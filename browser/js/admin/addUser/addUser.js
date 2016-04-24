@@ -2,7 +2,10 @@ app.config(function($stateProvider) {
 	$stateProvider.state('adduser', {
 		url: '/admin/addUser',
 		templateUrl: 'js/admin/addUser/addUser-template.html',
-		controller: 'AddUserController'
+		controller: 'AddUserController',
+		data: {
+            authenticate: true
+        }
 	})
 });
 
@@ -10,7 +13,10 @@ app.config(function($stateProvider) {
 	$stateProvider.state('listusers', {
 		url: '/admin/users',
 		templateUrl: 'js/admin/addUser/list-users.html',
-		controller: "ListUsersCtrl"
+		controller: "ListUsersCtrl",
+		data: {
+            authenticate: true
+        }
 	})
 });
 
