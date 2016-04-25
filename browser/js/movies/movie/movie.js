@@ -29,7 +29,10 @@ app.controller('MovieCtrl', function($http, $scope, $state, MovieFactory, MovieQ
 			})	
 		} else {
 			MovieQueueFactory.addToWishlist($scope.movie._id)
-				.then(wishlist => console.log(wishlist));
+				.then(wishlist => {
+					console.log(wishlist)
+					$state.go('wishList')
+				});
 		}
 
 	}
