@@ -7,9 +7,22 @@
 						<p>Ordered by: {{order.user.first}}, {{order.user.first}}</p>
 						<p>{{order.deliverables.title}}, Inventory:{{order.deliverables.inventory}} </p>
 						<p>Tracking Number: {{order.tracking}}</p>
+						<p>Status: {{order.status}}</p>
 					</div>
 				</uib-accordion-group>
 			</uib-accordion>
+		</div>
+		<div class="list-group">
+			<uib-accordion close-others="true">
+    			<uib-accordion-group heading="Id: {{order._id}} , for {{order.deliverables.title}}, by: {{order.user.email}}" ng-repeat="order in orders | filter: { status: 'returned' }">
+    				<div class="list-group-item">
+    					<p>Ordered by: {{order.user.first}}, {{order.user.first}}</p>
+						<p>{{order.deliverables.title}}, Inventory:{{order.deliverables.inventory}} </p>
+						<p>Tracking Number: {{order.tracking}}</p>
+						<p>Status: {{order.status}}</p>
+					</div>
+    			</uib-accordion-group>
+    		</uib-accordion>
 		</div>
 	</div>
 </div>

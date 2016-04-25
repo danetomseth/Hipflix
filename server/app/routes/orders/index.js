@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 var Orders = mongoose.model('Orders');
 var Movies = mongoose.model('Movies');
+var MovieQueue = mongoose.model('MovieQueues');
 module.exports = router;
 
 
@@ -28,9 +29,15 @@ router.put('/:orderId', (req, res, next) => {
 		return order.returnMovie()
 	})
 	.then(updatedOrder => {
-		//console.log('updated order', updatedOrder);
-		updatedOrder.user.movieQueue.updateQueue(updatedOrder._id);
+		var Que = updatedOrder.user.movieQueue;
+		//console.log("*****", Que);
+		return Que.findInQueue(updatedOrder._id)
+		console.log('item', queItem);
+	
 		res.send('Updated');
+	})
+	.then(function(updatedQ) {
+		console.log('Everything updated!!!', updatedQ);
 	})
 	.catch(next);
 

@@ -44,30 +44,30 @@ var schema = new mongoose.Schema({
 
 //3) movie returned > pending (3) > active ^
 
-var newOrder = function(user, queue) {
-	console.log('creating order', user.owner, queue);
-	return Order.create({
-		user: user.owner,
-		deliverables: queue.movie
-	})
-	
-}
+// var newOrder = function(user, queue) {
+// 	console.log('creating order', user.owner, queue);
+// 	return Order.create({
+// 		user: user.owner,
+// 		deliverables: queue.movie
+// 	})
 
-var shiftQueue = function(user) {
-	var check = false
-	for(var i = 0; i < user.queue.length; i++) {
-		if(user.queue[i].status === 'pending' && !check) {
-			user.queue[i].status = 'active';
-			newOrder(user, user.queue[i])
-			user.activeQueue++;
-			check = true;
-		}
-		if(check) {
-			user.queue[i].priority --;
-		}
-	}
-	return user;
-}
+// }
+
+// var shiftQueue = function(user) {
+// 	var check = false
+// 	for(var i = 0; i < user.queue.length; i++) {
+// 		if(user.queue[i].status === 'pending' && !check) {
+// 			user.queue[i].status = 'active';
+// 			newOrder(user, user.queue[i])
+// 			user.activeQueue++;
+// 			check = true;
+// 		}
+// 		if(check) {
+// 			user.queue[i].priority --;
+// 		}
+// 	}
+// 	return user;
+// }
 
 var checkPending = function (user) {
 	var count = 1;
@@ -79,15 +79,15 @@ var checkPending = function (user) {
 	return count;
 }
 
-// var checkStatus = function(user) {
-// 	var count = 0;
-// 	user.queue.forEach(function(item) {
-// 		if(item.status === 'active') {
-// 			count++;
-// 		}
-// 	})
-// 	return count;
-// }
+var checkStatus = function(queue) {
+	var count = 0;
+	queue.forEach(function(item) {
+		if(item.status === 'pending') {
+			count++;
+		}
+	})
+	return count;
+}
 
 schema.methods.addToQueue = function(movieId, allowance) {
 	var user = this;
@@ -95,8 +95,7 @@ schema.methods.addToQueue = function(movieId, allowance) {
 	var newMovie = {
 		movie: movieId,
 		status: 'pending',
-		priority: 0,
-		orderId: ''
+		priority: 0
 	}
 	user.queue.forEach(function(item) {
 		if(item.movie._id === movieId) {
@@ -107,17 +106,13 @@ schema.methods.addToQueue = function(movieId, allowance) {
 		if(user.activeQueue < allowance) {
 			newMovie.status = 'active'
 			//call new order
-			return Order.create({
-				user: user.owner,
-				deliverables: queue.movie
-			}).then(function(order) {
+			return user.createOrder(user.owner, movieId)
+			.then(function(order) {
 				user.activeQueue ++
 				newMovie.orderId = order._id
 				user.queue.push(newMovie);
 				return user.save()
 			})
-			
-			
 		}
 		else {
 			newMovie.priority = checkPending(user)
@@ -131,9 +126,16 @@ schema.methods.addToQueue = function(movieId, allowance) {
 	}
 }
 
+schema.methods.createOrder = function(userId, movieId) {
+	return Order.create({
+		user: userId,
+		deliverables: movieId
+	})
+}
+
 schema.methods.dequeue = function(itemId) {
 	var user = this;
-
+	console.log('in deque');
 	user.queue.forEach(function(item, index) {
 		if(item._id == itemId) {
 			user.activeQueue--;
@@ -147,23 +149,68 @@ schema.methods.dequeue = function(itemId) {
 	return user.save()
 }
 
-schema.methods.updateQueue = function(orderId) {
-	var user = this;
-	console.log("about to update");
-	user.queue.forEach(function(item, index) {
-		console.log('********', item, orderId);
-		if(item.orderId == orderId) {
-			console.log('found!!!!');
-			user.activeQueue--;
-			user.queue.status = 'returned'
-			//also need to update movie inventory
+schema.methods.findInQueue = function(id) {
+	var MovieQ = this
+	var Queue = MovieQ.queue;
+	
+	Queue.forEach(function(elem) {
+		console.log(elem.orderId);
+		console.log(id);
+		if(elem.status === 'active') {
+			if(elem.orderId.toString() === id.toString()) {
+				MovieQ.updateQueue(elem);
+				MovieQ.activeQueue--;
+				return;
+			}
 		}
 	})
-	user = shiftQueue(user);
-	console.log('Updated queue', user);
-	return
-	//return user.save();
+	if(checkStatus(MovieQ.queue)) {
+		console.log('pending exists');
+		return MovieQ.shiftQueue().then(function(Q) {
+			console.log('*******Q', Q);
+			return Q.save();
+		})
+	}
+	else {
+		return MovieQ.save()
+	}
+	//
 }
+
+
+schema.methods.updateQueue = function(queueItem) {
+	var user = this;
+	queueItem.status = 'returned'
+	return
+}
+
+
+schema.methods.shiftQueue = function() {
+	var movieIndex;
+	var MovieQ = this;
+	var check = false
+	for(var i = 0; i < MovieQ.queue.length; i++) {
+		if(MovieQ.queue[i].status === 'pending' && !check) {
+			console.log("checkingg");
+			movieIndex = i;
+			check = true;
+		}
+		if(check) {
+			MovieQ.queue[i].priority --;
+		}
+	}
+	return MovieQ.createOrder(MovieQ.owner, MovieQ.queue[movieIndex].movie)
+	.then(function(order) {
+		MovieQ.queue[movieIndex].orderId = order._id;
+		MovieQ.queue[movieIndex].status = 'active';
+		MovieQ.activeQueue++;
+		return MovieQ.save();
+	})
+	
+}
+
+
+
 
 
 

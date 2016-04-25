@@ -11,6 +11,7 @@ app.config(function($stateProvider) {
 app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueueFactory){
 	$scope.pendingMovies = [];
 	$scope.activeMovies = [];
+	$scope.watchedMovies = [];
 	AuthService.getLoggedInUser()
 	.then(user => {
 		if(user) {
@@ -23,6 +24,9 @@ app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueu
 					}
 					else if (item.status === 'pending') {
 						$scope.pendingMovies.push(item);
+					}
+					else if (item.status === 'returned') {
+						$scope.watchedMovies.push(item);
 					}
 				})
 			})	
@@ -49,6 +53,8 @@ app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueu
 				})
 		}
 	}
+
+	
 
 
 });
