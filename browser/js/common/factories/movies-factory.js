@@ -6,7 +6,7 @@ app.factory('MovieFactory', function($http) {
 			})
 		},
 		fetchOne: (movieId) => {
-			return $http.get('/api/movies/'+ movieId).then(movie => movie.data)
+			return $http.get('/api/movies/'+ movieId).then(res => res.data)
 		},
 		create: (newMovie) => {
 			return $http.post('/api/movies', newMovie)
@@ -21,7 +21,7 @@ app.factory('MovieFactory', function($http) {
         findMovie: (imdbID) => {
             var id = imdbID.slice(26, -1)
             return $http.get("http://www.omdbapi.com/?i="+id+"&plot=full&r=json")
-            .then(movie => movie.data)
+            .then(res => res.data)
             .then(movie => {
                 return {
                     title: movie.Title,
