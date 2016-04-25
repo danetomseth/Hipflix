@@ -6,6 +6,11 @@ app.factory('AdminFactory', function($http) {
 				return 'Created'
 			})
 		},
+		fetchOne: function(userId) {
+			return $http.get('/api/users/'+userId).then(function(res) {
+				return res.data;
+			})
+		},
 		fetchAll: function() {
 			return $http.get('/api/users')
 			.then(function(res) {
@@ -13,6 +18,7 @@ app.factory('AdminFactory', function($http) {
 			})
 		},
 		updateUser: function(user) {
+			console.log('updating user', user);
 			return $http.put('/api/users', user)
 			.then(function() {
 				return 'Updated'

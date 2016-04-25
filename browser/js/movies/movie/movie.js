@@ -21,10 +21,7 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFac
 	AuthService.getLoggedInUser()
 		.then(user => {
 			$scope.user = user
-			console.log('user', user);
-			if(user !== null) {
-				$scope.isUser = true;
-			}
+			$scope.isUser = user;
 		})
 
 	$scope.addToQueue = function() {

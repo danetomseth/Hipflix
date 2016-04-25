@@ -43,21 +43,26 @@ router.post('/', (req, res, next) => {
   Movies.create(req.body)
   .then((movie) => res.status(201).send(movie))
   .catch(next)
-
-	// if(req.user.isAuthenticated && req.user.isAdmin){ // consider changing to use ensureAuthenticated
-	// 	Movies.create(req.body)
-	// 	.then((movie) => res.send(movie))
-	// 	.catch(next)
-	// }
 });
 
+router.get('/similar/:categoryId/:limit', (req, res, next) => {
+  
+  var limitNum = Number(req.params.limit);
+  Movies.find({
+    category: req.params.categoryId
+  })
+  .sort({'rating': -1})
+  .limit(limitNum)
+  .then(movies => {
+    res.send(movies);
+  })
+})
+
 router.put('/', (req, res, next) => {
-  console.log('body****', req.body);
   Movies.findOneAndUpdate({_id:req.body._id}, req.body, {new: true})
   .exec()
   .then(updatedMovie => {
-    console.log('movie saved', updatedMovie);
-    res.send('yes');
+    res.send('Updated');
   })
 })
 

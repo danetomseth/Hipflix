@@ -25,22 +25,22 @@ var popMovies = function(queue) {
 
 router.param('userId', (req, res, next, userId) => {
 	Users.findById(userId)
-		.deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
-		.then(user => {
-			if(!user) {
-				res.sendStatus(404);
-			} else {
-				req.newUser = user;
-				next();
-			}
-		})
-		.catch(next);
+	.deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
+	.then(user => {
+		if(!user) {
+			res.sendStatus(404);
+		} else {
+			req.newUser = user;
+			next();
+		}
+	})
+	.catch(next);
 
 });
 router.get('/', (req, res, next) => {
 	Users.find({})
-		.then(users => res.json(users))
-		.catch(next);
+	.then(users => res.json(users))
+	.catch(next);
 });
 
 router.post('/', (req, res, next) => {
@@ -77,9 +77,9 @@ router.post('/:userId/movie', (req, res, next) => {
 router.delete('/:userId/movie/:itemId', (req, res, next) => {
 	req.newUser.movieQueue.dequeue(req.params.itemId)
 	.then(data => {
-			res.status(204).send('deleted')
-		})
-		.catch(next)
+		res.status(204).send('deleted')
+	})
+	.catch(next)
 })
 
 router.get('/:userId', (req, res, next) => {
@@ -93,8 +93,8 @@ router.get('/:userId/moviequeue', (req, res, next) => {
 
 router.get('/:userId/reviews', (req, res, next) => {
 	Reviews.find({user: req.newUser._id})
-		.then(reviewsOfOneUser => res.json(reviewsOfOneUser))
-		.catch(next);
+	.then(reviewsOfOneUser => res.json(reviewsOfOneUser))
+	.catch(next);
 });
 
 router.get('/:userId/billing', (req, res, next) => {
@@ -103,20 +103,28 @@ router.get('/:userId/billing', (req, res, next) => {
 
 router.get('/:userId/orders', (req, res, next) => {
 	Orders.find({user: req.newUser._id})
-		.then(ordersOfOneUser => res.json(ordersOfOneUser))
-		.catch(next);
+	.then(ordersOfOneUser => res.json(ordersOfOneUser))
+	.catch(next);
+});
+
+router.put('/', (req, res, next) => {
+	Users.findOneAndUpdate({_id:req.body._id}, req.body, {new: true})
+	.exec()
+	.then(updatedUser => {
+		res.send('Updated');
+	})
 });
 
 router.put('/subscription', (req, res, next) => {
     // if(req.user.isAdmin || req.user === req.body.user){ // I think this will check if the current user is updating themselves, or is an admin
-        Users.findById(req.body.user._id)
-        .then(user => {
-            user.subscription = req.body.sub._id;
-            user.renewalPrice = req.body.sub.price;
+    	Users.findById(req.body.user._id)
+    	.then(user => {
+    		user.subscription = req.body.sub._id;
+    		user.renewalPrice = req.body.sub.price;
             user.renewalDate = moment().add(renewalPeriod, 'seconds') // this is a crappy business model - if someone updates their subscription mid-month, then they don't pay for the current pay period. We should add pro-rating logic.
             return user.save()
         })
-        .then(user => res.json(user))
-        .catch(next)
+    	.then(user => res.json(user))
+    	.catch(next)
     // }
 })

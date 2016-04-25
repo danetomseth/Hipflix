@@ -1,19 +1,8 @@
 <!-- Two options here, could either filter the model, or simply use tabs like the lower example -->
 
 <div class="container-fluid">
-	<div class="row">
-		<div class="list-group">
-				<uib-accordion close-others="true">
-					<uib-accordion-group heading="{{user.email}}" ng-repeat="user in users">
-						<user-item></user-item>
-					</uib-accordion-group>
-				</uib-accordion>
-		</div>
-
-	
-	</div>
 	<div class="row panel" id="tab-panel">
-		<h4>Filter</h4>
+		<h4>HipFlix Members</h4>
 	 <uib-tabset active="activeJustified" justified="true">
     	<uib-tab index="0" heading="All Users">
     		<uib-accordion close-others="true">
@@ -28,9 +17,6 @@
     				<user-item></user-item>
     			</uib-accordion-group>
     		</uib-accordion>
-    	</uib-tab>
-    	<uib-tab index="2" heading="Long Justified">
-    		<h2>Hello!!</h2>
     	</uib-tab>
   	</uib-tabset>
   	</div>
