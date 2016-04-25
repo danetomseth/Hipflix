@@ -4,6 +4,8 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const Subscriptions = mongoose.model('Subscriptions');
 const User = mongoose.model('Users');
+const KEY = require("../../../env").PAYMENT_KEY;
+const stripe = require("stripe")(KEY);
 module.exports = router;
 
 router.get('/', (req, res, next) => {
@@ -13,16 +15,20 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	Subscriptions.create(req.body)
-	.then(createdSubscription => res.json(createdSubscription))
-	.catch(next);
+    var sub = req.body
+    stripe.plans.create({
+        amount: (sub.price)*100,
+        interval: "month",
+        name: sub.plan,
+        currency: "usd",
+        id: sub.plan,
+        statement_descriptor: "VHSs are so hip"
+    })
+    .then(plan => {
+        //save it to our DB
+        console.log(plan)
+        return Subscriptions.create(req.body)
+    })
+    .then(createdSubscription => res.json(createdSubscription))
+    .catch(next);
 });
-
-// router.get('/basic', (req, res, next) => {
-//     console.log('basic route')
-//     Subscriptions.find({plan:'Basic'})
-//     .then(subscription => res.json(subscription))
-//     .catch(next);
-// });
-
-

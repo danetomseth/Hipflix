@@ -3,8 +3,8 @@
 		<div class="list-group-item"><strong>My Billing History</strong></div>
 		<div ng-repeat="bill in bills" class="list-group-item">
 			<ol>
-				<ul>Billing Date: {{ bill.date }}</ul>
-				<ul>Billing Amount: ${{ bill.total }}</ul>
+				<ul>Billing Date: {{ bill.created | date:'medium' }}</ul>
+				<ul>Billing Amount: ${{ bill.amount/100 }}</ul>
 			</ol>
 		</div>
 
