@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const _ = require('lodash');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
-const MovieQ = mongoose.model('MovieQueues')
+const MovieQ = mongoose.model('MovieQueues');
+const Address = mongoose.model('Addresses');
 
 
 const schema = new mongoose.Schema({
@@ -22,7 +23,7 @@ const schema = new mongoose.Schema({
     last: {
         type: String
     },
-    isAdmin:{
+    isAdmin: {
         type: Boolean,
         default: false
     },
@@ -80,7 +81,7 @@ const schema = new mongoose.Schema({
 });
 
 // method to remove sensitive information from user objects before sending them out
-schema.methods.sanitize =  function () {
+schema.methods.sanitize = function() {
     return _.omit(this.toJSON(), ['password', 'salt']);
 };
 
@@ -88,18 +89,18 @@ schema.plugin(deepPopulate)
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
-var generateSalt = function () {
+var generateSalt = function() {
     return crypto.randomBytes(16).toString('base64');
 };
 
-var encryptPassword = function (plainText, salt) {
+var encryptPassword = function(plainText, salt) {
     var hash = crypto.createHash('sha1');
     hash.update(plainText);
     hash.update(salt);
     return hash.digest('hex');
 };
 
-schema.pre('save', function (next) {
+schema.pre('save', function(next) {
     var user = this;
     if (user.isModified('password')) {
         user.salt = user.constructor.generateSalt();
@@ -110,8 +111,19 @@ schema.pre('save', function (next) {
         owner: user._id
     })
     .then(function(queue) {
-        console.log('**********',user);
+        console.log('**********', user);
         user.movieQueue = queue._id;
+        return user
+    })
+    .then(function() {
+        console.log('creating address');
+        return Address.create({
+            owner: user._id
+        })
+    })
+    .then(newAddress => {
+        console.log('address', newAddress);
+        user.address = newAddress._id
         next();
     })
     .catch(next);
@@ -123,7 +135,7 @@ schema.pre('save', function (next) {
 schema.statics.generateSalt = generateSalt;
 schema.statics.encryptPassword = encryptPassword;
 
-schema.method('correctPassword', function (candidatePassword) {
+schema.method('correctPassword', function(candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 

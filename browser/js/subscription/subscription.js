@@ -63,7 +63,7 @@ app.controller('SubscriptionCtrl', function($q,$scope, $state, AuthService, Bill
             }
         })
         .then((user) => {
-            $state.go('home') // ultimately send this back to the users' billing page
+            $state.go('address') // ultimately send this back to the users' billing page
         })
     }
 

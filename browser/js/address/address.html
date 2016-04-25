@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <form class="form-horizontal">
+      <div class="form-group" id="user-edit">
+        <label class="control-label">Address:</label>
+        <div class="form-group">
+          <input value="{{address.address}}" ng-model="address.address" type="address" class="form-control">
+        </div>
+        <label class="control-label">State:</label>
+        <div class="form-group">
+          <input value="{{address.state}}" ng-model="address.state" type="state" class="form-control">
+        </div>
+        <label class="control-label">Last:</label>
+        <div class="form-group">
+          <input value="{{address.zip}}" ng-model="address.zip" type="last" class="form-control">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary pull-right" ng-click="saveAddress(address)">Save</button>
+        </div>
+        </div>
+      </form>
+    </div> 
+  </div>

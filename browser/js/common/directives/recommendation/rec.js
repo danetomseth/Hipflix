@@ -28,9 +28,11 @@ app.directive('hfRecEngine', function(MovieFactory) {
                 }
             }
             var limit = 6;
-            MovieFactory.findSimilar(favorite.categoryId, limit).then(bestMatch => {
-            	scope.recMovies = bestMatch;
-            })
+            if(favorite.categoryId) {
+                MovieFactory.findSimilar(favorite.categoryId, limit).then(bestMatch => {
+                	scope.recMovies = bestMatch;
+                })
+            }
         }
     }
 });
