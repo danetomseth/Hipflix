@@ -6,4 +6,4 @@ app.directive('hfMoviequeueItem', function(MovieFactory) {
 
 		}
 	}
-})
+});

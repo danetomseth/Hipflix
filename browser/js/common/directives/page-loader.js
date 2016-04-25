@@ -5,10 +5,10 @@ app.directive('pageLoader', function() {
 			var image = new Image();
 			image.onload = function() {
 				element.addClass('body-background')
-				scope.loader = false;
+				//scope.loader = false;
 			}
 			image.src = "03AG.jpg";
-			scope.loader = true;
+			//scope.loader = true;
 		}
 	}
 });

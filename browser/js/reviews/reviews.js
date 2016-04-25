@@ -15,6 +15,11 @@ app.config(function($stateProvider) {
 			}
 		}
 	})
+	.state('reviewsByUser', {
+		url: '/:userId/reviews',
+		controller: 'ReviewsByUserCtrl',
+		templateUrl: '/js/reviews/reviewsByUser.html',
+	})
 });
 
 app.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService, ReviewsFactory) {
@@ -37,4 +42,18 @@ app.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService
 
 app.controller('ReviewsCtrl', function($scope, $state, ReviewsFactory, movie) {
 	$scope.movie = movie;
+});
+
+app.controller('ReviewsByUserCtrl', function($scope, $state, ReviewsFactory, AuthService) {
+	AuthService.getLoggedInUser().then(user => {
+		console.log('user', user)
+		$scope.user = user;
+	})
+	.then(() => {
+		return ReviewsFactory.fetchAllByUser($scope.user._id)
+	})
+	.then(reviews => {
+		console.log("reviews", reviews)
+		$scope.user.reviews = reviews;
+	});
 });

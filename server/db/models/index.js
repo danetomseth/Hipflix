@@ -4,9 +4,9 @@
 require('./addresses');
 require('./billing');
 require('./categories');
-require('./MovieQueues');
 require('./movies');
 require('./orders');
 require('./reviews');
 require('./subscriptions');
+require('./MovieQueues');
 require('./users');

@@ -14,15 +14,23 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('MovieCtrl', function($http, $scope, $state, MovieFactory, MovieQueueFactory, AuthService, movie) {
+app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFactory, AuthService, movie) {
+	$scope.isUser = false;
+	$scope.isCollapsed = false;
 	$scope.movie = movie;
 	AuthService.getLoggedInUser()
 		.then(user => {
 			$scope.user = user
+			console.log('user', user);
+			if(user !== null) {
+				$scope.isUser = true;
+			}
 		})
 
 	$scope.addToQueue = function() {
 		if($scope.user){
+			$scope.isUser = true;
+
 			MovieQueueFactory.addToQueue($scope.user, $scope.movie._id)
 			.then(res => {
 				$state.go('movieQueue');
@@ -36,6 +44,7 @@ app.controller('MovieCtrl', function($http, $scope, $state, MovieFactory, MovieQ
 		}
 
 	}
+
 
 
 });
