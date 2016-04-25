@@ -136,20 +136,21 @@ router.put('/subscription', (req, res, next) => {
     Users.findById(req.body.user._id)
     .populate("subscription")
     .then(user => {
+        console.log(user)
         savedUser = user
         if (user.stripeSubID){ // if they exist in stripe , update
             return stripe.customers.updateSubscription(
                 user.stripeCustID,
                 user.stripeSubID,
-                { plan: req.body.sub})
+                { plan: req.body.sub.plan})
         } else { // otherwise, create
             return stripe.customers.createSubscription(
                 user.stripeCustID,
-                {plan: req.body.sub})
+                {plan: req.body.sub.plan})
         }
     })
     .then((subscription) => { // then update the DB user with their subscription info
-        console.log("**************STRIPE CUST**************", stripeCust)
+        console.log("**************STRIPE CUST**************", subscription)
         savedUser.stripeSubID = subscription.id
         savedUser.subscription = req.body.sub._id; // we could use the stripe API for this, but no.
         savedUser.renewalPrice = req.body.sub.price; // this is being kept for posterity, I don't know if stripe keeps legacy payment info.
