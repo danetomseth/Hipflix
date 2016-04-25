@@ -1,0 +1,23 @@
+<div class="container-fluid movie-queue">
+	<section ng-show="activeMovies.length">
+	<h2><strong>Active Queue</strong></h2>
+	<div class="row">
+		<hf-activequeue-item ng-repeat="item in activeMovies"></hf-activequeue-item>
+		<!-- <div ng-repeat="item in Userqueue">{{item}}</div> -->
+	</div>
+	<hr>
+	</section>
+	<section ng-show="pendingMovies.length">
+	<h2><strong>Pending Queue</strong></h2>
+	<div class="row">
+		<hf-moviequeue-item ng-repeat="item in pendingMovies" ></hf-moviequeue-item>
+	</div>
+	<hr>
+	</section>
+	<section ng-show="watchedMovies.length">
+	<h2><strong>Previously Watched</strong></h2>
+	<div class="row">
+		<hf-moviequeue-item ng-repeat="item in watchedMovies" ></hf-moviequeue-item>
+	</div>
+	</section>
+</div>

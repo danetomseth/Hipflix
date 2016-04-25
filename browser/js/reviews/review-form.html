@@ -1,0 +1,35 @@
+<div class="well">
+  <form class="form-horizontal" novalidate name="reviewForm">
+    <fieldset>
+      <legend>Write New Review</legend>
+      
+      <div class="form-group">
+        <label for="title" class="col-xs-2 control-label">Review Title</label>
+        <div class="col-xs-10">
+          <input class="form-control" name="title" type="text" ng-model="newReview.title" required ng-maxlength="80">
+        </div>
+
+        <label for="content" class="col-xs-2 control-label">Review Content</label>
+        <div class="col-xs-10">
+          <input class="form-control" name="content" type="text" ng-model="newReview.content">
+        </div>
+
+        <label for="rating" class="col-xs-2 control-label">Rating (enter from 1 - 5)</label>
+        <div class="col-xs-10">
+          <input class="form-control" name="title" type="text" ng-model="newReview.rating">
+        </div>
+         
+        <label for="bestFor" class="col-xs-2 control-label">What is this movie best for?</label>
+        <div class="col-xs-10">
+          <input class="form-control" name="title" type="text" ng-model="newReview.bestFor">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-10 col-xs-offset-2">
+          <button type="submit" class="btn btn-success" ng-disabled="reviewForm.$invalid" ng-click="submitReview(newReview)">Submit Review</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

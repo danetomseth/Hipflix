@@ -1,0 +1,13 @@
+<div class="container">
+	<div class="list-group">
+		<div class="list-group-item"><strong>My Billing History</strong></div>
+		<div ng-repeat="bill in bills" class="list-group-item">
+			<ol>
+				<ul>Billing Date: {{ bill.date }}</ul>
+				<ul>Billing Amount: ${{ bill.total }}</ul>
+			</ol>
+		</div>
+
+
+	</div>
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+	<div class='col-xs-12'>
+		<div class="page-header">
+			<h3>Create New Movie</h3>
+		</div>
+		<div id="" style="padding: 15px;" class="well">
+			<form name="movieFormm"  class="form-horizontal">
+
+				<div class="form-group">
+                    <label class="col-xs-1 control-label" >IMDB Link:</label>
+                    <div class="col-xs-3">
+                        <input ng-model="newMovie.imdb" class="form-control">
+                    </div>
+                        <button class="btn btn-primary col-xs-1" ng-click="findMovie(newMovie.imdb)">Find</button>
+					<label class="col-xs-1 control-label" >Title:</label>
+					<div class="col-xs-3">
+						<input ng-model="newMovie.title" type="title" class="form-control">
+					</div>
+
+					<label class="col-xs-1 control-label" >Year:</label>
+					<div class="col-xs-3">
+						<input type="year" ng-model="newMovie.year" class="form-control">
+					</div>
+					<label class="col-xs-1 control-label">Duration:</label>
+					<div class="col-xs-3">
+						<input type="duration" ng-model="newMovie.duration" placeholder="Minutes" class="form-control">
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label for="title" class="col-xs-1 control-label">Category:</label>
+					<div class="col-xs-3">
+						<!-- <select  id="select-menu" ng-model="singleCategory" class="form-control">
+							<option>Select Category</option>
+							<option ng-repeat="category in categories" value={{category}}>{{category}}</option>
+
+						</select> -->
+						<select class="form-control" ng-model="singleCategory" ng-options="category.name for category in categories">
+								<option value="">-- choose category --</option>
+						</select>
+
+					</div>
+
+						<button class="btn btn-primary col-xs-1" ng-click="addCategory(singleCategory)">Add</button>
+
+					<label class="col-xs-1 control-label" >Trailer:</label>
+					<div class="col-xs-4">
+						<input type="trailer" ng-model="newMovie.trailer" placeholder="Url" class="form-control">
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="col-xs-1 control-label">Photos:</label>
+					<div class="col-xs-3">
+						<input type="photos" ng-model="singlePhoto" placeholder="Url" class="form-control">
+					</div>
+
+						<button class="btn btn-primary col-xs-1" ng-click="addPhoto(singlePhoto)">Add</button>
+
+					<label class="col-xs-1 control-label">Tags:</label>
+					<div class="col-xs-2">
+						<input type="tags" ng-model="singleTag" class="form-control">
+					</div>
+
+						<button class="btn btn-primary col-xs-1" ng-click="addTag(singleTag)">Add</button>
+
+					<label class="col-xs-1 control-label" >Inventory:</label>
+					<div class="col-xs-1">
+						<input type="Inventory" class="form-control" ng-model="newMovie.inventory">
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="col-xs-1 control-label" for="description" >Description:</label>
+					<hr>
+					<div class="col-xs-12">
+						<textarea ng-model="newMovie.description" class="form-control" rows="5" id="description"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-2 col-xs-offset-9">
+						<button type="submit" ng-click="addMovie(newMovie)" class="btn btn-primary control-label">Add Movie</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+

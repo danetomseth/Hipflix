@@ -1,0 +1,64 @@
+<!-- <nav class="navbar navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <fullstack-logo></fullstack-logo>
+        </div>
+        <ul class="nav navbar-nav">
+            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+            </li>
+        </ul>
+        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+        <button ng-show="!user" ui-sref="signup" class="btn login-button">Signup</button>
+        <div ng-show="user" class="welcome">
+            <span>Welcome, {{ user.email }}!</span>
+            <a ng-click="logout()">Logout</a>
+        </div>
+    </div>
+</nav> -->
+
+<nav id="custom-nav" class="navbar navbar-custom navbar-transparent navbar-fixed-top">
+
+    <div class="container">
+        <div ng-show="user" class="welcome">
+            <span><a ui-sref-active="active" ui-sref="me" class="ng-binding" href="/me">Welcome, {{ user.first }}!</a></span>
+            <a ng-click="logout()">Logout</a>
+        </div>
+        <div class="row">
+            <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
+            <button ng-show="!user" ui-sref="signup" class="btn login-button">Signup</button>
+        </div>
+        <div class="row">
+        <div class="navbar-header">
+            <!-- YOU LOGO HERE -->
+            <a class="navbar-brand logo" href="/admin">
+                <img class="logo" src="assets/logo.png" width="120" alt="">
+            </a>
+        </div>
+       
+        <div class="collapse navbar-collapse clearfix" id="custom-collapse">
+            <form name="searchForm" class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" ng-model="searchWord">
+            </div>
+            <button type="submit" class="btn btn-default" placeholder="..." ng-click="search(searchWord)" >Search</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right"> 
+
+                <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                </li>
+                <li ng-if="!user" ui-sref="moviequeue">
+
+
+                    <span class="badge">{{ wishlist.length }}</span>
+                </li>
+
+            </ul>
+        </div>
+        </div>
+
+    </div>
+
+</nav>
