@@ -19,7 +19,7 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFac
 	$scope.isCollapsed = false;
 	$scope.movie = movie;
 	
-	getId()
+	getId();
 	function getId() {
 	    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
 	    const match = $scope.movie.trailer.match(regExp);
