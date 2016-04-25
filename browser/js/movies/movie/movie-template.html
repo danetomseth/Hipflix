@@ -37,11 +37,11 @@
 					</div>
 					<div class="col-xs-4">
 
-						<div class="list-group col-xs-12" ng-show="isUser">
+						<div class="list-group col-xs-12">
 							<div class="list-group-item">
 								<button class="btn btn-primary" ng-click="addToQueue()">Add To Q</button>
 							</div>
-							<div class="list-group-item">
+							<div class="list-group-item" ng-show="isUser">
 								<button class="btn btn-primary" ui-sref="addReview({movieId: movie._id})">Write Review</button>
 								
 							</div>

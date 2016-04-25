@@ -41,10 +41,9 @@ router.post('/', (req, res, next) => {
 
 
 router.delete('/:movieId', (req, res, next) => {
-	
 	var toRemoveInd = req.session.wishlist.indexOf(req.params.movieId)
-	var removedmovie = req.session.wishlist.splice(ind, 1);
-	res.send(req.session.wishlist)
+	var removedmovie = req.session.wishlist.splice(toRemoveInd, 1);
+	res.send(removedmovie)
 })
 
 

@@ -14,7 +14,8 @@ app.config(function($stateProvider){
     })
 });
 
-app.controller('SubscriptionCtrl', function($scope, $state, AuthService, BillingFactory, SubscriptionFactory){
+
+app.controller('SubscriptionCtrl', function($q,$scope, $state, AuthService, BillingFactory,MovieQueueFactory,SubscriptionFactory){
 
     $scope.form = { // remove from production if desired, or leave as UI guidance
         number: 4242424242424242,
@@ -22,8 +23,6 @@ app.controller('SubscriptionCtrl', function($scope, $state, AuthService, Billing
         exp_year: 17,
         cvc: 123
     };
-
-
 
     AuthService.getLoggedInUser().then(function (user) {
         $scope.user = user;
@@ -35,10 +34,35 @@ app.controller('SubscriptionCtrl', function($scope, $state, AuthService, Billing
         return $scope.subscriptions = subscriptions
     });
 
+     MovieQueueFactory.getWishlist()
+    .then(wishlist => {
+            console.log('get wishlist',wishlist)
+            $scope.wishList = wishlist
+    })
+
     $scope.submit = function(sub){
         if(!$scope.user) return alert("login or signup please")
-        return SubscriptionFactory.update($scope.user, sub)
+            console.log($scope.user)
+        SubscriptionFactory.update($scope.user, sub)
         .then(user => {
+            console.log("updated", user)
+            // if the user has already added some movies to the wishlist, add the movies in the wishlist
+            // into its movie queue.
+            if($scope.wishList.length > 0){
+                    var arrOfPromises = $scope.wishList.map(movie => {
+                        return MovieQueueFactory.addToQueue(user, movie._id)
+                    })
+                    $q.all(arrOfPromises)
+                      .then(()=>{
+                        console.log("all the movies in the wishlist into the moviequeue")
+                        return user
+                      })
+               
+            } else {
+                return user
+            }
+        })
+        .then((user) => {
             $state.go('home') // ultimately send this back to the users' billing page
         })
     }

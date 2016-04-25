@@ -39,16 +39,19 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFac
 		})
 
 	$scope.addToQueue = function() {
-		if($scope.user){
-			$scope.isUser = true;
-
+		console.log('addToQueue')
+		if($scope.isUser){
+			// $scope.isUser = true;
 			MovieQueueFactory.addToQueue($scope.user, $scope.movie._id)
 			.then(res => {
 				$state.go('movieQueue');
 			})	
 		} else {
 			MovieQueueFactory.addToWishlist($scope.movie._id)
-				.then(wishlist => console.log(wishlist));
+				.then(wishlist => {
+					console.log(wishlist)
+					$state.go('wishList')
+				});
 		}
 
 	}
