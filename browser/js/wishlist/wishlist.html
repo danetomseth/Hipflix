@@ -1,12 +1,15 @@
 <div class="container-fluid movie-queue">
 	<h2><strong>Active Queue</strong></h2>
 	<div class="row">
-		<hf-moviequeue-item ng-repeat="item in activeMovies"></hf-moviequeue-item>
+		<h3>You have no active movies so far because you haven't signed up yet!</h3>
+		<div class="list-group-item">
+			<button class="btn btn-warning" ng-click="signup()"/>Proceed to SignUp</button>
+		</div>
 		<!-- <div ng-repeat="item in Userqueue">{{item}}</div> -->
 	</div>
 	<hr>
 	<h2><strong>Pending Queue</strong></h2>
 	<div class="row">
-		<hf-moviequeue-item ng-repeat="item in pendingMovies" ></hf-moviequeue-item>
+		<hf-wishlist-item ng-repeat="item in pendingMovies" ></hf-wishlist-item>
 	</div>
 </div>
