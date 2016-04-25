@@ -207,7 +207,7 @@ schema.methods.shiftQueue = function() {
 		return MovieQ.save();
 	})
 	
-}
+};
 
 
 
