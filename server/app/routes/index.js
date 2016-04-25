@@ -10,6 +10,7 @@ router.use('/movies', require('./movies'));
 router.use('/users', require('./users'));
 router.use('/subscriptions', require('./subscriptions'));
 router.use('/reviews', require('./reviews'));
+router.use('/orders', require('./orders'));
 router.use('/wishlist', require('./wishlist'));
 
 

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="single-movie">
 	<div class="col-xs-10 col-centered">
 		<div class="panel well">
 			<div class="container-fluid panel-body">
@@ -28,19 +28,19 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-8">
+					<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Reviews</button>
 					</div>
 					<div class="col-xs-4">
 
-						<div class="list-group col-xs-12">
+						<div class="list-group col-xs-12" ng-show="isUser">
 							<div class="list-group-item">
-							<button class="btn btn-primary" ng-click="addToQueue()">Add To Q</button>
-								
+								<button class="btn btn-primary" ng-click="addToQueue()">Add To Q</button>
 							</div>
 							<div class="list-group-item">
-							<button class="btn btn-primary" ui-sref="addReview({movieId: movie._id})">Write Review</button>
+								<button class="btn btn-primary" ui-sref="addReview({movieId: movie._id})">Write Review</button>
 								
 							</div>
-							<div class="list-group-item">
+							<div class="list-group-item" ng-show="isUser">
 								<hf-queue-window></hf-queue-window>
 							</div>
 						</div>
@@ -48,6 +48,15 @@
 					</div>
 				</div>
 			</div>
+		<div uib-collapse="isCollapsed">
+			<div class="panel well">
+				<div class="list-group">
+					<div class="list-group-item" ng-repeat="review in movie.reviews">
+					<p>{{review}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>
 	</div>
 </div>

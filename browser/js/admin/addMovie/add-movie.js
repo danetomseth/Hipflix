@@ -7,5 +7,14 @@ app.config(function($stateProvider) {
 });
 
 
+app.config(function($stateProvider) {
+	$stateProvider.state('editmovie', {
+		url: '/admin/editmovie',
+		controller: 'EditMovieCtrl',
+		templateUrl: '/js/admin/addmovie/edit-movie.html'
+	});
+});
+
+
 
 

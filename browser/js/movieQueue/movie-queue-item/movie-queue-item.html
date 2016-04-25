@@ -19,7 +19,7 @@
 				<div class="list-group-item"><strong>{{item.movie.title}}</strong></div>
 				<div class="list-group-item"><a ui-sref="movie({movieId: item.movie._id})">Leave a Review</a></div>
 			</div>
-					<nav>
+					<nav ng-show="item.status === 'pending'">
 						<ul class="pagination">
 							<li>
 								<a href="#" aria-label="Previous">
@@ -34,7 +34,7 @@
 							</li>
 						</ul>
 					</nav>
-			<div class="list-group">
+			<div class="list-group" ng-show="false">
 				<div class="list-group-item">
 					<button class="btn btn-warning" ng-click="removeMovie(item)"/>Remove</button>
 				</div>

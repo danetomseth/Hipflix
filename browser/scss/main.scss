@@ -15,6 +15,9 @@
 @import 'template/main';
 @import 'fonts/main';
 @import 'custom/animate';
+@import 'custom/modal';
+@import 'custom/henry';
+@import 'custom/admin';
 
 * {
   box-sizing: border-box;
@@ -22,19 +25,12 @@
 
 body {
   // background-image: url('loading.gif') !important;
-  h2 {
-    color: white;
-  }
-  h3 {
-    color: white;
-  }
-  h4 {
-    color: white;
-  }
-  h5 {
-    color: white;
-  }
+
 }
+
+
+//fixes ui-bootstrap h-ref css
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 
 
@@ -89,6 +85,13 @@ navbar {
   top: 30px;
 }
 
+// .img-thumbnail {
+//  // width: 100%;
+//   background-image: url('poster.jpg');
+//   background-size: cover;
+//   width: 50%;
+//   height: auto;
+// }
 
 
 
