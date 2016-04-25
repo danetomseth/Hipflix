@@ -7,13 +7,21 @@ const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 let Movies = mongoose.model('Movies');
 
+router.get('/search', (req, res, next) => {
+
+  Movies.findByKeyword(req.query.keyword)
+  .then(movie => {
+    res.json(movie)
+  })
+})
+
 router.param('movieId', (req, res, next, movieId) => {
     //might be able to use movieId instead of router.params.id
     Movies.findById(req.params.movieId)
     .populate('category reviews')
     .deepPopulate('reviews.user reviews.movie')
     .then((movie) => {
-    	if (!movie) {
+      if (!movie) {
         let err = new Error('empty movie')
             err.status = 404; //eventually want to redirect her to 404 page, pass to err handler
             return next(err);
@@ -38,6 +46,8 @@ router.get('/:movieId', (req, res, next) => res.json(req.movie));
 
 router.get('/:movieId/reviews', (req, res, next) => {
   res.json(req.movie.reviews)});
+
+
 
 router.post('/', (req, res, next) => {
   Movies.create(req.body)

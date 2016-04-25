@@ -9,7 +9,7 @@ app.factory("SubscriptionFactory", function($http){
             .then(user => user.data)
         },
         create: function(sub){
-            return $http.post("/api/subscriptions", sub)
+            return $http.post("/api/subscriptions", {sub: sub})
             .then(sub => sub.data)
         },
         fetchBasic: function(){

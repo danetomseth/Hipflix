@@ -46,5 +46,11 @@ var schema = new mongoose.Schema({
 
 schema.plugin(deepPopulate);
 
+schema.statics.findByKeyword = function(keyword){
+	var regex = "(" + keyword + ")"
+ 	var myRegExp = new RegExp(regex, "i");
+    return this.find({title: myRegExp}).exec()
+}
+  
 
 mongoose.model('Movies', schema);

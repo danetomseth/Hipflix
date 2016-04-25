@@ -24,5 +24,6 @@ module.exports = {
         "clientSecret": process.env.GOOGLE_CLIENT_SECRET,
         "callbackURL": process.env.CALLBACK_URL
     },
-    "RENEWAL_PERIOD": 30
+    "RENEWAL_PERIOD": 30,
+    "PAYMENT_KEY": process.env.STRIPE_PAYMENT_KEY
 };

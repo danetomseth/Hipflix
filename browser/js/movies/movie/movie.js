@@ -18,6 +18,20 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFac
 	$scope.isUser = false;
 	$scope.isCollapsed = false;
 	$scope.movie = movie;
+	
+	getId();
+	function getId() {
+	    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+	    const match = $scope.movie.trailer.match(regExp);
+
+	    if (match && match[2].length == 11) {
+	        const movieTrailer = 'https://www.youtube.com/embed/' + match[2];
+	        $scope.movieTrailer = movieTrailer;
+	    } else {
+	        return 'error';
+    	}
+	}
+
 	AuthService.getLoggedInUser()
 		.then(user => {
 			$scope.user = user
