@@ -11,7 +11,7 @@ app.controller('WishListCtrl', function($scope, $state, MovieQueueFactory){
 	$scope.activeMovies = [];
 	MovieQueueFactory.getWishlist()
 	.then(wishlist => {
-			console.log(wishlist)
+			console.log('get wishlist',wishlist)
 			$scope.pendingMovies = wishlist
 	})
 
@@ -20,11 +20,15 @@ app.controller('WishListCtrl', function($scope, $state, MovieQueueFactory){
 	$scope.removeMovie = function(item) {
 	    MovieQueueFactory.removeFromWishlist(item)
 			.then(wishlist => {
-				console.log(wishlist)
+				console.log('wishlist after remove',wishlist)
 			})
 	}
 
 	$scope.signup = function(){
 		$state.go("signup");
+	}
+
+	$scope.addMovies = function(){
+		$state.go("movies");
 	}
 });

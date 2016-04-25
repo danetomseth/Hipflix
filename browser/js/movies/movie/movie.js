@@ -31,7 +31,6 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFac
 		console.log('addToQueue')
 		if($scope.isUser){
 			// $scope.isUser = true;
-
 			MovieQueueFactory.addToQueue($scope.user, $scope.movie._id)
 			.then(res => {
 				$state.go('movieQueue');

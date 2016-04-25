@@ -1,5 +1,5 @@
 app.factory('MovieQueueFactory', function($http) {
-	// var wishlistCount = { count: 0 }
+
 	var cachedWishlist = [];
 
 	return {
@@ -20,6 +20,7 @@ app.factory('MovieQueueFactory', function($http) {
 		addToWishlist:(movieId) => {
 			return $http.post("/api/wishlist", {movieId: movieId})
 			.then(wishlist => {
+				// only movieId
 				angular.copy(wishlist.data, cachedWishlist);
 				return wishlist.data
 			})
@@ -28,15 +29,24 @@ app.factory('MovieQueueFactory', function($http) {
 		getWishlist: () => {
 			return $http.get("/api/wishlist")
 				.then(wishlist => {
+						// wishlist with movie detail infos
 						angular.copy(wishlist.data, cachedWishlist);
 						return cachedWishlist					
 				})
 				
 		},
 		removeFromWishlist: (movie) => {
-			return $http.delete("/api/wishlist" + movie._id)
-				.then(wishlist => {
-					angular.copy(wishlist.data, cachedWishlist);
+			return $http.delete("/api/wishlist/" + movie._id)
+				.then(removedMovie => {
+					var removedMovieId = removedMovie.data[0]
+					// modify the cachedWishlist with movie detail infos
+					var indToRemove;
+					cachedWishlist.forEach((movie,ind) => {
+						if(movie._id === removedMovieId) {
+							indToRemove = ind;
+						}
+					})
+					cachedWishlist.splice(indToRemove,1);
 					return cachedWishlist
 				})
 		}

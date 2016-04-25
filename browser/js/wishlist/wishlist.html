@@ -2,7 +2,7 @@
 	<h2><strong>Active Queue</strong></h2>
 	<div class="row">
 		<h3>You have no active movies so far because you haven't signed up yet!</h3>
-		<div class="list-group-item">
+		<div>
 			<button class="btn btn-warning" ng-click="signup()"/>Proceed to SignUp</button>
 		</div>
 		<!-- <div ng-repeat="item in Userqueue">{{item}}</div> -->
@@ -10,6 +10,9 @@
 	<hr>
 	<h2><strong>Pending Queue</strong></h2>
 	<div class="row">
+		<div>
+			<button class="btn btn-warning" ng-click="addMovies()"/>Add More Movies</button>
+		</div>
 		<hf-wishlist-item ng-repeat="item in pendingMovies" ></hf-wishlist-item>
 	</div>
 </div>
