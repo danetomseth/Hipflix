@@ -20,7 +20,6 @@ app.directive('navbar', function ($rootScope, MovieQueueFactory, AuthService, AU
             MovieQueueFactory.getWishlist()
                 .then( wishlist => {
                     scope.wishlist = wishlist;
-                    console.log(wishlist)
                 })
 
             scope.isLoggedIn = function () {

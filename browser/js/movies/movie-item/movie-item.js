@@ -6,7 +6,6 @@ app.directive('hfMovieItem', function(MovieFactory) {
 		link: function(scope, element, attr) {
 			var box = angular.element(element.children());
 			element.on('mouseenter', function() {
-				console.log('enter', box);
 				box.addClass('movie-hover');
 			})
 			element.on('mouseleave', function() {

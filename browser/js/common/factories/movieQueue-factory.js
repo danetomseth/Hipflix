@@ -10,6 +10,7 @@ app.factory('MovieQueueFactory', function($http) {
 			})
 		},
 		dequeue: function(user, item) {
+			console.log('removing movie!!');
 			return $http.delete('/api/users/'+user._id+'/movie/'+item._id)
 			.then(res => res);
 		},
