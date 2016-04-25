@@ -15,11 +15,7 @@ var schema = new mongoose.Schema({
 	allowance: {
 		type: Number,
 		required: true
-	},
-    stripe: {
-        type: String,
-        required: true
-    }
+	}
 })
 
 // method to remove sensitive information from user objects before sending them out

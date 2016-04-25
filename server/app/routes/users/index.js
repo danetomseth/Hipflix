@@ -8,12 +8,15 @@ const Orders = mongoose.model('Orders');
 const Movies = mongoose.model('Movies');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const moment = require('moment');
-const renewalPeriod = require("../../../env").RENEWAL_PERIOD
+const keys = require("../../../env")
+const renewalPeriod = keys.RENEWAL_PERIOD
+const stripeKey = keys.PAYMENT_KEY;
+const stripe = require("stripe")(stripeKey);
 
 module.exports = router;
 
-var popMovies = function(queue) {
-	var userMovies = [];
+const popMovies = function(queue) {
+	const userMovies = [];
 	queue.queue.forEach(function(elem) {
 		Movies.findById(elem.movie)
 		.then(function(movie) {
@@ -25,29 +28,29 @@ var popMovies = function(queue) {
 
 router.param('userId', (req, res, next, userId) => {
 	Users.findById(userId)
-		.deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
-		.then(user => {
-			if(!user) {
-				res.sendStatus(404);
-			} else {
-				req.newUser = user;
-				next();
-			}
-		})
-		.catch(next);
+  .deepPopulate('addresses addresses.user movieQueue movieQueue.queue.movie movieQueue.queue subscription billingHistory billingHistory.user')
+  .then(user => {
+     if(!user) {
+        res.sendStatus(404);
+    } else {
+        req.newUser = user;
+        next();
+    }
+})
+  .catch(next);
 
 });
 router.get('/', (req, res, next) => {
 	Users.find({})
-		.then(users => res.json(users))
-		.catch(next);
+  .then(users => res.json(users))
+  .catch(next);
 });
 
 router.post('/', (req, res, next) => {
 	Users.findOne({email: req.body.email})
 	.then((user) => {
 		if(user) {
-			let err = new Error('User already exists!');
+			const err = new Error('User already exists!');
 			err.status = 403;
 			return next(err);
 		} else {
@@ -71,9 +74,9 @@ router.post('/:userId/movie', (req, res, next) => {
 router.delete('/:userId/movie/:itemId', (req, res, next) => {
 	req.newUser.movieQueue.dequeue(req.params.itemId)
 	.then(data => {
-			res.status(204).send('deleted')
-		})
-		.catch(next)
+     res.status(204).send('deleted')
+ })
+  .catch(next)
 })
 
 router.get('/:userId', (req, res, next) => {
@@ -81,14 +84,14 @@ router.get('/:userId', (req, res, next) => {
 });
 
 router.get('/:userId/moviequeue', (req, res, next) => {
-	var movies = popMovies(req.newUser.movieQueue);
+	const movies = popMovies(req.newUser.movieQueue);
 	res.json(req.newUser);
 });
 
 router.get('/:userId/reviews', (req, res, next) => {
 	Reviews.find({user: req.newUser._id})
-		.then(reviewsOfOneUser => res.json(reviewsOfOneUser))
-		.catch(next);
+  .then(reviewsOfOneUser => res.json(reviewsOfOneUser))
+  .catch(next);
 });
 
 router.get('/:userId/billing', (req, res, next) => {
@@ -97,20 +100,56 @@ router.get('/:userId/billing', (req, res, next) => {
 
 router.get('/:userId/orders', (req, res, next) => {
 	Orders.find({user: req.newUser._id})
-		.then(ordersOfOneUser => res.json(ordersOfOneUser))
-		.catch(next);
+  .then(ordersOfOneUser => res.json(ordersOfOneUser))
+  .catch(next);
 });
+
+router.post('/payment', (req, res, next) => {
+    let savedUser;
+    Users.findById(req.user._id)
+    .populate("subscription")
+    .then(user => {
+        savedUser = user
+       return stripe.customers.create({
+            source: req.body.token,
+            email: req.user.email
+        })
+    })
+    .then(stripeCust => {
+        console.log("**************STRIPE CUST**************", stripeCust)
+        savedUser.stripeCustID = stripeCust.id
+        return savedUser.save()
+    })
+})
+
 
 router.put('/subscription', (req, res, next) => {
     // if(req.user.isAdmin || req.user === req.body.user){ // I think this will check if the current user is updating themselves, or is an admin
-        Users.findById(req.body.user._id)
-        .then(user => {
-            user.subscription = req.body.sub._id;
-            user.renewalPrice = req.body.sub.price;
-            user.renewalDate = moment().add(renewalPeriod, 'seconds') // this is a crappy business model - if someone updates their subscription mid-month, then they don't pay for the current pay period. We should add pro-rating logic.
-            return user.save()
-        })
-        .then(user => res.json(user))
-        .catch(next)
-    // }
+    //create a stripe payment customer
+    let savedUser;
+    Users.findById(req.body.user._id)
+    .populate("subscription")
+    .then(user => {
+        savedUser = user
+        if (user.stripeSubID){ // if they exist in stripe , update
+            return stripe.customers.updateSubscription(
+                user.stripeCustID,
+                user.stripeSubID,
+                { plan: req.body.sub})
+        } else { // otherwise, create
+            return stripe.customers.createSubscription(
+                user.stripeCustID,
+                {plan: req.body.sub})
+        }
+    })
+    .then((subscription) => { // then update the DB user with their subscription info
+        console.log("**************STRIPE CUST**************", stripeCust)
+        savedUser.stripeSubID = subscription.id
+        savedUser.subscription = req.body.sub._id; // we could use the stripe API for this, but no.
+        savedUser.renewalPrice = req.body.sub.price; // this is being kept for posterity, I don't know if stripe keeps legacy payment info.
+        // savedUser.renewalDate = moment().add(renewalPeriod, 'seconds') // deprecated with Stripe integration
+        return savedUser.save()
+    })
+    .then(user => res.json(user))
+    .catch(next)
 })
