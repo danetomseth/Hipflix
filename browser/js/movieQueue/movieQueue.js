@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 
 
 
-app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueueFactory){
+app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueueFactory, OrderFactory){
 	$scope.pendingMovies = [];
 	$scope.activeMovies = [];
 	$scope.watchedMovies = [];
@@ -32,9 +32,9 @@ app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueu
 			})	
 		} else {
 			MovieQueueFactory.getWishlist().
-				then(wishlist => {
-					$scope.pendingMovies = wishlist
-				})
+			then(wishlist => {
+				$scope.pendingMovies = wishlist
+			})
 		}
 	})
 
@@ -48,10 +48,16 @@ app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueu
 			})	
 		} else {
 			MovieQueueFactory.removeFromWishlist(item)
-				.then(wishlist => {
-					console.log(wishlist)
-				})
+			.then(wishlist => {
+				console.log(wishlist)
+			})
 		}
+	}
+
+	$scope.returnMovie = function(item) {
+		OrderFactory.returnMovie(item).then(function() {
+			$state.reload();
+		})
 	}
 
 	

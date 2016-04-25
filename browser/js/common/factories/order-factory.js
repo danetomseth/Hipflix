@@ -15,6 +15,7 @@ app.factory('OrderFactory', function($state, $http) {
 			console.log('returning*********:  ', queueItem);
 			return $http.put('/api/orders/'+queueItem.orderId).then(function(res) {
 				console.log('result', res);
+				$state.reload();
 			})
 		}
 	}

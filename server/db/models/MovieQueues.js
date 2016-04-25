@@ -135,7 +135,6 @@ schema.methods.createOrder = function(userId, movieId) {
 
 schema.methods.dequeue = function(itemId) {
 	var user = this;
-	console.log('in deque');
 	user.queue.forEach(function(item, index) {
 		if(item._id == itemId) {
 			user.activeQueue--;
@@ -154,8 +153,6 @@ schema.methods.findInQueue = function(id) {
 	var Queue = MovieQ.queue;
 	
 	Queue.forEach(function(elem) {
-		console.log(elem.orderId);
-		console.log(id);
 		if(elem.status === 'active') {
 			if(elem.orderId.toString() === id.toString()) {
 				MovieQ.updateQueue(elem);
@@ -165,9 +162,7 @@ schema.methods.findInQueue = function(id) {
 		}
 	})
 	if(checkStatus(MovieQ.queue)) {
-		console.log('pending exists');
 		return MovieQ.shiftQueue().then(function(Q) {
-			console.log('*******Q', Q);
 			return Q.save();
 		})
 	}
@@ -191,7 +186,6 @@ schema.methods.shiftQueue = function() {
 	var check = false
 	for(var i = 0; i < MovieQ.queue.length; i++) {
 		if(MovieQ.queue[i].status === 'pending' && !check) {
-			console.log("checkingg");
 			movieIndex = i;
 			check = true;
 		}

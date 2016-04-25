@@ -30,14 +30,11 @@ router.put('/:orderId', (req, res, next) => {
 	})
 	.then(updatedOrder => {
 		var Que = updatedOrder.user.movieQueue;
-		//console.log("*****", Que);
 		return Que.findInQueue(updatedOrder._id)
-		console.log('item', queItem);
-	
-		res.send('Updated');
 	})
 	.then(function(updatedQ) {
 		console.log('Everything updated!!!', updatedQ);
+		res.send('Updated');
 	})
 	.catch(next);
 
