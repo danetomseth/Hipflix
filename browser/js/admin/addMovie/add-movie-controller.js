@@ -16,16 +16,12 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
 	//$scope.categories = ['drama', 'action', 'comedy'];
 	CategoriesFactory.fetchAll()
 	.then((categories) => {
-		console.log('categories returned', categories);
 		$scope.categories = categories;
-		console.log($scope.categories);
 	})
 	$scope.addCategory = function(category) {
-		console.log('category', category);
 		$scope.newMovie.category.push(category._id)
 	}
 	$scope.addPhoto = function(photo) {
-		console.log(photo);
 		$scope.newMovie.photos.push(photo);
 		$scope.singlePhoto = "";
 	}
@@ -37,7 +33,6 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
     $scope.findMovie = function(imdbID){
         MovieFactory.findMovie(imdbID)
         .then(movie => {
-            console.log("movie", movie)
             var rand = Math.floor(Math.random()*$scope.categories.length)
             var cat = $scope.categories[rand]
             movie.inventory = rand;
@@ -46,9 +41,11 @@ app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, Categories
         })
 
     }
+    $scope.populateDb = function(imdbString) {
+    	MovieFactory.populateDb(imdbString, $scope.categories)
+    }
 
     $scope.addMovie = function(movie) {
-      console.log('new movie', $scope.newMovie);
       MovieFactory.create($scope.newMovie)
       .then((newMovie) => {
        $state.go('admin');

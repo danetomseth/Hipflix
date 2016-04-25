@@ -1,6 +1,10 @@
 <section id="home">
-
+	
 	<div class="container">
+		<div class="row">
+			<h2>Recommended Movies</h2>
+			<hf-rec-engine></hf-rec-engine>
+		</div>
 		<div class="row">
 			<div class="col-xs-3">
 				<img class="img-responsive" src="vhs.png">
@@ -16,7 +20,11 @@
 			</div>
 		</div>
 		<hr>
-		<div class="container" ng-repeat="category in categories">
+		<h2>More Movies</h2>
+		<div class="row">
+			<hf-movie-poster ng-repeat="movie in allMovies | limitTo:20"></hf-movie-poster>
+		</div>
+		<!-- <div class="container" ng-repeat="category in categories">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="movie in category.movies" ui-sref="movie({movieId: movie._id})">
 					<div class="panel panel-default">
@@ -30,7 +38,7 @@
 				</div>
 			</div>
 			<hr>
-		</div>
+		</div> -->
 
 	</div>
 </section>

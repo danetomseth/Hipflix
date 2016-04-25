@@ -85,6 +85,17 @@
 				</div>
 
 			</form>
+			<hr>
+			<form name="movieFormm"  class="form-horizontal">
+
+				<div class="form-group">
+					<label class="col-xs-3 control-label" >IMDB Array:</label>
+                    <div class="col-xs-6">
+                        <input ng-model="imdbArray" class="form-control">
+                    </div>
+                        <button class="btn btn-primary col-xs-1" ng-click="populateDb(imdbArray)">Find</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,5 @@
+<div id="movie-item" class="col-xs-2 small-movie-box" ui-sref="movie({movieId: movie._id})">
+	<div class="movie-content-small">
+		<img ng-repeat="photo in movie.photos" class="img-responsive" ng-src="{{photo}}">
+	</div>
+</div>

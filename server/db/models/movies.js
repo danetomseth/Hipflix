@@ -34,6 +34,10 @@ var schema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Reviews'
 	}],
+	rating: {
+		type: Number,
+		default: 5
+	},
 	inventory: {
 		type: Number
 	}
