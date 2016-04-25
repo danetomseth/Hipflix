@@ -20,7 +20,6 @@ app.directive('navbar', function ($rootScope, MovieFactory,MovieQueueFactory, Au
             MovieQueueFactory.getWishlist()
                 .then( wishlist => {
                     scope.wishlist = wishlist;
-                    console.log(wishlist)
                 })
 
             scope.search = function(keyword){

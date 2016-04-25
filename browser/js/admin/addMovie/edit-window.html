@@ -1,0 +1,45 @@
+<div class="modal-body" id="edit-modal">
+	<h4 style="color: black">Edit Movie: <small>{{movie.title}}</small></h4>
+
+
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label">Title:</label>
+			<div class="form-group">
+				<input value="{{movie.title}}" ng-model="movie.title" type="title" class="form-control">
+			</div>
+			<label class="control-label">Category:</label>
+			<div class="form-group">
+			<label class="checkbox-inline" ng-repeat="category in localCategories">
+				<input type="checkbox" ng-model="category.selected" value="">{{category.name}}</label>
+			</div>
+			<label class="control-label">Duration:</label>
+			<div class="form-group">
+				<input value="{{movie.duration}}" type="title" ng-model="movie.duration" class="form-control">
+			</div>
+			<label class="control-label">Label:</label>
+			<div class="form-group">
+				<input value="{{movie.year}}" type="title" ng-model="movie.year" class="form-control">
+			</div>
+			<label class="control-label">Inventory:</label>
+			<div class="input-group">
+				
+				<input value="{{movie.inventory}}" ng-model="movie.inventory"  class="form-control">
+				<span class="input-group-btn">
+				<button class="btn btn-default input-btn" type="button" ng-click="addInv()"><span class="glyphicon glyphicon-plus"></span></button>
+				</span>
+				<span class="input-group-btn">
+				<button class="btn btn-default input-btn" type="button" ng-click="minusInv()"><span class="glyphicon glyphicon-minus"></span></button>
+				</span>
+			</div>
+			<hr>
+			<div class="input-group pull-right">
+				<button class="btn btn-primary" ng-click="updateMovie(movie, localCategories)">Save</button>
+			</div>
+
+		</div>
+	</form>
+
+</div>
+
+<!-- <span class="glyphicon glyphicon-plus"></span> -->

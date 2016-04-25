@@ -1,0 +1,25 @@
+#admin-panel {
+	li {
+
+	}
+	div{
+		background-color: rgba(230, 230, 230, 1);
+	}
+	div:hover {
+		cursor: pointer;
+		background-color: rgba(230, 230, 230, 0.8);
+	}
+}
+
+#admin-movies {
+	p {
+		display: inline-block;
+		padding-right: 9px;
+	}
+
+}
+
+#tab-panel {
+	padding: 20px;
+	border: 2px solid lightgrey;
+}
