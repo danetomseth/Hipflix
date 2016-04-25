@@ -15,7 +15,7 @@ app.config(function($stateProvider){
 });
 
 
-app.controller('SubscriptionCtrl', function($q,$scope, $state, AuthService, BillingFactory, SubscriptionFactory){
+app.controller('SubscriptionCtrl', function($q,$scope, $state, AuthService, BillingFactory,MovieQueueFactory,SubscriptionFactory){
 
     $scope.form = { // remove from production if desired, or leave as UI guidance
         number: 4242424242424242,
