@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const _ = require('lodash');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
-var MovieQ = mongoose.model('MovieQueues')
+const MovieQ = mongoose.model('MovieQueues')
 
-var schema = new mongoose.Schema({
+
+const schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -43,6 +44,12 @@ var schema = new mongoose.Schema({
     subscription: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Subscriptions'
+    },
+    stripeCustID: {
+        type: String
+    },
+    stripeSubID: {
+        type: String
     },
     renewalDate: {
         type: Date
