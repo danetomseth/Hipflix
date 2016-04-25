@@ -26,6 +26,9 @@ app.factory('MovieFactory', function($http) {
                 };
             })
         },
+        searchByName:(keyword) => {
+            return $http.get('/api/movies/search?keyword=' + keyword).then(movie => movie.data)
+        },
         updateMovie: (movie) => {
             return $http.put("/api/movies", movie)
         }
