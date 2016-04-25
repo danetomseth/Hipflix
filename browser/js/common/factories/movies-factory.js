@@ -25,6 +25,9 @@ app.factory('MovieFactory', function($http) {
 
                 };
             })
+        },
+        updateMovie: (movie) => {
+            return $http.put("/api/movies", movie)
         }
     }
 })

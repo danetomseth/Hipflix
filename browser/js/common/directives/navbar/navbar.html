@@ -43,8 +43,9 @@
                 <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                     <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
                 </li>
+                <li ng-if="!user" ui-sref="moviequeue">
 
-                <li ng-if="!user" ui-sref="">
+
                     <span class="badge">{{ wishlist.length }}</span>
                 </li>
 

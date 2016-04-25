@@ -60,7 +60,13 @@ router.post('/', (req, res, next) => {
 
 
 router.post('/:userId/movie', (req, res, next) => {
-	var allowance = 3;
+	var allowance;
+	if (req.newUser.subscription.allowance) {
+		allowance = req.newUser.subscription.allowance;
+	}
+	else {
+		allowance = 3;
+	}
 	req.newUser.movieQueue.addToQueue(req.body.movieId, allowance)
 	.then(data => {
 		res.status(204).send('created')

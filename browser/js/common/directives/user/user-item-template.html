@@ -1,0 +1,20 @@
+
+<div class="panel {{panelClass || 'panel-default'}}">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()"><span
+        ng-class="{'text-muted': isDisabled}">{{user.email}}</span></a>
+      </h4>
+  </div>
+  <div class="panel-body">
+      <ul class="list">
+        <li>Email: {{user.email}}</li>
+        <li>First: {{user.first}}</li>
+        <li>Last: {{user.last}}</li>
+        <li>Admin: {{user.isAdmin}}</li>
+        <li>{{user.subscription}}</li>
+      </ul>
+  </div>
+  <div class="panel-footer">
+  <button type="submit" ng-click="editUser(user)">Edit</button></div>
+</div>

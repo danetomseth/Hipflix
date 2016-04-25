@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var moment = require('moment');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var schema = new mongoose.Schema({
 	user: {
@@ -18,11 +19,23 @@ var schema = new mongoose.Schema({
 	},
 	tracking: {
 		type: Number,
-		default: (Math.random() * 10000000)
+		default: Math.floor((Math.random() * 10000000))
+	},
+	status: { 
+		type: String,
+		enum:['delivered', 'returned'],
+		default: 'delivered'
 	}
 })
 
 
 //Presave hook to send email
+schema.plugin(deepPopulate);
+
+schema.methods.returnMovie = function(id) {
+	this.status = 'returned';
+	console.log("movie returned");
+	return this.save();
+}
 
 mongoose.model('Orders', schema);
