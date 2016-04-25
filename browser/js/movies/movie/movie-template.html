@@ -14,13 +14,11 @@
 								<p style="display:inline-block; padding-right:5px" ng-repeat="category in movie.category">{{category.name}}</p>
 								<h5>Duration:</h5>
 								<p>{{movie.duration}} minutes</p>
-								<h5>Trailer:</h5>
-		
-								<iframe width="448" height="273" ng-src="https://www.youtube.com/embed/watch?v=zCy5WQ9S4c0" frameborder="0" allowFullScreen>{{movie.title}}</iframe>
+								<div ng-show='movieTrailer'>
+									<h5>Trailer:</h5>
+									<iframe width="90%" height="315px" title="YouTube video player" class="youtube-player" type="text/html" ng-src='{{movieTrailer}}' frameborder="0" allowfullscreen>{{ movie.title }}</iframe>
+								</div>
 
-								<iframe title="YouTube video player" class="youtube-player" type="text/html" width="560" height="315" ng-src="//www.youtube.com/embed/' + movieTrailer + '" frameborder="0" allowfullscreen>{{ movie.title }}</iframe>
-
-								<h5 ui-sref="reviews({movieId: movie._id})">Read reviews</h5>
 							</div>
 						</div>
 					</div>
@@ -56,7 +54,10 @@
 			<div class="panel well">
 				<div class="list-group">
 					<div class="list-group-item" ng-repeat="review in movie.reviews">
-					<p>{{review}}</p>
+					<h3>{{review.title}}</h3>
+					<h4>{{review.rating}}/5</h4>
+					<p>{{review.content}}</p>
+					<small style="font-style: italic;">By: {{review.user.first}}</small>
 					</div>
 				</div>
 			</div>
