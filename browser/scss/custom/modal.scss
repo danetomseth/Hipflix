@@ -22,3 +22,29 @@
 	}
 
 }
+
+#user-edit {
+	//min-height: 500px;
+	padding: 10px;
+	.form-group {
+		margin: 5px 0px;
+	}
+	.form-control {
+		margin-bottom: 5px;
+	}
+	input {
+		border: 1px solid black;
+	}
+	.input-btn {
+		border-color: black;
+		padding-right: 10px;
+
+		padding-left: 10px;
+		padding-top: 9px;
+		position: relative;
+		top: -2px !important;
+		//width: 50px
+	}
+
+}
+

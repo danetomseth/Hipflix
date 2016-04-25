@@ -1,0 +1,28 @@
+<div class="modal-body">
+  <div class="modal-header"><h4 style="color: black">Edit User: {{user.first}}, {{user.last}}</h4></div>
+  <div class="container-fluid">
+    <div class="row">
+      <form class="form-horizontal">
+        <div class="form-group" id="user-edit">
+          <label class="control-label">Email:</label>
+          <div class="form-group">
+            <input value="{{movie.email}}" ng-model="user.email" type="title" class="form-control">
+          </div>
+          <label class="control-label">First:</label>
+          <div class="form-group">
+            <input value="{{user.first}}" ng-model="user.first" type="first" class="form-control">
+          </div>
+          <label class="control-label">Last:</label>
+          <div class="form-group">
+            <input value="{{user.last}}" ng-model="user.last" type="last" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="checkbox-inline">
+            <input type="checkbox" ng-model="user.isAdmin" value="user.isAdmin">Admin</label>
+          </div>
+          <div class="form-group"><button class="btn btn-primary pull-right" ng-click="saveUser(user)">Save</button></div>
+        </div>
+      </form>
+    </div> 
+  </div>
+</div>

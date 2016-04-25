@@ -12,9 +12,8 @@
         <li>First: {{user.first}}</li>
         <li>Last: {{user.last}}</li>
         <li>Admin: {{user.isAdmin}}</li>
-        <li>{{user.subscription}}</li>
+        <!-- <li>{{user.subscription}}</li> -->
       </ul>
+       <button type="submit" class="btn btn-default" ng-click="editUser(user)">Edit</button>
   </div>
-  <div class="panel-footer">
-  <button type="submit" ng-click="editUser(user)">Edit</button></div>
 </div>
