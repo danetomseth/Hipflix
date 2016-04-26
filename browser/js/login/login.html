@@ -1,16 +1,26 @@
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
-
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
-
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+<div class="signin-container">
+    <div class="buffer local">
+        <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+            <alert type="danger" ng-show="error">
+                {{ error }}
+            </alert>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+    <div class="or buffer">
+        <div class="back-line"><span>OR</span></div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <div class="buffer oauth">
+        <p><oauth-button provider-name="Google"></oauth-button></p>
+<!--         <p><oauth-button provider-name="Twitter"></oauth-button></p> -->
+<!--         <p><oauth-button provider-name="Facebook"></oauth-button></p> -->
+    </div>
+</div>
