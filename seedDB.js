@@ -9,7 +9,7 @@ var dumpDB = spawn('/usr/local/bin/mongo', dumpArgs);
 
 // var mongoose = require('mongoose');
 /* Connect to the DB */
-mongoose.connect(DATABASE_URI,function(){
+mongoose.connect("mongodb://admin:hipflix@ds021701.mlab.com:21701/hipflix-db",function(){
     mongoose.connection.once('open', function() {
 
         mongoose.connection.db.dropDatabase(function (err) {
