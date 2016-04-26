@@ -10,11 +10,12 @@ const Address = mongoose.model('Addresses');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const moment = require('moment');
 // const renewalPeriod = require("../../../env").RENEWAL_PERIOD
-const sendgrid = require('sendgrid')("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");
 const keys = require("../../../env")
 const renewalPeriod = keys.RENEWAL_PERIOD
 const stripeKey = keys.PAYMENT_KEY;
 const stripe = require("stripe")(stripeKey);
+const sendgrid = require('sendgrid')("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");
+
 
 module.exports = router;
 
@@ -29,21 +30,21 @@ const popMovies = function(queue) {
     return userMovies
 }
 
-let sendEmail = function(email, subject, message) { // I think there's a promise version of this, but it's ok as is for now
-    console.log("sending email")
-    return sendgrid.send({
-        to: email,
-        from: 'hello@hipfix.win',
-        subject: subject,
-        text: message
-    }, function(err, json) {
-        if (err) {
-            return console.error(err);
-        }
-        console.log(json)
-        return json
-    });
-}
+// let sendEmail = function(email, subject, message) { // I think there's a promise version of this, but it's ok as is for now
+//     console.log("sending email")
+//     return sendgrid.send({
+//         to: email,
+//         from: 'hello@hipfix.win',
+//         subject: subject,
+//         html: message
+//     }, function(err, json) {
+//         if (err) {
+//             return console.error(err);
+//         }
+//         console.log(json)
+//         return json
+//     });
+// }
 
 router.param('userId', (req, res, next, userId) => {
     Users.findById(userId)
@@ -80,10 +81,27 @@ router.post('/', (req, res, next) => {
             }
         })
         .then(newUser => {
-            createdUser = newUser
-            return sendEmail(createdUser.email, "Welcome to hipflix", "You're signed up, " + createdUser.first)
+            createdUser = newUser;
+            var email = new sendgrid.Email();
+
+            email.addTo("hello@hipflix.win");
+            email.setFrom("createdUser.email"); // or createdUser.email.toString() ?
+            email.setSubject('Welcome to Hipflix!');
+            email.setText('You can now start browsing movies at www.hipflix.win');
+            email.setHtml('<strong>You must be excited to start on Hipflix, %user%</strong>');
+            email.addSubstitution("%user%", createdUser.first.toString());
+            // email.addHeader('X-Sent-Using', 'SendGrid-API');
+            // email.addHeader('X-Transport', 'web');
+            // email.addFile({path: './gif.gif', filename: 'owl.gif'});
+
+            sendgrid.send(email, function(err, json) {
+              if (err) { return console.error(err); }
+              console.log(json);
+            });
+
+            // return sendEmail(createdUser.email, "<h2>" + "Welcome to Hipflix", "You are successfully signed up, " + createdUser.first + "! Now you can view and start ordering some hip VHS movies at www.hipflix.win.");
         })
-        .then(conf => {
+        .then(conf => { // what is conf?
             res.json(createdUser)
         })
         .catch(next);
