@@ -32,5 +32,8 @@ app.controller('AddUserController', function($scope, $state, AdminFactory) {
 			$state.go('admin');
 		})
 	}
+	$scope.randomUser = function() {
+		AdminFactory.generateUser();
+	}
 });
 

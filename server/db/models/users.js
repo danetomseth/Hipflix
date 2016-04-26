@@ -27,6 +27,9 @@ const schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    photo: {
+        type: String
+    },
     address: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Addresses'
@@ -121,7 +124,7 @@ schema.pre('save', function(next) {
             owner: user._id
         })
     })
-    .then(newAddress => {
+    .then(function(newAddress){
         console.log('address', newAddress);
         user.address = newAddress._id
         next();

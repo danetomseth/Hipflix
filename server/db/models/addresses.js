@@ -7,7 +7,10 @@ var schema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Users'
 	},
-	address: {
+	street: {
+		type: String
+	},
+	city: {
 		type: String
 	},
 	state: {

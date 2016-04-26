@@ -106,17 +106,15 @@ router.post('/:userId/movie', (req, res, next) => {
 
 router.post('/address', (req, res, next) => {
     var id = req.body._id
-    Address.findById(id).then(address => {
-        address.address = req.body.address;
-        address.state = req.body.state;
-        address.zip = req.body.zip;
-        return address.save()
-        res.send("okay")
+    Address.findOneAndUpdate({
+        _id: req.body._id
+    }, req.body, {
+        new: true
     })
-    .then(savedAddress => {
-        console.log('saved', savedAddress);
-        res.send("updated");
-    })
+        .exec()
+        .then(updatedAddress => {
+            res.send(updatedAddress);
+        })
 })
 
 router.delete('/:userId/movie/:itemId', (req, res, next) => {

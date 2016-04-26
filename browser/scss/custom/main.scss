@@ -36,7 +36,7 @@
   margin-bottom: 10px;
 }
 .small-movie-box {
-  height: 200px;
+  height: auto;
   display: inline-block;
   margin-bottom: 10px;
 }
@@ -49,9 +49,13 @@
 }
 
 .movie-content-small {
-  padding-top: 5px;
+  padding: 5px;
   height: auto;
+  margin-right: 10px;
   box-shadow: 5px 5px 5px #888888 !important;
+  img {
+    height:230px;
+  }
 
 }
 
