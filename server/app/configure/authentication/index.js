@@ -10,8 +10,8 @@ var UserModel = mongoose.model('Users');
 var ENABLED_AUTH_STRATEGIES = [
     'local',
     //'twitter',
-    //'facebook',
-    //'google'
+    // 'facebook',
+    'google'
 ];
 
 module.exports = function (app) {

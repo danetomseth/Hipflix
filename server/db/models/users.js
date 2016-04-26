@@ -80,6 +80,10 @@ const schema = new mongoose.Schema({
     },
     google: {
         id: String
+    },
+    facebook:{
+        id: String
+        
     }
 });
 
