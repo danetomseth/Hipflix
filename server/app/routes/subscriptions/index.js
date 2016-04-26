@@ -14,6 +14,14 @@ router.get('/', (req, res, next) => {
 	.catch(next);
 });
 
+router.get('/:id', (req, res, next) => {
+    Subscriptions.findOne({
+        _id: req.params.id
+    })
+    .then(subscriptions => res.json(subscriptions))
+    .catch(next);
+});
+
 router.post('/', (req, res, next) => {
     var sub = req.body
     stripe.plans.create({

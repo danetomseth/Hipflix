@@ -2,7 +2,7 @@ app.config(function($stateProvider) {
 	$stateProvider.state('wishList', {
 		url: '/wishlist',
 		controller: 'WishListCtrl',
-		templateUrl: '/js/wishlist/wishList.html',
+		templateUrl: '/js/wishlist/wishlist.html',
 	})
 });
 

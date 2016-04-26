@@ -1,5 +1,6 @@
 'use strict';
-window.app = angular.module('Hipflix', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+var core = angular.module('core', ['ui.router', 'ui.bootstrap', 'ngAnimate'])
+window.app = angular.module('Hipflix', ['fsaPreBuilt', 'core']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
