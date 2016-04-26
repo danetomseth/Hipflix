@@ -1,16 +1,17 @@
 describe('SignupFactory', function(){
 
     beforeEach(module('core'));
+    console.log("~~~~~~~~~~~~~~~~~~")
 
     var $httpBackend;
     var $rootScope;
-    beforeEach('Get tools', inject(function($injector) {
-        $httpBackend = $injector.get('$httpBackend');
-        $rootScope = $injector.get('$rootScope');
+    beforeEach(inject(function (_$rootScope_, _$httpBackend_) {
+        $rootScope = _$rootScope_;
+        $httpBackend = _$httpBackend_;
     }));
 
     var SignupFactory;
-    beforeEach('Get SignupFactory', inject(function($injector){
+    beforeEach(inject(function($injector){
         SignupFactory = $injector.get('SignupFactory');
     }))
 
