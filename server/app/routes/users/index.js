@@ -130,10 +130,10 @@ router.post('/address', (req, res, next) => {
     }, req.body, {
         new: true
     })
-        .exec()
-        .then(updatedAddress => {
-            res.send(updatedAddress);
-        })
+    .then(function(address) {
+        console.log('sending');
+        res.json('updated');
+    })
 })
 
 router.delete('/:userId/movie/:itemId', (req, res, next) => {

@@ -9,6 +9,7 @@ app.config(function($stateProvider) {
 
 
 app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthService, MovieQueueFactory, OrderFactory){
+	$scope.emptyQueue = true;
 	$scope.pendingMovies = [];
 	$scope.activeMovies = [];
 	$scope.watchedMovies = [];
@@ -19,6 +20,7 @@ app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServic
 			MovieQueueFactory.fetch(user._id).then(function(user) {
 				var queue = user.movieQueue.queue;
 				queue.forEach(function(item) {
+					$scope.emptyQueue = false;
 					if(item.status === 'active') {
 						$rootScope.queueLength++;
 						$scope.activeMovies.push(item);
@@ -35,6 +37,7 @@ app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServic
 		} else {
 			MovieQueueFactory.getWishlist().
 			then(wishlist => {
+				$scope.emptyQueue = false;
 				$scope.pendingMovies = wishlist
 			})
 		}

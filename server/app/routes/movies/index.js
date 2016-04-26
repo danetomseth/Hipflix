@@ -46,7 +46,8 @@ router.get('/', (req, res, next) => {
 router.get('/:movieId', (req, res, next) => res.json(req.movie));
 
 router.get('/:movieId/reviews', (req, res, next) => {
-  res.json(req.movie.reviews)});
+  res.json(req.movie.reviews)
+});
 
 
 
@@ -57,12 +58,10 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/similar/:categoryId/:limit', (req, res, next) => {
-  
   var limitNum = Number(req.params.limit);
-  Movies.find({
+  Movies.findRandom({
     category: req.params.categoryId
   })
-  .sort({'rating': -1})
   .limit(limitNum)
   .then(movies => {
     res.send(movies);

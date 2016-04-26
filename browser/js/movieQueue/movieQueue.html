@@ -1,4 +1,22 @@
-<div class="container-fluid movie-queue">
+<div class="container-fluid" ng-show="emptyQueue">
+  <div class="row row-centered">
+    <div class="col-xs-12 col-centered">
+      <div class="page-header">
+        <h2>Your Queue is Empty! <small><a ui-sref='movies'>Add Movies</a></h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" ng-hide="emptyQueue">
+  <div class="row row-centered">
+    <div class="col-xs-12 col-centered">
+      <div class="page-header">
+        <h2>My Movies</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid movie-queue" ng-hide="emptyQueue">
 	<section ng-show="activeMovies.length">
 	<h2><strong>Active Queue</strong></h2>
 	<div class="row">

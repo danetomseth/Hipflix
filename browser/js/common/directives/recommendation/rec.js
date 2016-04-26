@@ -10,6 +10,7 @@ app.directive('hfRecEngine', function(MovieFactory) {
 
 app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, allCategories, MovieFactory) {
     $scope.populatedUser = populatedUser;
+    $scope.allCategories = allCategories;
     $scope.userCategories = [];
     var userMovies = $scope.populatedUser.movieQueue.queue.map(function(elem) {
         return elem.movie.category
@@ -19,7 +20,8 @@ app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, a
     })
     var categoryObj = {};
     $scope.allCategories.forEach(cat => {
-        categoryObj[cat._id] = 0
+        categoryObj[cat._id] = 0;
+
     });
     $scope.userCategories.forEach(elem => {
         categoryObj[elem]++;
@@ -34,6 +36,12 @@ app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, a
             favorite.count = categoryObj[key];
         }
     }
+    $scope.allCategories.forEach(function(elem) {
+        if(elem._id === favorite.categoryId) {
+            console.log("favorite found", elem.name);
+            $scope.favoriteCategory = elem.name;
+        }
+    })
     var limit = 6;
     if (favorite.categoryId) {
         MovieFactory.findSimilar(favorite.categoryId, limit).then(bestMatch => {
