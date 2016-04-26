@@ -6,11 +6,12 @@ module.exports = router;
 router.use('/members', require('./members'));
 
 router.use('/categories', require('./categories'));
+router.use('/environment', require('./environment'));
 router.use('/movies', require('./movies'));
-router.use('/users', require('./users'));
-router.use('/subscriptions', require('./subscriptions'));
-router.use('/reviews', require('./reviews'));
 router.use('/orders', require('./orders'));
+router.use('/reviews', require('./reviews'));
+router.use('/subscriptions', require('./subscriptions'));
+router.use('/users', require('./users'));
 router.use('/wishlist', require('./wishlist'));
 
 

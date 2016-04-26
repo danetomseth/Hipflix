@@ -30,10 +30,15 @@ app.config(function($sceProvider) {
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function ($rootScope, AuthService, $state) {
-
+app.run(function ($rootScope, AuthService, $state, EnvironmentFactory) {
+    EnvironmentFactory.getEnvironment()
+    .then( isProduction => {
+        if(isProduction){
+            console.log = function(){};
+        }
+    });
     // The given state requires an authenticated user.
-    var destinationStateRequiresAuth = function (state) {
+    const destinationStateRequiresAuth = function (state) {
         return state.data && state.data.authenticate;
     };
 
