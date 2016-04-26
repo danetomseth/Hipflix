@@ -1,11 +1,11 @@
- <span ng-show='disabled'>
-<div ui-view></div>
+<span >
+  <div ui-view ng-show="showPlans"></div>
 </span>
 
  <div class="container">
  <div class="row row-centered">
  <!-- <div class="col-xs-10 col-centered" ng-show="!user.stripeCustID && user"> -->
- <div class="col-xs-10 col-centered" ng-show="!user.stripeCustID && user" id="user-edit">
+ <div class="col-xs-10 col-centered"  id="user-edit">
     <h2>Enter Payment Information</h2>
     <div class="panel panel-default movie-content">
         <form class="form-horizontal" id="payment-form">
