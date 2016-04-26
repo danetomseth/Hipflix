@@ -10,7 +10,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('AdminCtrl', function($scope, $state) {
+core.controller('AdminCtrl', function($scope, $state) {
 	$scope.goToPage = function(page) {
 		$state.go(page);
 	}

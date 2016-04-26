@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function($scope, $rootScope, AuthService, $state, MovieQueueFactory) {
+core.controller('LoginCtrl', function($scope, $rootScope, AuthService, $state, MovieQueueFactory) {
 
     $scope.login = {};
     $scope.error = null;
@@ -29,7 +29,7 @@ app.controller('LoginCtrl', function($scope, $rootScope, AuthService, $state, Mo
             })
             .then(function(populatedUser) {
                 $rootScope.queueLength = 5;
-                
+
                 populatedUser.movieQueue.queue.forEach(function(elem) {
                     if (elem.status !== 'returned') {
                         $rootScope.queueLength++;

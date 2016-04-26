@@ -1,4 +1,4 @@
-app.controller('EditMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory, $uibModal) {
+core.controller('EditMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory, $uibModal) {
 
 	MovieFactory.fetchAll()
 	.then(function(res) {
@@ -59,9 +59,9 @@ app.controller('EditMovieCtrl', function($scope, $state, MovieFactory, Categorie
 			//close edit window and reload state after save
 			$scope.globalModal.close();
 			$state.reload();
-			
+
 		})
-		
+
 	}
 
 

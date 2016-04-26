@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('NewCategoryCtrl', function($scope, $state, CategoriesFactory) {
+core.controller('NewCategoryCtrl', function($scope, $state, CategoriesFactory) {
 	$scope.addCategory = function(data) {
 		var category = {
 			name: data

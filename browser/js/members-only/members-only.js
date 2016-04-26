@@ -17,7 +17,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.factory('SecretStash', function ($http) {
+core.factory('SecretStash', function ($http) {
 
     var getStash = function () {
         return $http.get('/api/members/secret-stash').then(function (response) {

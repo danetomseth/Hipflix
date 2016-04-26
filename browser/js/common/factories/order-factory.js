@@ -1,4 +1,4 @@
-app.factory('OrderFactory', function($state, $http) {
+core.factory('OrderFactory', function($state, $http) {
 	return {
 		fetchAll: function() {
 			return $http.get('api/orders').then(function(res) {

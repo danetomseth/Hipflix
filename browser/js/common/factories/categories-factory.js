@@ -1,4 +1,4 @@
-app.factory("CategoriesFactory", ($http) => {
+core.factory("CategoriesFactory", ($http) => {
     return {
         fetchAll: ()=>{
             return $http.get('/api/categories')

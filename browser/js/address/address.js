@@ -12,7 +12,7 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('AddressCtrl', function($scope, $state, SignupFactory, user){
+core.controller('AddressCtrl', function($scope, $state, SignupFactory, user){
     $scope.user = user;
     $scope.saveAddress = function(address) {
         address._id = user.address;
@@ -21,6 +21,6 @@ app.controller('AddressCtrl', function($scope, $state, SignupFactory, user){
             $state.go('movieQueue');
         })
     }
-    
+
 
 });

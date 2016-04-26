@@ -7,7 +7,7 @@
 
     var app = angular.module('fsaPreBuilt', []);
 
-    app.factory('Socket', function () {
+    core.factory('Socket', function () {
         if (!window.io) throw new Error('socket.io not found!');
         return window.io(window.location.origin);
     });
@@ -24,7 +24,7 @@
         notAuthorized: 'auth-not-authorized'
     });
 
-    app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
+    core.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
         var statusDict = {
             401: AUTH_EVENTS.notAuthenticated,
             403: AUTH_EVENTS.notAuthorized,

@@ -1,4 +1,4 @@
-app.factory('FullstackPics', function () {
+core.factory('FullstackPics', function () {
     return [
         'https://pbs.twimg.com/media/B7gBXulCAAAXQcE.jpg:large',
         'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/10862451_10205622990359241_8027168843312841137_o.jpg',

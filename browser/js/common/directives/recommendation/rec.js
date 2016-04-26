@@ -3,13 +3,13 @@ app.directive('hfRecEngine', function(MovieFactory) {
         restrict: 'E',
         templateUrl: 'js/common/directives/recommendation/rec-template.html',
         link: function(scope, elem, attr) {
-            
+
         }
     }
 });
 
 
-app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, allCategories, MovieFactory) {
+core.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, allCategories, MovieFactory) {
     $scope.populatedUser = populatedUser;
     $scope.allCategories = allCategories;
     $scope.userCategories = [];

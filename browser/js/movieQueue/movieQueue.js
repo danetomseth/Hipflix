@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 
 
 
-app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthService, MovieQueueFactory, OrderFactory){
+core.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthService, MovieQueueFactory, OrderFactory){
 	$scope.emptyQueue = true;
 	$scope.pendingMovies = [];
 	$scope.activeMovies = [];
@@ -33,7 +33,7 @@ app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServic
 						$scope.watchedMovies.push(item);
 					}
 				})
-			})	
+			})
 		} else {
 			MovieQueueFactory.getWishlist().
 			then(wishlist => {
@@ -50,7 +50,7 @@ app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServic
 				if(res.status === 204) {
 					$state.reload();
 				}
-			})	
+			})
 		} else {
 			MovieQueueFactory.removeFromWishlist(item)
 			.then(wishlist => {
@@ -65,7 +65,7 @@ app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServic
 		})
 	}
 
-	
+
 
 
 });

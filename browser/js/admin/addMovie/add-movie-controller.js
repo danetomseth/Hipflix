@@ -1,4 +1,4 @@
-app.controller('AddMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory) {
+core.controller('AddMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory) {
 	$scope.singleTag = "";
 	$scope.singlePhoto = "";
 	$scope.movieForm;

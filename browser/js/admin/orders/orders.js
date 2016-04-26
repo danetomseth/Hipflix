@@ -22,7 +22,7 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('OrderCtrl', function($scope, $state, OrderFactory) {
+core.controller('OrderCtrl', function($scope, $state, OrderFactory) {
 	OrderFactory.fetchAll().then(function(orders) {
 			console.log('orders returned', orders);
 		$scope.orders = orders;

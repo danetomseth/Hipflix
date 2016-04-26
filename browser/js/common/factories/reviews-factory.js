@@ -1,4 +1,4 @@
-app.factory('ReviewsFactory', function($http) {
+core.factory('ReviewsFactory', function($http) {
 	return {
 		fetchAll: () => {
 			return $http.get('/api/reviews').then(reviews => reviews.data)

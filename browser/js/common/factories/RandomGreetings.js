@@ -1,4 +1,4 @@
-app.factory('RandomGreetings', function () {
+core.factory('RandomGreetings', function () {
 
     var getRandomFromArray = function (arr) {
         return arr[Math.floor(Math.random() * arr.length)];

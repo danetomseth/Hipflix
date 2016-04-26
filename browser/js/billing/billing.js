@@ -16,6 +16,6 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('BillingCtrl', function($scope, bills){
+core.controller('BillingCtrl', function($scope, bills){
     $scope.bills = bills
 });

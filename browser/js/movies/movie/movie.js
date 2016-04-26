@@ -14,12 +14,12 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('MovieCtrl', function($scope, $state, $rootScope, MovieFactory, MovieQueueFactory, AuthService, movie) {
+core.controller('MovieCtrl', function($scope, $state, $rootScope, MovieFactory, MovieQueueFactory, AuthService, movie) {
 	$scope.isUser = false;
 	$scope.isCollapsed = false;
 	$scope.movie = movie;
 	console.log('****************', $rootScope.queueLength);
-	
+
 	if($scope.movie.tailer) {
 		$scope.movieTrailer = MovieFactory.setTrailerUrl($scope.movie.tailer)
 	}
@@ -39,7 +39,7 @@ app.controller('MovieCtrl', function($scope, $state, $rootScope, MovieFactory, M
 				$rootScope.queueLength++;
 				console.log($rootScope.queueLength);
 				$state.go('movieQueue');
-			})	
+			})
 		} else {
 			MovieQueueFactory.addToWishlist($scope.movie._id)
 				.then(wishlist => {

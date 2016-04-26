@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
             allMovies: function(MovieFactory) {
                 return MovieFactory.fetchAll()
             }
-            
+
         }
     });
 });
@@ -36,8 +36,8 @@ app.config(function($stateProvider) {
 })
 
 
-app.controller('HomeCtrl', function($q, $scope, $state, CategoriesFactory, currentUser, allCategories, allMovies, AuthService) {
-  
+core.controller('HomeCtrl', function($q, $scope, $state, CategoriesFactory, currentUser, allCategories, allMovies, AuthService) {
+
     $scope.currentUser = currentUser;
     //$scope.currentUser = true; //setting to true just to test
     if ($scope.currentUser) {
@@ -46,5 +46,5 @@ app.controller('HomeCtrl', function($q, $scope, $state, CategoriesFactory, curre
     }
     $scope.allCategories = allCategories;
     $scope.allMovies = allMovies;
-    
+
 });

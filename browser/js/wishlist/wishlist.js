@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('WishListCtrl', function($scope, $state, MovieQueueFactory){
+core.controller('WishListCtrl', function($scope, $state, MovieQueueFactory){
 	$scope.pendingMovies = [];
 	$scope.activeMovies = [];
 	MovieQueueFactory.getWishlist()

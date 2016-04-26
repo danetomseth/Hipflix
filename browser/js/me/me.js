@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
 });
 
 
-app.controller('MyAccountCtrl', function($scope,AuthService){
+core.controller('MyAccountCtrl', function($scope,AuthService){
 	AuthService.getLoggedInUser()
 		.then(user => {
 			$scope.user = user

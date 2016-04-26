@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 
 
 
-app.controller('SignupCtrl', function($scope, $state, MovieQueueFactory, SignupFactory, AuthService) {
+core.controller('SignupCtrl', function($scope, $state, MovieQueueFactory, SignupFactory, AuthService) {
     $scope.addUser = function() {
             SignupFactory.createUser($scope.newUser)
             .then(user => {
@@ -17,7 +17,7 @@ app.controller('SignupCtrl', function($scope, $state, MovieQueueFactory, SignupF
             .then(() => {
                 $state.go('subscription');
             })
-        
+
 
     }
 })

@@ -1,4 +1,4 @@
-app.factory("SubscriptionFactory", function($http){
+core.factory("SubscriptionFactory", function($http){
     return {
         fetchAll: function(){
             return $http.get("/api/subscriptions")

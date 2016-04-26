@@ -20,7 +20,7 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('AddUserController', function($scope, $state, AdminFactory) {
+core.controller('AddUserController', function($scope, $state, AdminFactory) {
 	$scope.addUser = function() {
 		if($scope.newUser.isAdmin === 'true') {
 			$scope.newUser.isAdmin = true

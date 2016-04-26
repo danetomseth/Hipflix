@@ -12,14 +12,14 @@ app.config(function($stateProvider) {
         });
 });
 
-app.controller('CategoriesCtrl', function($scope, CategoriesFactory){
+core.controller('CategoriesCtrl', function($scope, CategoriesFactory){
 
     CategoriesFactory.fetchAll()
     .then(categories => $scope.categories = categories)
 
 });
 
-app.controller('CategoryCtrl', function($scope, $stateParams, CategoriesFactory){
+core.controller('CategoryCtrl', function($scope, $stateParams, CategoriesFactory){
 
     CategoriesFactory.fetchOne($stateParams.category)
     .then(movies => {

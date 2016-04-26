@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('AddSubscriptionCtrl', function($scope, $state, SubscriptionFactory) {
+core.controller('AddSubscriptionCtrl', function($scope, $state, SubscriptionFactory) {
     $scope.newSubscription = {}
 
     $scope.addSubscription = function() {

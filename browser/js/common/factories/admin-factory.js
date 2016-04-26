@@ -1,4 +1,4 @@
-app.factory('AdminFactory', function($http) {
+core.factory('AdminFactory', function($http) {
     return {
         createUser: function(user) {
             return $http.post('/api/users', user)

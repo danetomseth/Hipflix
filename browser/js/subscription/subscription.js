@@ -34,7 +34,7 @@ app.config(function($stateProvider){
     })
 });
 
-app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactory) {
+core.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactory) {
     $scope.user = currentUser;
     console.log('$scope user', $scope.user);
     $scope.form = { // remove from production if desired, or leave as UI guidance
@@ -65,7 +65,7 @@ app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactor
 })
 
 
-app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, wishlist, currentUser, SubscriptionFactory){
+core.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, wishlist, currentUser, SubscriptionFactory){
 
     $scope.wishList = wishlist;
     $scope.user = currentUser;
@@ -88,7 +88,7 @@ app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, w
                         console.log("all the movies in the wishlist into the moviequeue")
                         return user
                       })
-               
+
             } else {
                 return user
             }
@@ -99,7 +99,7 @@ app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, w
     }
 });
 
-app.controller('SubcancelCtrl',function($scope, $state, AuthService, SubscriptionFactory){
+core.controller('SubcancelCtrl',function($scope, $state, AuthService, SubscriptionFactory){
     AuthService.getLoggedInUser().then(function (user) {
         $scope.user = user;
     });

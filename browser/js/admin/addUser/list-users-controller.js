@@ -1,4 +1,4 @@
-app.controller('ListUsersCtrl', function($scope, AdminFactory) {
+core.controller('ListUsersCtrl', function($scope, AdminFactory) {
 	AdminFactory.fetchAll()
 	.then(function(users) {
 		$scope.users = users;

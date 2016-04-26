@@ -22,14 +22,14 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService, ReviewsFactory) {
-	
+core.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService, ReviewsFactory) {
+
 	$scope.movieId = $stateParams.movieId;
-	
+
 	AuthService.getLoggedInUser().then(user => {
 		$scope.user = user
 	});
-	
+
 	$scope.submitReview = function(newReview){
 		var reviewToPost = {user: $scope.user._id, title: newReview.title, movie: $scope.movieId, content: newReview.content, rating: newReview.rating}
 		console.log('reviewToPost', reviewToPost)
@@ -40,11 +40,11 @@ app.controller('AddReviewCtrl', function($scope,$stateParams,$state, AuthService
 	};
 });
 
-app.controller('ReviewsCtrl', function($scope, $state, ReviewsFactory, movie) {
+core.controller('ReviewsCtrl', function($scope, $state, ReviewsFactory, movie) {
 	$scope.movie = movie;
 });
 
-app.controller('ReviewsByUserCtrl', function($scope, $state, ReviewsFactory, AuthService) {
+core.controller('ReviewsByUserCtrl', function($scope, $state, ReviewsFactory, AuthService) {
 	AuthService.getLoggedInUser().then(user => {
 		console.log('user', user)
 		$scope.user = user;

@@ -1,4 +1,4 @@
-app.factory('MovieQueueFactory', function($http) {
+core.factory('MovieQueueFactory', function($http) {
 
 	var cachedWishlist = [];
 
@@ -30,9 +30,9 @@ app.factory('MovieQueueFactory', function($http) {
 				.then(wishlist => {
 						// wishlist with movie detail infos
 						angular.copy(wishlist.data, cachedWishlist);
-						return cachedWishlist					
+						return cachedWishlist
 				})
-				
+
 		},
 		removeFromWishlist: (movie) => {
 			return $http.delete("/api/wishlist/" + movie._id)
@@ -50,6 +50,6 @@ app.factory('MovieQueueFactory', function($http) {
 				})
 		}
 
-		
+
 	}
 });

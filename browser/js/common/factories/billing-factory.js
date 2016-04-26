@@ -1,4 +1,4 @@
-app.factory('BillingFactory', function($http){
+core.factory('BillingFactory', function($http){
 
     // const stripeResponseHandler = function(status, response){
     //     $scope.form = null // clean up form and forget all data
