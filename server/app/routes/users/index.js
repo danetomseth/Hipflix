@@ -132,7 +132,7 @@ router.get('/:userId', (req, res, next) => {
 
 router.get('/:userId/moviequeue', (req, res, next) => {
     const movies = popMovies(req.newUser.movieQueue);
-    res.json(req.newUser);
+    res.json(req.newUser.movieQueue);
 });
 
 router.get('/:userId/reviews', (req, res, next) => {
