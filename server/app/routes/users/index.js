@@ -102,7 +102,7 @@ router.post('/', (req, res, next) => {
         //       console.log(json);
         //     });
         // })
-        .then(conf => {
+        .then(conf => { // what does conf stand for?
             res.json(createdUser)
         })
         .catch(next);
@@ -243,5 +243,5 @@ router.put('/subscription', (req, res, next) => {
 
 router.post('/:userId/contact', (req, res) => {
     sendEmail(req.newUser.email, req.body.subject, req.body.message)
-        .then(conf => res.sendStatus(201))
+        .then(conf => res.sendStatus(201)) // what does conf stand for?
 })
