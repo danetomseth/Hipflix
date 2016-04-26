@@ -85,7 +85,7 @@ router.post('/', (req, res, next) => {
             var email = new sendgrid.Email();
 
             email.addTo("hello@hipflix.win");
-            email.setFrom("createdUser.email"); // or createdUser.email.toString() ?
+            email.setFrom("" + createdUser.email); // or createdUser.email.toString()
             email.setSubject('Welcome to Hipflix!');
             email.setText('You can now start browsing movies at www.hipflix.win');
             email.setHtml('<strong>You must be excited to start on Hipflix, %user%</strong>');
