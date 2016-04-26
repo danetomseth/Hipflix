@@ -42,6 +42,11 @@ app.directive('navbar', function ($rootScope, MovieFactory,MovieQueueFactory, Au
             var setUser = function () {
                 AuthService.getLoggedInUser().then(function (user) {
                     scope.user = user
+                }).then(user => {
+                    MovieQueueFactory.fetch(scope.user._id)
+                    .then(movies => {
+                        scope.moviequeue = movies;
+                    })     
                 })
             };
 
