@@ -65,7 +65,7 @@ app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactor
 })
 
 
-app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, wishlist, currentUser, SubscriptionFactory){
+app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, wishlist, currentUser, SubscriptionFactory, MovieQueueFactory){
 
     $scope.wishList = wishlist;
     $scope.user = currentUser;

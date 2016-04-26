@@ -16,6 +16,16 @@ router.get('/', (req, res, next) => {
 	.catch(next);
 });
 
+router.get('/user/:userId', (req, res, next) => {
+	console.log('user id', req.params.userId);
+	Orders.find({
+		user: req.params.userId
+	})
+	.populate("deliverables")
+	.then(orders => res.json(orders))
+	.catch(next);
+});
+
 router.get('/:orderId', (req, res, next) => {
 	Orders.findById(req.params.orderId)
 	.then(order => res.json(order))
