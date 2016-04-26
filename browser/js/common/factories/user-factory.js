@@ -7,6 +7,17 @@ app.factory('UserFactory', function($http) {
                 return 'Created'
             })
         },
+        fetchOne: function(userId) {
+            return $http.get('/api/users/' + userId).then(function(res) {
+                return res.data;
+            })
+        },
+        fetchAll: function() {
+            return $http.get('/api/users')
+                .then(function(res) {
+                    return res.data
+                })
+        },
         changePassword: function(password, email){
             var email = email || ""
             return $http.put('/api/users', {password: password, email: email})

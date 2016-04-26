@@ -14,22 +14,14 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFactory, AuthService, movie) {
+app.controller('MovieCtrl', function($scope, $state, $rootScope, MovieFactory, MovieQueueFactory, AuthService, movie) {
 	$scope.isUser = false;
 	$scope.isCollapsed = false;
 	$scope.movie = movie;
+	console.log('****************', $rootScope.queueLength);
 	
-	getId();
-	function getId() {
-	    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-	    const match = $scope.movie.trailer.match(regExp);
-
-	    if (match && match[2].length == 11) {
-	        const movieTrailer = 'https://www.youtube.com/embed/' + match[2];
-	        $scope.movieTrailer = movieTrailer;
-	    } else {
-	        return 'error';
-    	}
+	if($scope.movie.tailer) {
+		$scope.movieTrailer = MovieFactory.setTrailerUrl($scope.movie.tailer)
 	}
 
 	AuthService.getLoggedInUser()
@@ -44,6 +36,8 @@ app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFac
 			// $scope.isUser = true;
 			MovieQueueFactory.addToQueue($scope.user, $scope.movie._id)
 			.then(res => {
+				$rootScope.queueLength++;
+				console.log($rootScope.queueLength);
 				$state.go('movieQueue');
 			})	
 		} else {

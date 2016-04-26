@@ -6,6 +6,13 @@ app.factory('SignupFactory', function($http) {
                 console.log('return data', data);
                 return 'Created'
             })
+        },
+        createAddress: function(address) {
+        	console.log('address', address);
+        	return $http.post('/api/users/address', address).then(res => {
+        		console.log('res', res);
+        		return res.data;
+        	})
         }
     }
 })

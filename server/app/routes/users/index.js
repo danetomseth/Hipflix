@@ -6,6 +6,7 @@ const Users = mongoose.model('Users');
 const Reviews = mongoose.model('Reviews');
 const Orders = mongoose.model('Orders');
 const Movies = mongoose.model('Movies');
+const Address = mongoose.model('Addresses');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const moment = require('moment');
 // const renewalPeriod = require("../../../env").RENEWAL_PERIOD
@@ -101,6 +102,19 @@ router.post('/:userId/movie', (req, res, next) => {
             res.status(204).send('created')
         })
         .catch(next)
+})
+
+router.post('/address', (req, res, next) => {
+    var id = req.body._id
+    Address.findOneAndUpdate({
+        _id: req.body._id
+    }, req.body, {
+        new: true
+    })
+        .exec()
+        .then(updatedAddress => {
+            res.send(updatedAddress);
+        })
 })
 
 router.delete('/:userId/movie/:itemId', (req, res, next) => {

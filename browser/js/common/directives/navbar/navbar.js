@@ -42,15 +42,6 @@ app.directive('navbar', function ($rootScope, MovieFactory,MovieQueueFactory, Au
             var setUser = function () {
                 AuthService.getLoggedInUser().then(function (user) {
                     scope.user = user
-                    return MovieQueueFactory.fetch(user._id)
-                }).then(function(popUser) {
-                    scope.queueLength = 0;
-                    popUser.movieQueue.queue.forEach(function(elem) {
-                        if(elem.status !== 'returned') {
-                            console.log(elem.status);
-                            scope.queueLength++;
-                        }
-                    })
                 })
             };
 
