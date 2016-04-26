@@ -10,11 +10,12 @@ const Address = mongoose.model('Addresses');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const moment = require('moment');
 // const renewalPeriod = require("../../../env").RENEWAL_PERIOD
-const sendgrid = require('sendgrid')("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");
 const keys = require("../../../env")
 const renewalPeriod = keys.RENEWAL_PERIOD
-const stripeKey = keys.PAYMENT_KEY;
-const stripe = require("stripe")(stripeKey);
+const SENDGRID_KEY = keys.SENDGRID
+const STRIPEKEY = keys.PAYMENT_KEY;
+const stripe = require("stripe")(STRIPEKEY);
+const sendgrid = require('sendgrid')(SENDGRID_KEY);
 
 module.exports = router;
 

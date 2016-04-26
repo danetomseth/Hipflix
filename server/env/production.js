@@ -25,5 +25,6 @@ module.exports = {
         "callbackURL": process.env.CALLBACK_URL
     },
     "RENEWAL_PERIOD": 30,
-    "PAYMENT_KEY": process.env.STRIPE_PAYMENT_KEY
+    "PAYMENT_KEY": process.env.STRIPE_PAYMENT_KEY,
+    "SENDGRID": process.env.SENDGRID_KEY
 };
