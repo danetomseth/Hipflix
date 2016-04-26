@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var random = require('mongoose-random');
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var schema = new mongoose.Schema({
@@ -45,6 +46,7 @@ var schema = new mongoose.Schema({
 
 
 schema.plugin(deepPopulate);
+schema.plugin(random, { path: 'r' });
 
 schema.statics.findByKeyword = function(keyword){
 	var regex = "(" + keyword + ")"

@@ -14,11 +14,10 @@ app.config(function($stateProvider) {
 
 app.controller('AddressCtrl', function($scope, $state, SignupFactory, user){
     $scope.user = user;
-    console.log('user', user);
     $scope.saveAddress = function(address) {
         address._id = user.address;
-        console.log('address');
-        SignupFactory.createAddress(address).then(res => {
+        SignupFactory.createAddress(address).then(function() {
+            console.log('resolved');
             $state.go('movieQueue');
         })
     }

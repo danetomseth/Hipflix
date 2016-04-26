@@ -9,7 +9,7 @@ app.factory('SignupFactory', function($http) {
         },
         createAddress: function(address) {
         	console.log('address', address);
-        	return $http.post('/api/users/address', address).then(res => {
+        	return $http.post('/api/users/address', address).then(function(res) {
         		console.log('res', res);
         		return res.data;
         	})

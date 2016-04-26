@@ -1,4 +1,9 @@
 /* centered columns styles */
+.form-horizontal .form-group {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .row-centered {
     text-align:center;
 }
@@ -37,6 +42,7 @@
 }
 .small-movie-box {
   height: auto;
+  min-width: 200px;
   display: inline-block;
   margin-bottom: 10px;
 }
@@ -49,9 +55,9 @@
 }
 
 .movie-content-small {
-  padding: 5px;
+  padding: 0px;
   height: auto;
-  margin-right: 10px;
+  margin-right: 20px;
   box-shadow: 5px 5px 5px #888888 !important;
   img {
     height:230px;
