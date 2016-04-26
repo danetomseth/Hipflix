@@ -1,8 +1,28 @@
+
 app.config(function($stateProvider){
     $stateProvider.state('subscription', {
         url: "/subscription",
+        templateUrl: "/js/subscription/stripe.html",
+        controller: "StripeCtrl",
+        resolve: {
+            currentUser: function(AuthService) {
+                return AuthService.getLoggedInUser()
+            }
+        }
+    })
+});
+app.config(function($stateProvider){
+    $stateProvider.state('subscription.plans', {
         templateUrl: "/js/subscription/subscription.html",
-        controller: "SubscriptionCtrl"
+        controller: "SubscriptionCtrl",
+        resolve: {
+            subscriptions: function(SubscriptionFactory) {
+                return SubscriptionFactory.fetchAll();
+            },
+            wishlist: function(MovieQueueFactory) {
+                return MovieQueueFactory.getWishlist();
+            }
+        }
     })
 });
 
@@ -14,31 +34,42 @@ app.config(function($stateProvider){
     })
 });
 
-
-app.controller('SubscriptionCtrl', function($q,$scope, $state, AuthService, BillingFactory,MovieQueueFactory,SubscriptionFactory){
-
+app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactory) {
+    $scope.user = currentUser;
+    console.log('$scope user', $scope.user);
     $scope.form = { // remove from production if desired, or leave as UI guidance
         number: 4242424242424242,
         exp_month: 12,
         exp_year: 17,
         cvc: 123
     };
+     const stripeResponseHandler = function(status, response){
+        $scope.form = null // clean up form and forget all data
+        if(response.err) {
+            $scope.disabled = false;
+        } else {
+            BillingFactory.updatePayment(response.id)
+        }
+    };
 
-    AuthService.getLoggedInUser().then(function (user) {
-        $scope.user = user;
-    });
+    $scope.disabled = false
+    $scope.payment = function(){
+        Stripe.setPublishableKey('pk_test_6BRu0k0Y6igqEqpVqySELRmW');
+                // Disable the submit button to prevent repeated clicks:
+                $scope.disabled = true
+                // Request a token from Stripe:
+                console.log(1)
+                Stripe.card.createToken($scope.form, stripeResponseHandler);
+                $state.transitionTo('subscription.plans');
+        }
+})
 
-    SubscriptionFactory.fetchAll()
-    .then(subscriptions => {
-        console.log(subscriptions);
-        return $scope.subscriptions = subscriptions
-    });
 
-     MovieQueueFactory.getWishlist()
-    .then(wishlist => {
-            console.log('get wishlist',wishlist)
-            $scope.wishList = wishlist
-    })
+app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, wishlist, currentUser, SubscriptionFactory){
+
+    $scope.wishList = wishlist;
+    $scope.user = currentUser;
+    $scope.subscriptions = subscriptions;
 
     $scope.submit = function(sub){
         if(!$scope.user) return alert("login or signup please")
@@ -66,26 +97,7 @@ app.controller('SubscriptionCtrl', function($q,$scope, $state, AuthService, Bill
             $state.go('address') // ultimately send this back to the users' billing page
         })
     }
-
-    const stripeResponseHandler = function(status, response){
-        $scope.form = null // clean up form and forget all data
-        if(response.err) {
-            $scope.disabled = false;
-        } else {
-            BillingFactory.updatePayment(response.id)
-        }
-    };
-
-    $scope.disabled = false
-    $scope.payment = function(){
-        Stripe.setPublishableKey('pk_test_6BRu0k0Y6igqEqpVqySELRmW');
-                // Disable the submit button to prevent repeated clicks:
-                $scope.disabled = true
-                // Request a token from Stripe:
-                console.log(1)
-                Stripe.card.createToken($scope.form, stripeResponseHandler);
-        }
-    })
+});
 
 app.controller('SubcancelCtrl',function($scope, $state, AuthService, SubscriptionFactory){
     AuthService.getLoggedInUser().then(function (user) {
