@@ -4,6 +4,10 @@ app.factory("SubscriptionFactory", function($http){
             return $http.get("/api/subscriptions")
             .then(subscriptions => subscriptions.data)
         },
+        fetchOne: function(id){
+            return $http.get("/api/subscriptions/"+id)
+            .then(subscriptions => subscriptions.data)
+        },
         update: function(user, sub){
             return $http.put("/api/users/subscription", {sub: sub, user: user})
             .then(user => user.data)
