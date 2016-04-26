@@ -44,8 +44,6 @@ app.controller('HomeCtrl', function($q, $scope, $state, CategoriesFactory, curre
     	$scope.activeUser = true;
     	$state.transitionTo('home.detail');
     }
-
-    console.log($scope.currentUser);
     $scope.allCategories = allCategories;
     $scope.allMovies = allMovies;
     
