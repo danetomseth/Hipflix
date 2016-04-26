@@ -2,7 +2,7 @@ app.config(function($stateProvider) {
 	$stateProvider.state('addmovie', {
 		url: '/admin/addmovie',
 		controller: 'AddMovieCtrl',
-		templateUrl: '/js/admin/addmovie/add-movie-template.html'
+		templateUrl: '/js/admin/addMovie/add-movie-template.html'
 	});
 });
 
@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
 	$stateProvider.state('editmovie', {
 		url: '/admin/editmovie',
 		controller: 'EditMovieCtrl',
-		templateUrl: '/js/admin/addmovie/edit-movie.html'
+		templateUrl: '/js/admin/addMovie/edit-movie.html'
 	});
 });
 
