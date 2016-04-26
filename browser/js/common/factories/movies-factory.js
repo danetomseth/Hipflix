@@ -18,6 +18,17 @@ app.factory('MovieFactory', function($http) {
                 return res.data
             })
         },
+        setTrailerUrl: (url) => {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = trailer.match(regExp);
+
+            if (match && match[2].length == 11) {
+                const movieTrailer = 'https://www.youtube.com/embed/' + match[2];
+                return movieTrailer;
+            } else {
+                return 'error';
+            }
+        },
         findMovie: (imdbID) => {
             var id = imdbID.slice(26, -1)
             return $http.get("http://www.omdbapi.com/?i="+id+"&plot=full&r=json")

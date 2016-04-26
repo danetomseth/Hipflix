@@ -48,7 +48,7 @@
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q) {
+    app.service('AuthService', function ($http, Session, $state, $rootScope, AUTH_EVENTS, $q) {
 
         function onSuccessfulLogin(response) {
             var data = response.data;
@@ -98,6 +98,7 @@
             return $http.get('/logout').then(function () {
                 Session.destroy();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                $state.go('home')
             });
         };
 

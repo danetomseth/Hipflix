@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 
 
 
-app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueueFactory, OrderFactory){
+app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthService, MovieQueueFactory, OrderFactory){
 	$scope.pendingMovies = [];
 	$scope.activeMovies = [];
 	$scope.watchedMovies = [];
@@ -20,9 +20,11 @@ app.controller('MovieQueueCtrl', function($scope, $state, AuthService, MovieQueu
 				var queue = user.movieQueue.queue;
 				queue.forEach(function(item) {
 					if(item.status === 'active') {
+						$rootScope.queueLength++;
 						$scope.activeMovies.push(item);
 					}
 					else if (item.status === 'pending') {
+						$rootScope.queueLength++;
 						$scope.pendingMovies.push(item);
 					}
 					else if (item.status === 'returned') {
