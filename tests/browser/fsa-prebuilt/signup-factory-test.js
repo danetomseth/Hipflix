@@ -1,6 +1,6 @@
 describe('SignupFactory', function(){
 
-    beforeEach(module('Hipflix'));
+    beforeEach(module('core'));
 
     var $httpBackend;
     var $rootScope;
