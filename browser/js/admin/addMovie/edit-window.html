@@ -6,7 +6,7 @@
 		<div class="form-group">
 			<label class="control-label">Title:</label>
 			<div class="form-group">
-				<input value="{{movie.title}}" ng-model="movie.title" type="title" class="form-control">
+				<input value="{{movie.title}}" ng-model="movie.title" type="text" class="form-control">
 			</div>
 			<label class="control-label">Category:</label>
 			<div class="form-group">
@@ -15,11 +15,15 @@
 			</div>
 			<label class="control-label">Duration:</label>
 			<div class="form-group">
-				<input value="{{movie.duration}}" type="title" ng-model="movie.duration" class="form-control">
+				<input value="{{movie.duration}}" type="number" ng-model="movie.duration" class="form-control">
 			</div>
-			<label class="control-label">Label:</label>
+			<label class="control-label">Year:</label>
 			<div class="form-group">
-				<input value="{{movie.year}}" type="title" ng-model="movie.year" class="form-control">
+				<input value="{{movie.year}}" type="text" ng-model="movie.year" class="form-control">
+			</div>
+			<label class="control-label">Trailer Url:</label>
+			<div class="form-group">
+				<input value="{{movie.trailer}}" type="url" ng-model="movie.trailer" class="form-control">
 			</div>
 			<label class="control-label">Inventory:</label>
 			<div class="input-group">
