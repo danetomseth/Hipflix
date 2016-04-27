@@ -8,7 +8,6 @@ app.directive('hfRecEngine', function(MovieFactory) {
     }
 });
 
-
 app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, allCategories, MovieFactory) {
     $scope.populatedUser = populatedUser;
     $scope.allCategories = allCategories;

@@ -1,5 +1,3 @@
-'use strict';
-
 const router = require('express').Router();
 const mongoose = require('mongoose');
 const Movies = mongoose.model("Movies")
@@ -7,9 +5,8 @@ const Promise = require("bluebird");
 
 module.exports = router;
 
-
 router.get('/', (req, res, next) => {
-	console.log("Get wishlist")
+	// console.log("Get wishlist")
 	if(req.session.wishlist){
 		Promise.all(req.session.wishlist.map( movieId => {
 			return Movies.findById(movieId)
@@ -20,12 +17,11 @@ router.get('/', (req, res, next) => {
 	} else {
 		res.send([]);
 	}
-
-} )
+})
 
 router.post('/', (req, res, next) => {
-	console.log("Post wishlist")
-	console.log("req.session", req.session)
+	// console.log("Post wishlist")
+	// console.log("req.session", req.session)
 	if(!req.session.wishlist){
 		req.session.wishlist = [];
 	} 
@@ -37,8 +33,7 @@ router.post('/', (req, res, next) => {
 		res.send(req.session.wishlist)
 	}
 	
-} )
-
+})
 
 router.delete('/:movieId', (req, res, next) => {
 	var toRemoveInd = req.session.wishlist.indexOf(req.params.movieId)

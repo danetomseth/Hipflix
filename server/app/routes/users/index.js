@@ -10,7 +10,7 @@ const Address = mongoose.model('Addresses');
 const deepPopulate = require('mongoose-deep-populate')(mongoose);
 const moment = require('moment');
 // const renewalPeriod = require("../../../env").RENEWAL_PERIOD
-const sendgrid = require('sendgrid')("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");
+const sendgrid = require('sendgrid')("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");
 const keys = require("../../../env")
 const renewalPeriod = keys.RENEWAL_PERIOD
 const stripeKey = keys.PAYMENT_KEY;
@@ -27,7 +27,7 @@ const popMovies = function(queue) {
             })
     })
     return userMovies
-}
+};
 
 let sendEmail = function(email, subject, message) { // I think there's a promise version of this, but it's ok as is for now
     console.log("sending email")
@@ -80,10 +80,29 @@ router.post('/', (req, res, next) => {
             }
         })
         .then(newUser => {
-            createdUser = newUser
-            return sendEmail(createdUser.email, "Welcome to hipflix", "You're signed up, " + createdUser.first)
+            createdUser = newUser;
+            return sendEmail(createdUser.email, "Welcome to Hipflix, " + createdUser.first + "!", "You're signed up, " + createdUser.first + ". Now you can go browse our very hip selection of VHS at www.hipflix.win")
         })
-        .then(conf => {
+        // a more personalized email template w/ HTML
+        // .then(newUser => {
+        //     createdUser = newUser;
+        //     var email = new sendgrid.Email();
+
+        //     email.addTo("hello@hipflix.win");
+        //     email.setFrom("" + createdUser.email); // or createdUser.email.toString()
+        //     email.setSubject('Welcome to Hipflix!');
+        //     email.setText('You can now start browsing movies at www.hipflix.win');
+        //     email.setHtml('<strong>You must be excited to start on Hipflix, %user%</strong>');
+        //     email.addSubstitution("%user%", createdUser.first.toString());
+        //     // email.addHeader('X-Sent-Using', 'SendGrid-API');
+        //     // email.addHeader('X-Transport', 'web');
+        //     // email.addFile({path: './gif.gif', filename: 'owl.gif'});
+        //     sendgrid.send(email, function(err, json) {
+        //       if (err) { return console.error(err); }
+        //       console.log(json);
+        //     });
+        // })
+        .then(conf => { // what does conf stand for?
             res.json(createdUser)
         })
         .catch(next);
@@ -97,7 +116,7 @@ router.post('/:userId/movie', (req, res, next) => {
     } else {
         allowance = 3;
     }
-    req.newUser.movieQueue.addToQueue(req.body.movieId, allowance)
+    req.newUser.movieQueue.addToQueue(req.body.movieId, allowance, req.newUser)
         .then(data => {
             res.status(204).send('created')
         })
@@ -123,8 +142,7 @@ router.delete('/:userId/movie/:itemId', (req, res, next) => {
             res.status(204).send('deleted')
         })
         .catch(next)
-
-})
+});
 
 router.get('/:userId', (req, res, next) => {
     res.json(req.newUser)
@@ -218,11 +236,16 @@ router.put('/subscription', (req, res, next) => {
             // savedUser.renewalDate = moment().add(renewalPeriod, 'seconds') // deprecated with Stripe integration
             return savedUser.save()
         })
+        .then(user => {
+           sendEmail(user.email, "Thank you for your purchase, " + user.first + "!", "Congratulations on your new subscription of " + req.body.sub.plan + ", " + user.first + ". Now you can go browse our very hip selection of VHS at www.hipflix.win");
+           return user;
+        })
         .then(user => res.json(user))
         .catch(next)
 })
 
+// what does this route do?
 router.post('/:userId/contact', (req, res) => {
     sendEmail(req.newUser.email, req.body.subject, req.body.message)
-        .then(conf => res.sendStatus(201))
+        .then(conf => res.sendStatus(201)) // what does conf stand for?
 })

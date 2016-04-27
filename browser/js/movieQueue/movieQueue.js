@@ -1,3 +1,5 @@
+// 'use strict';
+
 app.config(function($stateProvider) {
 	$stateProvider.state('movieQueue', {
 		url: '/me/moviequeue',
@@ -5,8 +7,6 @@ app.config(function($stateProvider) {
 		templateUrl: '/js/movieQueue/movieQueue.html',
 	})
 });
-
-
 
 app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthService, MovieQueueFactory, OrderFactory){
 	$scope.emptyQueue = true;
