@@ -15,10 +15,8 @@ app.directive('navbar', function($rootScope, MovieFactory, MovieQueueFactory, Au
                 }, {
                     label: 'Movies',
                     state: 'movies'
-                }, {
-                    label: 'Plans',
-                    state: 'subscription'
-                }, {
+                },  
+                {
                     label: 'My Account',
                     state: 'me',
                     auth: true
