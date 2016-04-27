@@ -9,41 +9,35 @@ app.config(function($stateProvider) {
 				.then(movie => {
 					return movie
 				})
+			},
+			currentUser: function(AuthService) {
+				return AuthService.getLoggedInUser()
 			}
 		}
 	})
 });
 
-app.controller('MovieCtrl', function($scope, $state, $rootScope, MovieFactory, MovieQueueFactory, AuthService, movie) {
+app.controller('MovieCtrl', function($scope, $state, MovieFactory, MovieQueueFactory, AuthService, currentUser, movie) {
 	$scope.isUser = false;
-	$scope.isCollapsed = false;
+	console.log(currentUser);
+	$scope.user = currentUser;
+	if(currentUser !== null) $scope.isUser = true;
+	$scope.isCollapsed = true;
 	$scope.movie = movie;
-	console.log('****************', $rootScope.queueLength);
 	
 	if($scope.movie.tailer) {
 		$scope.movieTrailer = MovieFactory.setTrailerUrl($scope.movie.tailer)
 	}
 
-	AuthService.getLoggedInUser()
-		.then(user => {
-			$scope.user = user
-			$scope.isUser = user;
-		})
-
 	$scope.addToQueue = function() {
-		console.log('addToQueue')
 		if($scope.isUser){
-			// $scope.isUser = true;
 			MovieQueueFactory.addToQueue($scope.user, $scope.movie._id)
 			.then(res => {
-				$rootScope.queueLength++;
-				console.log($rootScope.queueLength);
 				$state.go('movieQueue');
 			})	
 		} else {
 			MovieQueueFactory.addToWishlist($scope.movie._id)
 				.then(wishlist => {
-					console.log(wishlist)
 					$state.go('wishList')
 				});
 		}

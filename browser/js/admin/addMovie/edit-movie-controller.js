@@ -1,7 +1,11 @@
 app.controller('EditMovieCtrl', function($scope, $state, MovieFactory, CategoriesFactory, $uibModal) {
 
+	
+
+
 	MovieFactory.fetchAll()
 	.then(function(res) {
+		console.log('res fetch all', res);
 		$scope.movies = res
 	});
 

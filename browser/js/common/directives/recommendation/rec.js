@@ -43,7 +43,7 @@ app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, a
             $scope.favoriteCategory = elem.name;
         }
     })
-    var limit = 6;
+    var limit = 5;
     if (favorite.categoryId) {
         MovieFactory.findSimilar(favorite.categoryId, limit).then(bestMatch => {
             $scope.recMovies = bestMatch;

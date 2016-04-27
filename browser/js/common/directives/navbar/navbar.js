@@ -51,28 +51,19 @@ app.directive('navbar', function($rootScope, MovieFactory, MovieQueueFactory, Au
                     $state.go('home');
                 });
             };
-            var activeMovies = function(movieArray) {
-                var count = 0;
-                var activeArray = [];
-                movieArray.forEach(function(movie) {
-                    if (movie.status !== 'returned') {
-                        count++;
-                        activeArray.push(movie);
-                    }
-                })
-                return activeArray;
-            }
-            scope.$watch('moviequeue', function(newValue, oldValue) {
-               console.log('Que Changed!', newValue);
-               // scope.counter = scope.counter + 1;
-            });
-            // scope.$watch(
-            //     "MovieQueueCtrl.queue",
-            //     function handleFooChange(newValue, oldValue) {
-            //         console.log("value", oldValue);
-            //         console.log("new value", newValue);
-            //     }
-            // );
+            //Would like to include this to only show movies in active queue
+            // var activeMovies = function(movieArray) {
+            //     var count = 0;
+            //     var activeArray = [];
+            //     movieArray.forEach(function(movie) {
+            //         if (movie.status !== 'returned') {
+            //             count++;
+            //             activeArray.push(movie);
+            //         }
+            //     })
+            //     return activeArray;
+            // }
+         
             var setUser = function() {
                 AuthService.getLoggedInUser().then(function(user) {
                     scope.user = user
@@ -80,7 +71,8 @@ app.directive('navbar', function($rootScope, MovieFactory, MovieQueueFactory, Au
                     MovieQueueFactory.fetch(scope.user._id)
                         .then(movies => {
 
-                            scope.moviequeue = activeMovies(movies)
+                            //scope.chachedMoviequeue = activeMovies(movies)
+                            scope.chachedMoviequeue = movies
                             // console.log('Queue', scope.moviequeue);
                         })
                 })

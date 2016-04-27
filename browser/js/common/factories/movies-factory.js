@@ -5,6 +5,17 @@ app.factory('MovieFactory', function($http) {
 				return movies.data
 			})
 		},
+        fetchAllRandom: function() {
+            return $http.get('/api/movies/random').then(movies => {
+                return movies.data
+            })
+        },
+        fetchStream: function() {
+            return $http.get('/api/movies/stream').then(movies => {
+                console.log('data in factory', movies.data);
+                return movies.data
+            })
+        },
 		fetchOne: (movieId) => {
 			return $http.get('/api/movies/'+ movieId).then(res => res.data)
 		},
@@ -45,7 +56,7 @@ app.factory('MovieFactory', function($http) {
             })
         },
         populateDb: (imdbString, allCategories) => {
-            var inv = Math.floor(Math.random()*allCategories.length) + 1;
+            
             var imdbArray = imdbString.split(',')
             imdbArray.forEach(function(url) {
                 var urlRegEx = /(title\/)(tt\d+)/ig;
@@ -60,17 +71,17 @@ app.factory('MovieFactory', function($http) {
                             newCat.push(cat);
                         }
                     })
-                    if(movie.Metascore === 'N/A') {
-                        movie.Metascore = 50;
+                    if(movie.imdbRating === 'N/A') {
+                        movie.imdbRating = 8;
                     }
-
+                    var inv = Math.floor(Math.random()*allCategories.length) + 1;
                     var newMovie = {
                         title: movie.Title,
                         year: movie.Year,
                         duration: movie.Runtime.split(" ")[0],
                         description: movie.Plot,
                         photos: [movie.Poster],
-                        rating: movie.Metascore / 10,
+                        rating: movie.imdbRating / 2,
                         inventory: inv,
                         category: newCat
 
