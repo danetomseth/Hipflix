@@ -2,12 +2,20 @@
 	li {
 
 	}
+	p {
+		color: #260126;
+		font-size: 1.2em;
+	}
 	div{
-		background-color: rgba(230, 230, 230, 1);
+		//background-color: rgba(230, 230, 230, 1);
+		background-color: #BFAF80;
 	}
 	div:hover {
 		cursor: pointer;
 		background-color: rgba(230, 230, 230, 0.8);
+	}
+	span {
+		color: #260126;
 	}
 }
 

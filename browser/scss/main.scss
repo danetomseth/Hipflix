@@ -23,9 +23,26 @@
   box-sizing: border-box;
 }
 
+hr {
+  background-color: #260126;
+  color: #260126;
+  border-color: #260126;
+}
+
 body {
   // background-image: url('loading.gif') !important;
+  background-color: #8C6954;
+  background-image:
+  repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
+  repeating-linear-gradient(60deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
+  linear-gradient(60deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)),
+  linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
+  background-size: 70px 120px;
 
+}
+
+.panel {
+  border-bottom: 1px solid #59323C;
 }
 
 
@@ -39,8 +56,8 @@ body {
 }
 .body-background {
   // background-image: url('03AG.jpg') !important;
-  background-size: 25% !important; 
-  background-repeat: cover;
+  //background-size: 25% !important; 
+  //background-repeat: cover;
 
 }
 
@@ -61,17 +78,22 @@ body {
 
 #custom-nav {
 	//height: 200px;
-	background-color: #fff;
-  background-image: url('04G.jpg') !important;
-  background-size: 25% !important; 
-  background-repeat: repeat;
-  color: white;
-  border-bottom: 1px solid grey;
+
+  background:
+  linear-gradient(135deg, #59323C 22px, #260126 22px, #260126 24px, transparent 24px, transparent 67px, #59323C 67px, #260126 69px, transparent 69px),
+  linear-gradient(225deg, #59323C 22px, #260126 22px, #260126 24px, transparent 24px, transparent 67px, #59323C 67px, #260126 69px, transparent 69px)0 64px;
+  background-color:#59323C;
+  background-size: 64px 128px;
+  color: #F2EEB3;
+  border-bottom: 1px solid #F2EEB3;
   a {
-    color: white;
+    color: #F2EEB3;
+  }
+  a:hover {
+    color: #BFAF80;
   }
   a.active {
-    color: grey;
+    color: #8C6954;
   }
 }
 navbar {

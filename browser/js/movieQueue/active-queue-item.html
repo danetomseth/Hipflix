@@ -1,12 +1,12 @@
 <div id="movie-item" class="col-xs-3 movie-box ">
 	<div class="panel panel-default movie-content">
-		<div class="text-center"><img style="height: 150px" ng-repeat="photo in item.movie.photos" class="img-thumbnail" ng-src="{{photo}}"></div>
+		<div class="text-center"><img style="height: 200px" ng-repeat="photo in item.movie.photos" class="img-thumbnail" ng-src="{{photo}}"></div>
 		<div class="panel-body">
 			<div class="list-group">
 				<div class="list-group-item"><strong>{{item.movie.title}}</strong></div>
 				<div class="list-group-item"><a ui-sref="movie({movieId: item.movie._id})">Leave a Review</a></div>
 			</div>
-					<nav>
+					<nav ng-show="item.status === 'pending'">
 						<ul class="pagination">
 							<li>
 								<a href="#" aria-label="Previous">
@@ -21,12 +21,9 @@
 							</li>
 						</ul>
 					</nav>
-			<div class="list-group">
-				<div class="list-group-item">
+				<div class="row row-centered">
 					<button class="btn btn-warning" ng-click="returnMovie(item)"/>Return</button>
 				</div>
-				
-			
 			</div>
 		</div>
 	</div>
