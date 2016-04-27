@@ -53,6 +53,11 @@ schema.statics.findByKeyword = function(keyword){
  	var myRegExp = new RegExp(regex, "i");
     return this.find({title: myRegExp}).exec()
 }
+
+schema.methods.updateInventory = function(movie) {
+	console.log("this", this);
+	console.log("movie", movie);
+}
   
 
 mongoose.model('Movies', schema);

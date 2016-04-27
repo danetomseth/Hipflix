@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
                 return CategoriesFactory.fetchAll();
             },
             allMovies: function(MovieFactory) {
-                return MovieFactory.fetchAll()
+                return MovieFactory.fetchAllRandom()
             }
 
         }

@@ -7,9 +7,7 @@ app.config(function($stateProvider) {
 			currentUser: function(AuthService) {
 				return AuthService.getLoggedInUser()
 			},
-			userSubscription: function(SubscriptionFactory, currentUser) {
-				return SubscriptionFactory.fetchOne(currentUser.subscription)
-			},
+
 			userOrders: function(OrderFactory, currentUser) {
 				return OrderFactory.fetchUserOrders(currentUser._id)
 			}
@@ -17,9 +15,18 @@ app.config(function($stateProvider) {
 	})
 });
 
-app.controller('MyAccountCtrl', function($scope, currentUser, userOrders, userSubscription){
+// app.controller('MyAccountCtrl', function($scope, currentUser, userOrders, userSubscription){
+
+core.controller('MyAccountCtrl', function($scope, currentUser, userOrders, SubscriptionFactory){
 	$scope.user = currentUser;
 	$scope.orders = userOrders;
-	$scope.subscription = userSubscription;
-	console.log('sub:',$scope.subscription);
+	if($scope.user.subscription) {
+		return SubscriptionFactory.fetchOne(currentUser.subscription).then(function(subscription){
+			$scope.subscription = subscription;
+		})
+
+	}
+
+
+
 });

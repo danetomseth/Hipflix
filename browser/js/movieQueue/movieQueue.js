@@ -1,3 +1,5 @@
+// 'use strict';
+
 app.config(function($stateProvider) {
 	$stateProvider.state('movieQueue', {
 		url: '/me/moviequeue',
@@ -17,8 +19,9 @@ core.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServi
 	.then(user => {
 		if(user) {
 			$scope.user = user
-			MovieQueueFactory.fetch(user._id).then(function(user) {
-				var queue = user.movieQueue.queue;
+			MovieQueueFactory.fetch(user._id).then(function(movieQueue) {
+				var queue = movieQueue;
+				$scope.queue = movieQueue
 				queue.forEach(function(item) {
 					$scope.emptyQueue = false;
 					if(item.status === 'active') {

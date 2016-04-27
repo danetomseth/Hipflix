@@ -10,6 +10,7 @@ app.directive('hfRecEngine', function(MovieFactory) {
 
 
 core.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, allCategories, MovieFactory) {
+
     $scope.populatedUser = populatedUser;
     $scope.allCategories = allCategories;
     $scope.userCategories = [];
@@ -43,7 +44,7 @@ core.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, 
             $scope.favoriteCategory = elem.name;
         }
     })
-    var limit = 6;
+    var limit = 5;
     if (favorite.categoryId) {
         MovieFactory.findSimilar(favorite.categoryId, limit).then(bestMatch => {
             $scope.recMovies = bestMatch;
