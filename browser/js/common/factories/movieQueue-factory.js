@@ -1,4 +1,4 @@
-git app.factory('MovieQueueFactory', function($http) {
+app.factory('MovieQueueFactory', function($http) {
 
 	var cachedWishlist = [];
 
