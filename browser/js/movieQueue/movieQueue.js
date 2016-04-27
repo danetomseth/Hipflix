@@ -19,6 +19,7 @@ app.controller('MovieQueueCtrl', function($scope, $rootScope, $state, AuthServic
 			$scope.user = user
 			MovieQueueFactory.fetch(user._id).then(function(movieQueue) {
 				var queue = movieQueue;
+				$scope.queue = movieQueue
 				queue.forEach(function(item) {
 					$scope.emptyQueue = false;
 					if(item.status === 'active') {

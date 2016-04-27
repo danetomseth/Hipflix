@@ -5,7 +5,7 @@ app.config(function($stateProvider) {
 		templateUrl: '/js/movies/movies.html',
 		resolve: {
 			movies: function(MovieFactory) {
-				return MovieFactory.fetchAll()
+				return MovieFactory.fetchAllRandom()
 			}
 		}
 	})
