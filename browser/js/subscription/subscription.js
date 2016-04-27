@@ -35,13 +35,14 @@ app.config(function($stateProvider){
 });
 
 app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactory) {
-    $scope.showPlans = false;
+    //$scope.showPlans = false;
+    $scope.disabled = false
+    $scope.user = currentUser;
+
     if(currentUser.stripeCustID) {
-        $scope.showPlans = true;
-        $scope.disabled = false;
+        $scope.disabled = true;
         $state.transitionTo('subscription.plans');
     }
-    $scope.user = currentUser;
     console.log('$scope user', $scope.user);
 
     $scope.form = { // remove from production if desired, or leave as UI guidance
@@ -59,13 +60,11 @@ app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactor
         }
     };
 
-    $scope.disabled = false
     $scope.payment = function(){
-        Stripe.setPublishableKey('pk_test_6BRu0k0Y6igqEqpVqySELRmW');
+        Stripe.setPublishableKey('pk_test_f7AGNgm8l7BC9lmO8eq7IupL');
                 // Disable the submit button to prevent repeated clicks:
                 $scope.disabled = true
                 // Request a token from Stripe:
-                console.log(1)
                 Stripe.card.createToken($scope.form, stripeResponseHandler);
                 $state.transitionTo('subscription.plans');
         }
