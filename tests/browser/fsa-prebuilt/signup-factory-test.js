@@ -1,7 +1,6 @@
 describe('SignupFactory', function(){
 
     beforeEach(module('core'));
-    console.log("~~~~~~~~~~~~~~~~~~")
 
     var $httpBackend;
     var $rootScope;
@@ -45,8 +44,6 @@ describe('SignupFactory', function(){
             });
 
             $httpBackend.flush()
-
-
-        })
+        });
     })
 })
