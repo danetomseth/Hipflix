@@ -35,8 +35,15 @@ app.config(function($stateProvider){
 });
 
 app.controller('StripeCtrl', function($scope, $state, currentUser, BillingFactory) {
+    $scope.showPlans = false;
+    if(currentUser.stripeCustID) {
+        $scope.showPlans = true;
+        $scope.disabled = false;
+        $state.transitionTo('subscription.plans');
+    }
     $scope.user = currentUser;
     console.log('$scope user', $scope.user);
+
     $scope.form = { // remove from production if desired, or leave as UI guidance
         number: 4242424242424242,
         exp_month: 12,

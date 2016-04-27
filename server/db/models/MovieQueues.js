@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const Order = mongoose.model('Orders');
 const sendgrid = require('sendgrid')("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");
-
+var Movies = mongoose.model('Movies');
 
 const schema = new mongoose.Schema({
 	queue: [{
@@ -44,30 +44,23 @@ const schema = new mongoose.Schema({
 
 //3) movie returned > pending (3) > active ^
 
-// var newOrder = function(user, queue) {
-// 	console.log('creating order', user.owner, queue);
-// 	return Order.create({
-// 		user: user.owner,
-// 		deliverables: queue.movie
-// 	})
 
-// }
+var updateInventory = function(movieId, value) {
+	
+	return Movies.findOne({
+		_id: movieId
+	})
+	.then(function(movie) {
+		if(value === 'minus') {
+			movie.inventory--;
+		}
+		else {
+			movie.inventory++;
+		}
 
-// var shiftQueue = function(user) {
-// 	var check = false
-// 	for(var i = 0; i < user.queue.length; i++) {
-// 		if(user.queue[i].status === 'pending' && !check) {
-// 			user.queue[i].status = 'active';
-// 			newOrder(user, user.queue[i])
-// 			user.activeQueue++;
-// 			check = true;
-// 		}
-// 		if(check) {
-// 			user.queue[i].priority --;
-// 		}
-// 	}
-// 	return user;
-// }
+		return movie.save()
+	})
+}
 
 var checkPending = function (user) {
 	var count = 1;
@@ -120,11 +113,12 @@ schema.methods.addToQueue = function(movieId, allowance,currentUser) {
 	if(check) {
 		if(user.activeQueue < allowance) {
 			newMovie.status = 'active'
-			//call new order
+			var movie;
 			return user.createOrder(user.owner, movieId)
 			.then(function(order) {
 				user.activeQueue ++
 				newMovie.orderId = order._id
+				movie = order.deliverables
 				user.queue.push(newMovie);
 				return user.save()
 			})
@@ -132,6 +126,13 @@ schema.methods.addToQueue = function(movieId, allowance,currentUser) {
 				console.log('THIS IS USER', user);
 				sendEmail(currentUser.email, "Woohoo! Your order is successful, " + currentUser.first + "!", "We know how excited you are about these movies on the way, " + currentUser.first + ". But did you know you can order more and upgrade your plan at www.hipflix.win ?")
 				return user;
+			})
+			.then(function(user) {
+				return updateInventory(movie, 'minus')
+			})
+			.then(function(updatedMovie) {
+				//yeahhhh
+				return
 			})
 		}
 		else {
@@ -171,7 +172,6 @@ schema.methods.dequeue = function(itemId) {
 schema.methods.findInQueue = function(id) {
 	var MovieQ = this
 	var Queue = MovieQ.queue;
-	
 	Queue.forEach(function(elem) {
 		if(elem.status === 'active') {
 			if(elem.orderId.toString() === id.toString()) {
@@ -189,13 +189,16 @@ schema.methods.findInQueue = function(id) {
 	else {
 		return MovieQ.save()
 	}
-	//
 }
 
 
 schema.methods.updateQueue = function(queueItem) {
 	var user = this;
 	queueItem.status = 'returned'
+	updateInventory(queueItem.movie, 'plus')
+	.then(function(movie) {
+		//yeah...I know
+	})
 	return
 }
 
@@ -218,8 +221,13 @@ schema.methods.shiftQueue = function() {
 		MovieQ.queue[movieIndex].orderId = order._id;
 		MovieQ.queue[movieIndex].status = 'active';
 		MovieQ.activeQueue++;
+		return updateInventory(MovieQ.queue[movieIndex].movie, 'plus')
+		 
+	})
+	.then(function(movie) {
 		return MovieQ.save();
 	})
+	
 	
 };
 
