@@ -80,7 +80,7 @@ router.post('/', (req, res, next) => {
             }
         })
         .then(newUser => {
-            createdUser = newUser
+            createdUser = newUser;
             return sendEmail(createdUser.email, "Welcome to Hipflix, " + createdUser.first + "!", "You're signed up, " + createdUser.first + ". Now you can go browse our very hip selection of VHS at www.hipflix.win")
         })
         // a more personalized email template w/ HTML
@@ -116,7 +116,7 @@ router.post('/:userId/movie', (req, res, next) => {
     } else {
         allowance = 3;
     }
-    req.newUser.movieQueue.addToQueue(req.body.movieId, allowance)
+    req.newUser.movieQueue.addToQueue(req.body.movieId, allowance, req.newUser)
         .then(data => {
             res.status(204).send('created')
         })
@@ -236,6 +236,10 @@ router.put('/subscription', (req, res, next) => {
             savedUser.renewalPrice = req.body.sub.price; // this is being kept for posterity, I don't know if stripe keeps legacy payment info.
             // savedUser.renewalDate = moment().add(renewalPeriod, 'seconds') // deprecated with Stripe integration
             return savedUser.save()
+        })
+        .then(user => {
+           sendEmail(user.email, "Thank you for your purchase, " + user.first + "!", "Congratulations on your new subscription of " + req.body.sub.plan + ", " + user.first + ". Now you can go browse our very hip selection of VHS at www.hipflix.win");
+           return user;
         })
         .then(user => res.json(user))
         .catch(next)

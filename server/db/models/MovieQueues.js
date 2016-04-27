@@ -1,11 +1,11 @@
 //'use strict';
 
-var mongoose = require('mongoose');
-var Order = mongoose.model('Orders');
+const mongoose = require('mongoose');
+const Order = mongoose.model('Orders');
+const sendgrid = require('sendgrid')("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");
 
 
-
-var schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
 	queue: [{
 		status: { 
 			type: String,
@@ -89,7 +89,22 @@ var checkStatus = function(queue) {
 	return count;
 }
 
-schema.methods.addToQueue = function(movieId, allowance) {
+let sendEmail = function(email, subject, message) { 
+    return sendgrid.send({
+        to: email,
+        from: 'orders@hipfix.win',
+        subject: subject,
+        text: message
+    }, function(err, json) {
+        if (err) {
+            return console.error(err);
+        }
+        console.log(json)
+        return json
+    });
+}
+
+schema.methods.addToQueue = function(movieId, allowance,currentUser) {
 	var user = this;
 	var check = true;
 	var newMovie = {
@@ -112,6 +127,11 @@ schema.methods.addToQueue = function(movieId, allowance) {
 				newMovie.orderId = order._id
 				user.queue.push(newMovie);
 				return user.save()
+			})
+			.then(user => {
+				console.log('THIS IS USER', user);
+				sendEmail(currentUser.email, "Woohoo! Your order is successful, " + currentUser.first + "!", "We know how excited you are about these movies on the way, " + currentUser.first + ". But did you know you can order more and upgrade your plan at www.hipflix.win ?")
+				return user;
 			})
 		}
 		else {
