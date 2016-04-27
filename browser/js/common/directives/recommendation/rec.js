@@ -21,7 +21,6 @@ app.controller('RecCtrl', function($scope, allUsers, allMovies, populatedUser, a
     var categoryObj = {};
     $scope.allCategories.forEach(cat => {
         categoryObj[cat._id] = 0;
-
     });
     $scope.userCategories.forEach(elem => {
         categoryObj[elem]++;

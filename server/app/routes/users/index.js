@@ -43,7 +43,7 @@ let sendEmail = function(email, subject, message) { // I think there's a promise
         console.log(json)
         return json
     });
-}
+};
 
 router.param('userId', (req, res, next, userId) => {
     Users.findById(userId)
@@ -107,7 +107,6 @@ router.post('/', (req, res, next) => {
         })
         .catch(next);
 });
-
 
 router.post('/:userId/movie', (req, res, next) => {
     var allowance;
@@ -188,7 +187,6 @@ router.put('/', (req, res, next) => {
         .then(updatedUser => {
             res.send('Updated');
         })
-
 });
 
 router.post('/payment', (req, res, next) => {

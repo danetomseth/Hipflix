@@ -32,7 +32,6 @@ router.post('/', (req, res, next) => {
 	} else {
 		res.send(req.session.wishlist)
 	}
-	
 })
 
 router.delete('/:movieId', (req, res, next) => {
