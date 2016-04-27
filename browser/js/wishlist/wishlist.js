@@ -28,6 +28,10 @@ app.controller('WishListCtrl', function($scope, $state, MovieQueueFactory){
 		$state.go("signup");
 	}
 
+	$scope.login = function(){
+		$state.go("login");
+	}
+
 	$scope.addMovies = function(){
 		$state.go("movies");
 	}
