@@ -1,6 +1,8 @@
 core.factory('SignupFactory', function($http) {
     return {
         createUser: function(user) {
+            console.log(1)
+            console.log(user)
             return $http.post('/api/users', user)
             .then(function(data) {
                 console.log('return data', data);

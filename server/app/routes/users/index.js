@@ -18,6 +18,11 @@ const stripe = require("stripe")(stripeKey);
 
 module.exports = router;
 
+router.use(function(req,res,next){
+    console.log('hello from the idx!');
+    next();
+})
+
 const popMovies = function(queue) {
     const userMovies = [];
     queue.queue.forEach(function(elem) {
@@ -66,6 +71,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    console.log(2)
     let createdUser
     Users.findOne({
         email: req.body.email
