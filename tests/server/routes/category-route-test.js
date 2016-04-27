@@ -23,7 +23,6 @@ describe('Category Route', function(){
         clearDB(done);
     });
 
-
     var guestAgent;
     var category, categories;
 
@@ -47,15 +46,12 @@ describe('Category Route', function(){
         });
     });
 
-
     beforeEach(function(done){
         Movie.create({title: "Test Movie", category: [category._id]}, function (err, c){
             if (err) return done(err);
             done();
         });
-
     });
-
 
     it('should get all categories', function(done){
         guestAgent.get('/api/categories')
@@ -67,6 +63,7 @@ describe('Category Route', function(){
             done();
         });
     });
+
     it('should return all movies in a single named category', function(done){
         guestAgent.get('/api/categories/'+category.name)
         .expect(200)
@@ -77,11 +74,12 @@ describe('Category Route', function(){
             done();
         });
     });
+
     it('should create new categories', function(done){
         guestAgent
         .post('/api/categories/')
         .send({name: "a created category"})
-        .expect(201)
+        .expect(200)
         .end(function(err, res){
             if (err) return done(err);
             expect(res.body.name).to.equal("a created category");
