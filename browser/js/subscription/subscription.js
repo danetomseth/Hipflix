@@ -99,6 +99,13 @@ app.controller('SubscriptionCtrl', function($q, $scope, $state, subscriptions, w
                 return user
             }
         })
+        .then(user => {
+            MovieQueueFactory.deleteWishList().then(() => {
+                console.log('wishlist deleted')
+                return user
+            })
+            
+        })
         .then((user) => {
             $state.go('address') // ultimately send this back to the users' billing page
         })
