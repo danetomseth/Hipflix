@@ -17,5 +17,5 @@ module.exports = {
    "callbackURL": "INSERT_GOOGLE_CALLBACK_HERE"
  },
   "RENEWAL_PERIOD": 30,
-  "PAYMENT_KEY": "sk_test_HqM0o3o7gPQWJYGooDFA0agU"
+  "PAYMENT_KEY": "sk_test_6DZDsuffyWHNz8lLCHBRNsvq"
 };

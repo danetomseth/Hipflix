@@ -30,14 +30,12 @@ hr {
 }
 
 body {
-  // background-image: url('loading.gif') !important;
-  background-color: #8C6954;
-  background-image:
-  repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
-  repeating-linear-gradient(60deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
-  linear-gradient(60deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)),
-  linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
-  background-size: 70px 120px;
+  background:
+  linear-gradient(-45deg, white 25%, transparent 25%, transparent 75%, #DBDBDB 75%, #DBDBDB) 0 0,
+  linear-gradient(-45deg, #DBDBDB 25%, transparent 25%, transparent 75%, white 75%, white) 1em 1em,
+  linear-gradient(45deg, #DBDBDB 17%, transparent 17%, transparent 25%, #DBDBDB 25%, #DBDBDB 36%, transparent 36%, transparent 64%, #DBDBDB 64%, #DBDBDB 75%, transparent 75%, transparent 83%, #DBDBDB 83%) 1em 1em;
+  background-color: white;
+  background-size: 2em 2em;
 
 }
 
@@ -80,20 +78,20 @@ body {
 	//height: 200px;
 
   background:
-  linear-gradient(135deg, #59323C 22px, #260126 22px, #260126 24px, transparent 24px, transparent 67px, #59323C 67px, #260126 69px, transparent 69px),
-  linear-gradient(225deg, #59323C 22px, #260126 22px, #260126 24px, transparent 24px, transparent 67px, #59323C 67px, #260126 69px, transparent 69px)0 64px;
-  background-color:#59323C;
+  linear-gradient(135deg, #121212 22px, #454545 22px, #454545 24px, transparent 24px, transparent 67px, #454545 67px, #454545 69px, transparent 69px),
+  linear-gradient(225deg, #121212 22px, #454545 22px, #454545 24px, transparent 24px, transparent 67px, #454545 67px, #454545 69px, transparent 69px)0 64px;
+  background-color:#121212;
   background-size: 64px 128px;
-  color: #F2EEB3;
+  color: white;
   border-bottom: 1px solid #F2EEB3;
   a {
-    color: #F2EEB3;
+    color: white;
   }
   a:hover {
-    color: #BFAF80;
+    color: #BFBCB2;
   }
   a.active {
-    color: #8C6954;
+    color: #B3B3B3;
   }
 }
 navbar {
