@@ -57,7 +57,8 @@ app.factory('MovieQueueFactory', function($http) {
 		deleteWishList: () => {
 			return $http.delete("api/wishlist")
 					.then(res => {
-						cachedWishlist = [];
+						angular.copy([], cachedWishlist)
+						console.log('cachedWishlist moviequeue Factory',cachedWishlist)
 						return cachedWishlist
 					})
 		}
