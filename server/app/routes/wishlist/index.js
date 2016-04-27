@@ -40,6 +40,17 @@ router.delete('/:movieId', (req, res, next) => {
 	res.send(removedmovie)
 })
 
+router.delete('/', (req, res, next) => {
+	console.log('wishlist delete route')
+	if(req.session.wishlist){
+		req.session.wishlist = [];
+		console.log('req.session.wishlist', req.session.wishlist)
+		res.send([])
+	} else {
+		res.send([]);
+	}
+})
+
 
 
 

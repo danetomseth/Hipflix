@@ -53,6 +53,13 @@ app.factory('MovieQueueFactory', function($http) {
 					cachedWishlist.splice(indToRemove,1);
 					return cachedWishlist
 				})
+		},
+		deleteWishList: () => {
+			return $http.delete("api/wishlist")
+					.then(res => {
+						cachedWishlist = [];
+						return cachedWishlist
+					})
 		}
 
 		

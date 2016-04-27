@@ -15,10 +15,8 @@ app.directive('navbar', function($rootScope, MovieFactory, MovieQueueFactory, Au
                 }, {
                     label: 'Movies',
                     state: 'movies'
-                }, {
-                    label: 'Plans',
-                    state: 'subscription'
-                }, {
+                },  
+                {
                     label: 'My Account',
                     state: 'me',
                     auth: true
@@ -68,13 +66,17 @@ app.directive('navbar', function($rootScope, MovieFactory, MovieQueueFactory, Au
                 AuthService.getLoggedInUser().then(function(user) {
                     scope.user = user
                 }).then(user => {
-                    MovieQueueFactory.fetch(scope.user._id)
-                        .then(movies => {
+                    if(user) {
+                        console.log(user);
+                        MovieQueueFactory.fetch(scope.user._id)
+                            .then(movies => {
 
-                            //scope.chachedMoviequeue = activeMovies(movies)
-                            scope.chachedMoviequeue = movies
-                            // console.log('Queue', scope.moviequeue);
-                        })
+                                //scope.chachedMoviequeue = activeMovies(movies)
+                                scope.chachedMoviequeue = movies
+                                // console.log('Queue', scope.moviequeue);
+                            })
+                        
+                    }
                 })
             };
 
