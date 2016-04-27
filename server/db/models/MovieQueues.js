@@ -1,9 +1,7 @@
-//'use strict';
-
 const mongoose = require('mongoose');
 const Order = mongoose.model('Orders');
 const sendgrid = require('sendgrid')("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");
-var Movies = mongoose.model('Movies');
+const Movies = mongoose.model('Movies');
 
 const schema = new mongoose.Schema({
 	queue: [{
@@ -95,7 +93,7 @@ let sendEmail = function(email, subject, message) {
         console.log(json)
         return json
     });
-}
+};
 
 schema.methods.addToQueue = function(movieId, allowance,currentUser) {
 	var user = this;
@@ -123,7 +121,6 @@ schema.methods.addToQueue = function(movieId, allowance,currentUser) {
 				return user.save()
 			})
 			.then(user => {
-				console.log('THIS IS USER', user);
 				sendEmail(currentUser.email, "Woohoo! Your order is successful, " + currentUser.first + "!", "We know how excited you are about these movies on the way, " + currentUser.first + ". But did you know you can order more and upgrade your plan at www.hipflix.win ?")
 				return user;
 			})
@@ -191,7 +188,6 @@ schema.methods.findInQueue = function(id) {
 	}
 }
 
-
 schema.methods.updateQueue = function(queueItem) {
 	var user = this;
 	queueItem.status = 'returned'
@@ -201,7 +197,6 @@ schema.methods.updateQueue = function(queueItem) {
 	})
 	return
 }
-
 
 schema.methods.shiftQueue = function() {
 	var movieIndex;
@@ -227,16 +222,7 @@ schema.methods.shiftQueue = function() {
 	.then(function(movie) {
 		return MovieQ.save();
 	})
-	
-	
 };
-
-
-
-
-
-
-
 
 mongoose.model('MovieQueues', schema)
 

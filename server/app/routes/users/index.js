@@ -27,7 +27,7 @@ const popMovies = function(queue) {
             })
     })
     return userMovies
-}
+};
 
 let sendEmail = function(email, subject, message) { // I think there's a promise version of this, but it's ok as is for now
     console.log("sending email")
@@ -142,8 +142,7 @@ router.delete('/:userId/movie/:itemId', (req, res, next) => {
             res.status(204).send('deleted')
         })
         .catch(next)
-
-})
+});
 
 router.get('/:userId', (req, res, next) => {
     res.json(req.newUser)
@@ -245,6 +244,7 @@ router.put('/subscription', (req, res, next) => {
         .catch(next)
 })
 
+// what does this route do?
 router.post('/:userId/contact', (req, res) => {
     sendEmail(req.newUser.email, req.body.subject, req.body.message)
         .then(conf => res.sendStatus(201)) // what does conf stand for?
